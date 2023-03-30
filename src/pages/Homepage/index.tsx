@@ -40,16 +40,16 @@ export const Homepage = () => {
 						aria-hidden
 					/>
 					<nav className="header-nav desktop">
-						<a href="#">Nossos Dados</a>
-						<a href="#">Como funciona</a>
-						<a href="#">Benefícios</a>
+						<a href="#dataSection">Nossos Dados</a>
+						<a href="#workSection">Como funciona</a>
+						<a href="#benefitsSection">Benefícios</a>
 						<a href="#">FAQ</a>
 					</nav>
 					<button onClick={() => navigate('/login')}>Dashboard</button>
 				</div>
 			</header>
 
-			<section className="container">
+			<section className="container" id="homeSection">
 				<div className="intro content">
 					<div className="text-section">
 						<h1>O MAIOR E MAIS RENTÁVEL APP DE GESTÃO DE FROTAS</h1>
@@ -63,7 +63,9 @@ export const Homepage = () => {
 							controlar as suas frotas, além de trazer inúmeros benefícios ao
 							adquirir nossos serviços.
 						</p>
-						<button>Saiba mais</button>
+						<a href="#registerSection">
+							<button>Saiba mais</button>
+						</a>
 					</div>
 					<img
 						className="notebookManImg desktop"
@@ -79,7 +81,7 @@ export const Homepage = () => {
 				</div>
 			</section>
 
-			<section className="partners container">
+			<section className="partners container" id="partnersSection">
 				<div className="partners content">
 					<div className="text-section">
 						<h1 className="title">Parceiros</h1>
@@ -105,7 +107,7 @@ export const Homepage = () => {
 				</div>
 			</section>
 
-			<section className="container">
+			<section className="container" id="dataSection">
 				<div className="data content">
 					<div className="text-section">
 						<h1 className="title">Nossos Dados</h1>
@@ -123,7 +125,7 @@ export const Homepage = () => {
 								<span>200</span>
 								<i className="ph-users" title="ícone representando pessoas"></i>
 							</h2>
-							<p>Clientes Registrados</p>
+							<p>Clientes registrados</p>
 						</div>
 						<div className="card">
 							<h2>
@@ -137,7 +139,7 @@ export const Homepage = () => {
 									title="ícone representando um combustível"
 								></i>
 							</h2>
-							<p>Economizados em Combustível</p>
+							<p>Economizados em combustível</p>
 						</div>
 						<div className="card">
 							<h2>
@@ -145,20 +147,20 @@ export const Homepage = () => {
 									className="ph-plus-fill"
 									title="ícone com um sinal de adição"
 								></i>
-								<span>200</span>
+								<span>1500</span>
 								<i
 									className="ph-money"
 									title="ícone representando dinheiro"
 								></i>
 							</h2>
-							<p>Clientes Registrados</p>
+							<p>Caminhões registrados</p>
 						</div>
 					</div>
 					<div className="data"></div>
 				</div>
 			</section>
 
-			<section className="work container">
+			<section className="work container" id="workSection">
 				<div className="work content">
 					<div className="text-section">
 						<h1 className="title">Como funciona</h1>
@@ -211,7 +213,7 @@ export const Homepage = () => {
 				</div>
 			</section>
 
-			<section className="container">
+			<section className="container" id="registerSection">
 				<div className="forms-section content">
 					<div className="text-section desktop">
 						<div>
@@ -260,7 +262,7 @@ export const Homepage = () => {
 				</div>
 			</section>
 
-			<section className="benefits container">
+			<section className="benefits container" id="benefitsSection">
 				<div className="benefits content">
 					<div>
 						<h1 className="title">Principais Benefícios</h1>
@@ -325,27 +327,22 @@ export const Homepage = () => {
 				<div className="footer content">
 					<ul>
 						<li className="desktop">
-							<a href="#">Benefícios</a>
+							<a href="#dataSection">Dados</a>
 						</li>
 						<li className="desktop">
-							<a href="#">Dados</a>
-						</li>
-						<li className="desktop">
-							<a href="#">Home</a>
+							<a href="#homeSection">Home</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="#homeSection">
 								<img src={logoImg} alt="" />
 							</a>
 						</li>
 						<li className="desktop">
-							<a href="#">Parceiros</a>
+							<a href="#partnersSection">Parceiros</a>
 						</li>
+
 						<li className="desktop">
-							<a href="#">Taxas</a>
-						</li>
-						<li className="desktop">
-							<a href="#">Contrate</a>
+							<a href="#registerSection">Contrate</a>
 						</li>
 					</ul>
 					<hr />

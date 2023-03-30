@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
 * {
@@ -36,15 +36,15 @@ button {
   all: unset;
   font-family: "Poppins", sans-serif;
   font-size: 1.4rem;
-  background-color: ${(props) => props.theme["green-500"]};
-  color: ${(props) => props.theme.white};
+  background-color: ${props => props.theme['green-500']};
+  color: ${props => props.theme.white};
   padding: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: ${(props) => props.theme["green-600"]};
+  background-color: ${props => props.theme['green-600']};
   transition: background-color 200ms;
 }
 
