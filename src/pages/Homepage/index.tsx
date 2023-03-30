@@ -20,6 +20,7 @@ import cameraIconImg from '../../assets/video-camera-icon.svg';
 import formsPersonImg from '../../assets/forms-person.svg';
 
 import snapFingerImg from '../../assets/easy-to-use-icon.png';
+import React from 'react';
 
 export const Homepage = () => {
 	const navigate = useNavigate();

@@ -403,6 +403,9 @@ export const LandingPageContainer = styled.div`
 		transform: scale(1.05);
 	}
 
+	@media (max-width: 1200px) {
+	}
+
 	@media (max-width: 600px) {
 		font-size: 1.2rem;
 
@@ -450,6 +453,10 @@ export const LandingPageContainer = styled.div`
 			height: 85vh;
 			align-items: center;
 			text-align: center;
+
+			.text-section {
+				align-items: center;
+			}
 
 			button {
 				margin: auto;
