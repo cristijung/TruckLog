@@ -13,13 +13,20 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.14",
+    "@reduxjs/toolkit": "^1.9.3",
+    "@types/react-redux": "^7.1.25",
     "react": "^18.2.0",
+    "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.7",
+    "react-input-mask": "^2.0.4",
     "react-modal": "^3.16.1",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-toastify": "^9.1.2",
-    "styled-components": "^5.3.9"
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.9",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
