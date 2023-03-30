@@ -39,9 +39,9 @@ export const Dashboard = () => {
   };
 
   useEffect(() => {
-    document.title = "Dashboard | TruckLog"
+    document.title = "Dashboard | TruckLog";
   }, []);
-  
+
   const [searchUser, setSearchUsers] = useState("");
   return (
     <UsersContainer>
@@ -59,78 +59,8 @@ export const Dashboard = () => {
         >
           Cadastrar Usuário <i className="ph ph-plus"></i>
         </button>
-        <input
-          value={searchUser}
-          onChange={(e) => setSearchUsers(e.target.value)}
-          type="text"
-          placeholder="Procurar Usuários"
-        />
 
-        <div className="gas-station-header">
-          <p>
-            Nome <i className="ph ph-arrow-down"></i>
-          </p>
-          <p>Documento -</p>
-
-          <p>Status - </p>
-        </div>
-
-        <div className="gas-station-body ">
-          {users
-            .sort((user) => {
-              return user.status === "ATIVO" ? -1 : 1;
-            })
-
-            .filter((user) =>
-              user.nome.toLowerCase().includes(searchUser.toLowerCase())
-            )
-            .map((user) => (
-              <div
-                className={
-                  user.status === "ATIVO" ? "trip ativo" : "trip inativo"
-                }
-                key={user.idUsuario}
-              >
-                <p>{user.nome}</p>
-                <div>
-                  <p>{user.documento}</p>
-                </div>
-
-                <div className={user.status === "ATIVO" ? "ativo" : "inativo"}>
-                  {user.status}
-                  <div className="btn-container">
-                    <button
-                      onClick={() => handleAddRole(user.idUsuario)}
-                      disabled={user.status === "ATIVO" ? false : true}
-                    >
-                      <i
-                        title="Editar cargos "
-                        className="ph ph-address-book"
-                      ></i>
-                    </button>
-                    <button
-                      onClick={() => handleOpenEditModal(user.idUsuario)}
-                      disabled={user.status === "ATIVO" ? false : true}
-                    >
-                      <i title="Editar User" className="ph ph-pencil"></i>
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        handleRemoveUserModal(user.idUsuario, user.nome)
-                      }
-                      disabled={user.status === "ATIVO" ? false : true}
-                    >
-                      <i
-                        title="Deletar User"
-                        className="ph ph-trash delete-icon"
-                      ></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>
+        <div className="gas-station-body "></div>
       </main>
 
       <CreateUserModal

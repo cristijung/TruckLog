@@ -14,7 +14,7 @@ export const Sidenav = ({ children }: ISidenavProps) => {
   const handleToggleSidenav = () => {
     if (sidenav.current && container.current) {
       sidenav.current.classList.toggle("expanded");
-      container.current.classList.toggle("expanded")
+      container.current.classList.toggle("expanded");
     }
   };
 
@@ -24,11 +24,16 @@ export const Sidenav = ({ children }: ISidenavProps) => {
       <div className="container" ref={container}>
         <SidenavContent className="expanded" ref={sidenav}>
           <h3 className="category">GERENCIAMENTO</h3>
+
+          <Link to={"/usuario/dashboard"} className="item">
+            <i className="ph-fill ph-house"></i> Dashboard
+          </Link>
+
           <Link to={"/usuario/viagens"} className="item">
             <i className="ph ph-path"></i> Viagens
           </Link>
           <Link to={"/usuario/efetivo"} className="item">
-            <i className="ph ph-user"></i> Efetivo e Detalhes
+            <i className="ph ph-user"></i> Motoristas
           </Link>
           <Link to={"/usuario/rotas"} className="item">
             <i className="ph ph-signpost"></i> Rotas

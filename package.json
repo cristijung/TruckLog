@@ -13,6 +13,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.14",
+    "@phosphor-icons/react": "^2.0.6",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/react-redux": "^7.1.25",
     "react": "^18.2.0",
