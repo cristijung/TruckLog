@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useGasStations } from "../../../../hooks/useGasStations";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -59,7 +60,7 @@ export function EditGasStationModal({
             {...register("valorCombustivel")}
           />
 
-          <button type="submit">Editar Posto</button>
+          <Button type="submit">Editar Posto</Button>
         </form>
       </ModalContainer>
     </Modal>

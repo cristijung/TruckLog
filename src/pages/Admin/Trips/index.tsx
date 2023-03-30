@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "../../../shared/components/Button";
 import {
   CreateTripModal,
   EditTripModal,
@@ -33,12 +34,12 @@ export const Viagens = () => {
         </div>
 
         <h2 className="title-page">Viagens</h2>
-        <button
+        <Button
           onClick={() => setIsCreateTripModalOpen(true)}
           className="create-button"
         >
           Criar Viagem <i className="ph ph-plus"></i>
-        </button>
+        </Button>
         <input
           value={searchTrip}
           onChange={(e) => setSearchTrip(e.target.value)}

@@ -12,7 +12,7 @@ export const UsersContainer = styled.main`
     font-size: 1.6rem;
     border-radius: 0.5rem;
   }
-
+  
   [class$="content"] {
     max-width: 80vw;
     margin: 0 auto;
@@ -133,6 +133,7 @@ export const UsersContainer = styled.main`
         gap: 0.8rem;
 
         button {
+          all: unset;
           background-color: transparent;
           padding: 0;
         }

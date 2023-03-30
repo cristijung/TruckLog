@@ -4,6 +4,7 @@ import { ModalContainer } from "../styles";
 import { useState } from "react";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import { useTrucks, useRoles, useRoutes, useTrips } from "../../../../hooks";
+import { Button } from "../../../Button";
 interface ICreateEntityModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -56,7 +57,7 @@ export function EditTripModal({
           <label htmlFor="dataFim">Data final</label>
           <input id="dataFim" type="date" {...register("dataFim")} />
 
-          <button type="submit">Editar</button>
+          <Button type="submit">Editar</Button>
         </form>
       </ModalContainer>
     </Modal>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Button } from "../../../shared/components/Button";
 import {
   CreateDriverModal,
   EditDriverModal,
@@ -45,12 +46,12 @@ export const Roles = () => {
         </div>
 
         <h2 className="title-page">Efetivo e Detalhes</h2>
-        <button
+        <Button
           className="create-button"
           onClick={() => setIsCreateByRoleModalOpen(true)}
         >
           Cadastro Completo <i className="ph ph-plus"></i>
-        </button>
+        </Button>
         <input
           value={searchUsers}
           onChange={(e) => setSearchUsers(e.target.value)}

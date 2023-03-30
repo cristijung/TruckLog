@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm, FieldValues } from "react-hook-form";
 import { useRoles } from "../../../../hooks/useRoles";
+import { Button } from "../../../Button";
 
 interface IEditDriver {
   nome: string;
@@ -88,7 +89,7 @@ export function EditDriverModal({
             {...register("senha")}
           />
 
-          <button type="submit">Editar</button>
+          <Button type="submit">Editar</Button>
         </form>
       </ModalContainer>
     </Modal>

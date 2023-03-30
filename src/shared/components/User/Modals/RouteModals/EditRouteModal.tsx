@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useRoutes } from "../../../../hooks";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -68,7 +69,7 @@ export function EditRouteModal({
             {...register("localDestino")}
           />
 
-          <button type="submit">Editar</button>
+          <Button type="submit">Editar</Button>
         </form>
       </ModalContainer>
     </Modal>

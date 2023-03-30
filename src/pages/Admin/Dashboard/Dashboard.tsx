@@ -7,6 +7,7 @@ import { EditUserModal } from "../../../shared/components/User/Modals/UserModals
 import { CreateUserModal } from "../../../shared/components/User/Modals/UserModals/CreateUserModal";
 import { RemoveUserModal } from "../../../shared/components/User/Modals/UserModals/RemoveUserModal";
 import { AddRoleModal } from "../../../shared/components/User/Modals";
+import { Button } from "../../../shared/components/Button";
 
 export const Dashboard = () => {
   const { users } = useUsers();
@@ -53,12 +54,12 @@ export const Dashboard = () => {
         </div>
 
         <h2 className="title-page">Olá {userLogin}</h2>
-        <button
+        <Button
           onClick={() => setIsCreateUserModalOpen(true)}
           className="create-button"
         >
           Cadastrar Usuário <i className="ph ph-plus"></i>
-        </button>
+        </Button>
         <input
           value={searchUser}
           onChange={(e) => setSearchUsers(e.target.value)}

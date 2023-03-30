@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
 import { ICreateTruckDTO, useTrucks } from "../../../../hooks";
+import { Button } from "../../../Button";
 
 interface ICreateTruckModalProps {
   isOpen: boolean;
@@ -61,7 +62,7 @@ export function CreateTruckModal({
             placeholder="Digite nível de Combustível"
             {...register("nivelCombustivel")}
           />
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">Cadastrar</Button>
         </form>
       </ModalContainer>
     </Modal>

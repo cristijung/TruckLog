@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Button } from '../../../shared/components/Button';
 import {
 	CreateTruckModal,
 	EditTruckModal,
@@ -39,12 +40,12 @@ export const Caminhoes = () => {
 					</div>
 
 					<h2 className="title-page">Caminhões</h2>
-					<button
+					<Button
 						onClick={() => setIsCreateTruckModalOpen(true)}
 						className="create-button"
 					>
 						Cadastrar Caminhão <i className="ph ph-plus"></i>
-					</button>
+					</Button>
 					<input
 						value={searchTruck}
 						onChange={e => setSearchTruck(e.target.value)}

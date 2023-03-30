@@ -4,6 +4,7 @@ import { ModalContainer } from "../styles";
 import { useState } from "react";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import { useTrucks, useRoles, useRoutes, useTrips } from "../../../../hooks";
+import { Button } from "../../../Button";
 interface ICreateEntityModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -107,7 +108,7 @@ export function CreateTripModal({
                 );
               })}
           </select>
-          <button type="submit">Criar</button>
+          <Button type="submit">Criar</Button>
         </form>
       </ModalContainer>
     </Modal>

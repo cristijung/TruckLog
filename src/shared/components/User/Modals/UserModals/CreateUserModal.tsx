@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
 import { IUserComplete, useUsers } from "../../../../hooks/useUsers";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalPropsDriver {
   isOpen: boolean;
@@ -77,7 +78,7 @@ export function CreateUserModal({
           </select> */}
           <label htmlFor="email"></label>
           <input type="email" placeholder="E-mail" {...register("email")} />
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">Cadastrar</Button>
           {/* <label id="status" htmlFor="situation">
             Disponibilidade
           </label>

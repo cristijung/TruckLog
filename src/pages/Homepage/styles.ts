@@ -3,21 +3,6 @@ import styled from 'styled-components';
 export const LandingPageContainer = styled.div`
 	font-size: 1.6rem;
 
-	button {
-		all: unset;
-		cursor: pointer;
-		background-color: ${props => props.theme['green-500']};
-		color: ${props => props.theme.white};
-		font-size: inherit;
-		border-radius: 1rem;
-		padding: 1rem 2rem;
-		transition: filter 200ms;
-	}
-
-	button:hover {
-		filter: brightness(0.8);
-	}
-
 	p {
 		font-family: 'Red Hat Display', sans-serif;
 	}
@@ -451,7 +436,7 @@ export const LandingPageContainer = styled.div`
 			align-items: center;
 			text-align: center;
 
-			button {
+			a {
 				margin: auto;
 			}
 

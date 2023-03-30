@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import { useRoutes } from "../../../../hooks";
+import { Button } from "../../../Button";
 import { ModalContainer } from "../styles";
 
 interface ICreateEntityModalProps {
@@ -32,7 +33,7 @@ export function DeleteRouteModal({
             Rota: <strong>{descricaoRota}</strong>
           </p>
           <div className="delete-btn-container">
-            <button
+            <Button
               className="delete-btn"
               onClick={async () => {
                 const isOk = await deleteRoute(idRota);
@@ -40,10 +41,10 @@ export function DeleteRouteModal({
               }}
             >
               Deletar
-            </button>
-            <button className="canceal-btn" onClick={() => onRequestClose()}>
+            </Button>
+            <Button className="canceal-btn" onClick={() => onRequestClose()}>
               Cancelar
-            </button>
+            </Button>
           </div>
         </div>
       </ModalContainer>

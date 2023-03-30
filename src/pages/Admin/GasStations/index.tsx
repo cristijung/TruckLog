@@ -6,6 +6,7 @@ import {
   EditGasStationModal,
   RemoveGasStationModal,
 } from "../../../shared/components/User/Modals";
+import { Button } from "../../../shared/components/Button";
 
 export const Postos = () => {
   const { gasStations } = useGasStations();
@@ -48,12 +49,12 @@ export const Postos = () => {
         </div>
 
         <h2 className="title-page">Postos</h2>
-        <button
+        <Button
           onClick={() => setIsCreateGasStationModalOpen(true)}
           className="create-button"
         >
           Cadastrar Posto <i className="ph ph-plus"></i>
-        </button>
+        </Button>
         <input
           value={searchGasStation}
           onChange={(e) => setGasStation(e.target.value)}

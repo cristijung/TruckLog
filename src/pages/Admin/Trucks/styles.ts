@@ -123,6 +123,7 @@ export const CaminhoesContainer = styled.div`
       justify-content: space-between;
 
       button {
+        all: unset;
         background-color: transparent;
         padding: 0;
       }

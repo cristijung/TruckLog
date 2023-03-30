@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useRoles } from "../../../../hooks/useRoles";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -33,7 +34,7 @@ export function DeleteDriverModal({
               Usuario: <strong>{nomeUsuario}</strong>
             </p>
             <div className="delete-btn-container  ">
-              <button
+              <Button
                 className="delete-btn"
                 onClick={() =>
                   deleteUserByRole(idUsuario).then(() => {
@@ -42,10 +43,10 @@ export function DeleteDriverModal({
                 }
               >
                 Deletar
-              </button>
-              <button className="canceal-btn" onClick={() => onRequestClose()}>
+              </Button>
+              <Button className="canceal-btn" onClick={() => onRequestClose()}>
                 Cancelar
-              </button>
+              </Button>
             </div>
           </div>
         </div>
