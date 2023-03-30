@@ -7,84 +7,126 @@ import { EditUserModal } from "../../../shared/components/User/Modals/UserModals
 import { CreateUserModal } from "../../../shared/components/User/Modals/UserModals/CreateUserModal";
 import { RemoveUserModal } from "../../../shared/components/User/Modals/UserModals/RemoveUserModal";
 import { AddRoleModal } from "../../../shared/components/User/Modals";
+import { FlagBanner, GasPump, Users, Truck } from "@phosphor-icons/react";
 
 export const Dashboard = () => {
-  const { users } = useUsers();
+    const { users } = useUsers();
 
-  const { userLogin } = useContext(AuthContext);
-  const [isCreateUserModalOpen, setIsCreateUserModalOpen] = useState(false);
-  const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
-  const [isRemoveUSerModalOpen, setIsRemoveUserModalOpen] = useState(false);
-  const [isAddRoleModalOpen, setIsAddRoleModalOpen] = useState(false);
+    const { userLogin } = useContext(AuthContext);
+    const [isCreateUserModalOpen, setIsCreateUserModalOpen] = useState(false);
+    const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
+    const [isRemoveUSerModalOpen, setIsRemoveUserModalOpen] = useState(false);
+    const [isAddRoleModalOpen, setIsAddRoleModalOpen] = useState(false);
 
-  const [idUserEdit, setIdUserEdit] = useState(0);
-  const [idUserRemove, setIdUserRemove] = useState(0);
+    const [idUserEdit, setIdUserEdit] = useState(0);
+    const [idUserRemove, setIdUserRemove] = useState(0);
 
-  const [userName, setUserName] = useState("");
+    const [userName, setUserName] = useState("");
 
-  const handleAddRole = (idUsuario: number) => {
-    setIsAddRoleModalOpen(true);
-    setIdUserEdit(idUsuario);
-  };
+    const handleAddRole = (idUsuario: number) => {
+        setIsAddRoleModalOpen(true);
+        setIdUserEdit(idUsuario);
+    };
 
-  const handleOpenEditModal = (user: number) => {
-    setIsEditUserModalOpen(true);
-    setIdUserEdit(user);
-  };
+    const handleOpenEditModal = (user: number) => {
+        setIsEditUserModalOpen(true);
+        setIdUserEdit(user);
+    };
 
-  const handleRemoveUserModal = (idUsuario: number, name: string) => {
-    setIsRemoveUserModalOpen(true);
-    setUserName(name);
-    setIdUserRemove(idUsuario);
-  };
+    const handleRemoveUserModal = (idUsuario: number, name: string) => {
+        setIsRemoveUserModalOpen(true);
+        setUserName(name);
+        setIdUserRemove(idUsuario);
+    };
 
-  useEffect(() => {
-    document.title = "Dashboard | TruckLog";
-  }, []);
+    useEffect(() => {
+        document.title = "Dashboard | TruckLog";
+    }, []);
 
-  const [searchUser, setSearchUsers] = useState("");
-  return (
-    <UsersContainer>
-      <main className="content">
-        <div className="user-trail">
-          <span>Meu Painel</span>
-          <span>{" > "}</span>
-          <a className="selected">Dashboard</a>
-        </div>
+    const [searchUser, setSearchUsers] = useState("");
+    return (
+        <UsersContainer>
+            <main className="content">
+                <div className="user-trail">
+                    <span>Meu Painel</span>
+                    <span>{" > "}</span>
+                    <a className="selected">Dashboard</a>
+                </div>
 
-        <h2 className="title-page">Olá {userLogin}</h2>
-        <button
-          onClick={() => setIsCreateUserModalOpen(true)}
-          className="create-button"
-        >
-          Cadastrar Usuário <i className="ph ph-plus"></i>
-        </button>
+                <div className="page-header">
+                    <div>
+                        <h2 className="title-page">Olá {userLogin}</h2>
+                        <button
+                            onClick={() => setIsCreateUserModalOpen(true)}
+                            className="create-button"
+                        >
+                            Cadastrar Usuário <i className="ph ph-plus"></i>
+                        </button>
+                    </div>
 
-        <div className="gas-station-body "></div>
-      </main>
+                    <div>
+                        <h2 className="title-page">Visão Geral</h2>
+                    </div>
+                </div>
 
-      <CreateUserModal
-        isOpen={isCreateUserModalOpen}
-        onRequestClose={() => setIsCreateUserModalOpen(false)}
-      />
+                <div className="data-container">
+                    <div className="card-data">
+                        <div className="card-header">
+                            <span>Viagens realizadas até o momento</span>
+                            <FlagBanner size={32} />
+                        </div>
+                        <strong>2000</strong>
+                        <span>15 nos útimos 7 dias</span>
+                    </div>
+                    <div className="card-data">
+                        <div className="card-header">
+                            <span>Postos cadastrados</span>
+                            <GasPump size={32} />
+                        </div>
+                        <strong>2000</strong>
+                        <span>15 nos útimos 7 dias</span>
+                    </div>
+                    <div className="card-data">
+                        <div className="card-header">
+                            <span>Caminhões cadastrados</span>
+                            <Users size={32} />
+                        </div>
+                        <strong>2000</strong>
+                        <span>15 nos útimos 7 dias</span>
+                    </div>
+                    <div className="card-data">
+                        <div className="card-header">
+                            <span>Motoristas cadastrados</span>
+                            <Truck size={32} />
+                        </div>
+                        <strong>2000</strong>
+                        <span>15 nos útimos 7 dias</span>
+                    </div>
+                </div>
+            </main>
 
-      <EditUserModal
-        isOpen={isEditUserModalOpen}
-        onRequestClose={() => setIsEditUserModalOpen(false)}
-        idUsuario={idUserEdit}
-      />
+            <CreateUserModal
+                isOpen={isCreateUserModalOpen}
+                onRequestClose={() => setIsCreateUserModalOpen(false)}
+            />
 
-      <RemoveUserModal
-        isOpen={isRemoveUSerModalOpen}
-        nomeUsuario={userName}
-        onRequestClose={() => setIsRemoveUserModalOpen(false)}
-        idUsuario={idUserRemove}
-      />
-      <AddRoleModal
-        isOpen={isAddRoleModalOpen}
-        onRequestClose={() => setIsAddRoleModalOpen(false)}
-        idUsuario={idUserEdit}
-      ></AddRoleModal>
-    </UsersContainer>
-  );
+            <EditUserModal
+                isOpen={isEditUserModalOpen}
+                onRequestClose={() => setIsEditUserModalOpen(false)}
+                idUsuario={idUserEdit}
+            />
+
+            <RemoveUserModal
+                isOpen={isRemoveUSerModalOpen}
+                nomeUsuario={userName}
+                onRequestClose={() => setIsRemoveUserModalOpen(false)}
+                idUsuario={idUserRemove}
+            />
+            <AddRoleModal
+                isOpen={isAddRoleModalOpen}
+                onRequestClose={() => setIsAddRoleModalOpen(false)}
+                idUsuario={idUserEdit}
+            ></AddRoleModal>
+        </UsersContainer>
+    );
 };
