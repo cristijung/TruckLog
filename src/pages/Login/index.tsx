@@ -1,17 +1,48 @@
-import { useContext } from "react";
-import { LoginContainer } from "./styles";
-import { useForm } from "react-hook-form";
-import { AuthContext } from "../../shared/context/AuthContext";
-import truckImg from "../../assets/truck.png";
-import bgObject1Img from "../../assets/bg-item3.svg";
-import bgObject2Img from "../../assets/bg-item2.svg";
+import { useContext } from 'react';
+import { LoginContainer } from './styles';
+import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../shared/context/AuthContext';
+import { Link } from 'react-router-dom';
+import { FaHome, BsArrowLeft } from 'react-icons/all';
+import { useState, useEffect } from 'react';
+import InputMask from 'react-input-mask';
+
+import truckImg from '../../assets/truck.png';
+import bgObject1Img from '../../assets/bg-item3.svg';
+import bgObject2Img from '../../assets/bg-item2.svg';
+import InterestModal from '../../shared/components/User/Modals/LoginModal/InterestModal';
 
 export const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({});
   const { handleLogin } = useContext(AuthContext);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 600);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <LoginContainer>
+      <div className="back-button">
+        <Link className="link-button" to="/">
+          {isMobile ? (
+            <>
+              <FaHome size={45} />
+            </>
+          ) : (
+            <>
+              <BsArrowLeft size={35} />
+              <span>Página Inicial</span>
+            </>
+          )}
+        </Link>
+      </div>
       <div className="bg-items">
         <img className="bg-object1" src={bgObject1Img} alt="" />
         <img className="bg-object2" src={bgObject2Img} alt="" />
@@ -29,9 +60,9 @@ export const Login = () => {
           });
 
           !isOk &&
-            (document.querySelector(".error")?.classList.add("visible"),
-            document.querySelectorAll(".input-container").forEach((input) => {
-              input.classList.add("outlined-error");
+            (document.querySelector('.error')?.classList.add('visible'),
+            document.querySelectorAll('.input-container').forEach((input) => {
+              input.classList.add('outlined-error');
             }));
         })}
       >
@@ -39,27 +70,26 @@ export const Login = () => {
           <h1>Login</h1>
           <h3>Insira seus dados de acesso:</h3>
 
-          <div className="input-container visible">
+          <div className={`input-container `}>
             <i className="ph ph-envelope"></i>
             <input
               type="text"
               placeholder="login"
               id="login"
               required
-              {...register("login")}
+              {...register('login')}
               onFocus={() => {
                 document
-                  .querySelectorAll(".input-container")[0]
-                  .classList.add("outlined");
+                  .querySelectorAll('.input-container')[0]
+                  .classList.add('outlined');
               }}
               onBlur={() => {
                 document
-                  .querySelectorAll(".input-container")[0]
-                  .classList.remove("outlined");
-
+                  .querySelectorAll('.input-container')[0]
+                  .classList.remove('outlined');
                 document
-                  .querySelectorAll(".input-container")[0]
-                  .classList.remove("outlined-error");
+                  .querySelectorAll('.input-container')[0]
+                  .classList.remove('outlined-error');
               }}
             />
           </div>
@@ -71,26 +101,27 @@ export const Login = () => {
               id="senha"
               placeholder="senha"
               required
-              {...register("senha")}
+              {...register('senha')}
               onFocus={() => {
                 document
-                  .querySelectorAll(".input-container")[1]
-                  .classList.add("outlined");
+                  .querySelectorAll('.input-container')[1]
+                  .classList.add('outlined');
               }}
               onBlur={() => {
                 document
-                  .querySelectorAll(".input-container")[1]
-                  .classList.remove("outlined");
+                  .querySelectorAll('.input-container')[1]
+                  .classList.remove('outlined');
 
                 document
-                  .querySelectorAll(".input-container")[1]
-                  .classList.remove("outlined-error");
+                  .querySelectorAll('.input-container')[1]
+                  .classList.remove('outlined-error');
               }}
             />
           </div>
 
           <p className="error">*Login ou senha inválidos</p>
           <div className="button-section">
+            <InterestModal />
             <a href="#">Esqueceu sua senha?</a>
             {/* <a href="#" onClick={() => setIsLogin(false)}>
                 Ainda não possui uma conta?

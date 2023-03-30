@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const LoginContainer = styled.div`
   display: grid;
@@ -6,9 +6,22 @@ export const LoginContainer = styled.div`
   grid-template-rows: 1fr;
 
   body {
-    font-family: "Red Hat Display", sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
   }
-
+  .back-button {
+    position: absolute;
+    margin: 5rem 0 0 5rem;
+    .link-button {
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    &:hover {
+      transform: translateX(-10px);
+      transition: all 0.3s ease-in-out;
+    }
+  }
   form {
     height: 100vh;
 
@@ -23,7 +36,7 @@ export const LoginContainer = styled.div`
 
   button {
     all: unset;
-    background-color: ${(props) => props.theme["green-700"]};
+    background-color: ${(props) => props.theme['green-700']};
     color: ${(props) => props.theme.white};
     padding: 1rem 2rem;
     border-radius: 0.8rem;
@@ -36,7 +49,7 @@ export const LoginContainer = styled.div`
   }
 
   button:hover {
-    background-color: ${(props) => props.theme["green-500"]};
+    background-color: ${(props) => props.theme['green-500']};
   }
 
   button i {
@@ -45,7 +58,7 @@ export const LoginContainer = styled.div`
 
   h1,
   h3 {
-    color: ${(props) => props.theme["green-700"]};
+    color: ${(props) => props.theme['green-700']};
   }
 
   h1 {
@@ -54,19 +67,19 @@ export const LoginContainer = styled.div`
 
   h3 {
     font-size: 1.8rem;
-    font-family: "Red Hat Display", sans-serif;
+    font-family: 'Red Hat Display', sans-serif;
   }
 
   a {
     font-size: 1.4rem;
     font-weight: 700;
-    color: ${(props) => props.theme["green-700"]};
+    color: ${(props) => props.theme['green-700']};
     transition: color 100ms;
     width: fit-content;
   }
 
   a:hover {
-    color: ${(props) => props.theme["green-500"]};
+    color: ${(props) => props.theme['green-500']};
   }
 
   .bg-items {
@@ -112,7 +125,9 @@ export const LoginContainer = styled.div`
       }
     }
   }
-
+  .error {
+    color: red;
+  }
   .input-container {
     display: flex;
     gap: 1rem;
@@ -121,7 +136,7 @@ export const LoginContainer = styled.div`
     width: 60%;
     max-width: 48rem;
     border-radius: 1rem;
-    background-color: ${(props) => props.theme["gray-100"]};
+    background-color: ${(props) => props.theme['gray-100']};
     font-size: 1.6rem;
 
     i {
@@ -132,8 +147,8 @@ export const LoginContainer = styled.div`
 
     &.outlined-error {
       border: 2px solid ${(props) => props.theme.status.error};
-      animation: shake 400ms;      
-      
+      animation: shake 400ms;
+
       @keyframes shake {
         25% {
           transform: translateX(-0.5rem);
@@ -158,7 +173,7 @@ export const LoginContainer = styled.div`
     }
 
     &.outlined {
-      border: 2px solid ${(props) => props.theme["green-500"]};
+      border: 2px solid ${(props) => props.theme['green-500']};
     }
   }
 
@@ -179,7 +194,10 @@ export const LoginContainer = styled.div`
       gap: 1rem;
       width: 100%;
     }
-
+    .back-button {
+      position: absolute;
+      margin: 5rem 0 0 0rem;
+    }
     .button-section {
       width: 100%;
       flex-direction: column;
