@@ -13,7 +13,7 @@ export const defaultTheme = {
   status: {
     error: "#e74c3c",
     success: "#4BB543",
-    warning: "#eed202"
+    warning: "#cbb944",
   },
 
   background: "#f0f0f5",

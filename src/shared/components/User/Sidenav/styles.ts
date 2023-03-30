@@ -69,4 +69,9 @@ export const SidenavContent = styled.nav`
     background-color: ${(props) => props.theme["gray-100"]};
     transition: background 200ms;
   }
+  .item.active {
+    border-radius: 90rem;
+    background-color: ${(props) => props.theme["gray-100"]};
+    transition: background 200ms;
+  }
 `;

@@ -5,7 +5,7 @@ import {
   DeleteDriverModal,
 } from "../../../shared/components/User/Modals";
 
-import { useRoles } from "../../../shared/hooks/useRoles";
+import { IUserComplete, useRoles } from "../../../shared/hooks/useRoles";
 import { RolesContainer } from "./styles";
 
 export const Roles = () => {
@@ -34,6 +34,10 @@ export const Roles = () => {
   useEffect(() => {
     document.title = "Efetivo e Detalhes | TruckLog";
   }, []);
+  function unique(user: IUserComplete) {
+    const result = users.filter((user, index) => users.indexOf(user) === index);
+    return result;
+  }
 
   return (
     <RolesContainer>
@@ -41,15 +45,15 @@ export const Roles = () => {
         <div className="user-trail">
           <span>Meu Painel</span>
           <span>{" > "}</span>
-          <a className="selected">Relatório completo</a>
+          <a className="selected">Motoristas</a>
         </div>
 
-        <h2 className="title-page">Efetivo e Detalhes</h2>
+        <h2 className="title-page">Motoristas</h2>
         <button
           className="create-button"
           onClick={() => setIsCreateByRoleModalOpen(true)}
         >
-          Cadastro Completo <i className="ph ph-plus"></i>
+          Cadastrar <i className="ph ph-plus"></i>
         </button>
         <input
           value={searchUsers}
@@ -68,11 +72,10 @@ export const Roles = () => {
         </div>
 
         <div className="gas-station-body">
-          {users
-            .sort((user) => {
-              return user.statusUsuario === "ATIVO" ? -1 : 1;
+          {Array.from(new Set(users))
+            .sort((a, b) => {
+              return a.statusUsuario === "ATIVO" ? -1 : 1;
             })
-
             .filter((user) =>
               user.nome.toLowerCase().includes(searchUsers.toLowerCase())
             )
@@ -87,7 +90,7 @@ export const Roles = () => {
               >
                 <p>{user.nomeUsuario}</p>
                 <p>{user.documento}</p>
-                {user.nome.replace("ROLE_", "")}
+                {user.nomeUsuario.replace("ROLE_", "")}
                 <div
                   className={
                     user.statusUsuario === "ATIVO" ? "ativo" : "inativo"
@@ -95,15 +98,6 @@ export const Roles = () => {
                 >
                   {user.statusUsuario}
                   <div className="btn-container">
-                    {/* <button
-                      onClick={() =>
-                        handleEditByRoleModal(user.idUsuario, user.nome)
-                      }
-                      disabled={user.statusUsuario === "ATIVO" ? false : true}
-                    >
-                      <i title="Editar Posto" className="ph ph-pencil"></i>
-                    </button> */}
-
                     <button
                       onClick={() =>
                         handleDeleteByRoleModal(
