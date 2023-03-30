@@ -43,7 +43,6 @@ export const Homepage = () => {
 						<a href="#dataSection">Nossos Dados</a>
 						<a href="#workSection">Como funciona</a>
 						<a href="#benefitsSection">Benefícios</a>
-						<a href="#">FAQ</a>
 					</nav>
 					<button onClick={() => navigate('/login')}>Dashboard</button>
 				</div>
