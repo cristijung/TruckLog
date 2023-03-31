@@ -79,7 +79,6 @@ export const UsersContainer = styled.main`
         .card-data {
             display: flex;
             flex-direction: column;
-            justify-content: ;
             gap: 1rem;
             padding: 1.5rem;
             border-radius: 8px;
@@ -108,9 +107,10 @@ export const UsersContainer = styled.main`
         flex-wrap: wrap;
         gap: 2rem;
         justify-content: space-between;
-        max-height: 480px;
+        align-items: center;
         height: 100%;
         width: 100%;
+        max-height: 480px;
 
         canvas {
             border-radius: 8px;
@@ -119,9 +119,15 @@ export const UsersContainer = styled.main`
             width: 100%;
             height: 100%;
         }
+    }
+    @media (max-width: 1900px) {
+        .chart-container {
+            max-height: none;
+            padding-bottom: 2rem;
+        }
 
-        canvas:first-child {
-            flex-grow: 1;
+        canvas {
+            max-height: 500px;
         }
     }
 

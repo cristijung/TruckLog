@@ -32,7 +32,7 @@ export const data = {
         {
             label: "quantidade de motoristas",
             data: [12, 19],
-            backgroundColor: ["rgb(75, 181, 67, 0.4)", "rgb(231, 76, 60, 0.4)"],
+            backgroundColor: ["rgb(75, 181, 67, 0.6)", "rgb(231, 76, 60, 0.6)"],
             borderColor: ["#4BB543", "#e74c3c"],
             borderWidth: 1,
         },
