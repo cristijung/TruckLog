@@ -37,7 +37,7 @@ export function AddRoleModal({
             onRequestClose();
           })}
         >
-          <label htmlFor="Role"> Cargo</label>
+          <label htmlFor="idCargo"> Cargo</label>
           <select id="idCargo" {...register("idCargo")}>
             <option value="1">Administrador</option>
             <option value="2">Colaborador</option>
