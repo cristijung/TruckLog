@@ -70,4 +70,16 @@ h6 {
       }
   }
 
+  @media screen and (min-width: 601px) and (max-width: 1080px){
+    .modal-content {
+      min-width: 70vw;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .modal-content {
+      min-width: 80vw;
+    }
+  }
+
 `;

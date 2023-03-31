@@ -1,31 +1,34 @@
 import Modal from 'react-modal';
 import { ModalContainer } from '../styles';
-import { useForm } from 'react-hook-form';
-import { useTrucks } from '../../../../hooks';
-import { Button } from '../../../Button';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface IEditTruckModalProps {
 	isOpen: boolean;
 	onRequestClose: () => void;
 }
 
-interface IUseFormProps {
-	nivelCombustivel: number;
-}
-
 export function ShowLGPD({ isOpen, onRequestClose }: IEditTruckModalProps) {
+	const navigate = useNavigate();
+
+	const handleCloseModal = () => {
+		onRequestClose();
+		navigate('/');
+	};
 	return (
 		<Modal
 			isOpen={isOpen}
-			onRequestClose={onRequestClose}
+			onRequestClose={handleCloseModal}
 			className="modal-content"
 			overlayClassName="modal-overlay"
 			ariaHideApp={false}
 		>
 			<ModalContainer>
-				<h2>Política de Privacidade e Proteção de Dados Pessoais</h2>
+				<h2 className="lgpdH2">
+					Política de Privacidade e Proteção de Dados Pessoais
+				</h2>
 
-				<p>
+				<p className="lgpdText">
 					Coletamos e utilizamos seus dados pessoais, como nome completo, e-mail
 					e informações de navegação, de forma segura e protegida, em
 					conformidade com a LGPD. Esses dados são utilizados para fornecer

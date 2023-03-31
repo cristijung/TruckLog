@@ -43,7 +43,7 @@ export const LandingPageContainer = styled.div`
 		height: 15vh;
 		padding: 2rem;
 
-		> img {
+		img {
 			height: 110%;
 		}
 	}
@@ -66,7 +66,7 @@ export const LandingPageContainer = styled.div`
 		opacity: 0.4;
 		z-index: -1;
 		left: 0;
-		width: 80rem;
+		width: 60rem;
 	}
 
 	/* -- INTRO SECTION */
@@ -130,6 +130,7 @@ export const LandingPageContainer = styled.div`
 	}
 
 	.partners .card {
+		width: 100%;
 		max-width: 20rem;
 	}
 
@@ -273,6 +274,9 @@ export const LandingPageContainer = styled.div`
 		justify-content: center;
 		gap: 0.5rem;
 		width: 90%;
+		.error-yup {
+			color: ${props => props.theme.status['error']};
+		}
 	}
 
 	form label,
@@ -388,12 +392,29 @@ export const LandingPageContainer = styled.div`
 		transform: scale(1.05);
 	}
 
+	.footer-bottom {
+		display: flex;
+		gap: 1.2rem;
+		align-items: center;
+
+		a:hover {
+			color: ${props => props.theme['green-600']};
+			text-decoration: underline;
+		}
+	}
+
 	@media screen and (min-width: 601px) and (max-width: 1080px) {
+		width: 100vw;
+		height: 100vh;
 		font-size: 1.6rem;
 
 		.content {
 			width: 95vw;
-			gap: 4rem;
+			gap: 2.5rem;
+			.header-btn {
+				padding: 0.7rem;
+				font-size: 1.5rem;
+			}
 
 			.header-nav {
 				align-items: center;
@@ -403,9 +424,132 @@ export const LandingPageContainer = styled.div`
 		.intro {
 			.text-section {
 				h1 {
-					font-size: 1.9rem;
+					font-size: 2.3rem;
 				}
-				p {
+			}
+
+			.cards {
+				.card {
+				}
+			}
+		}
+
+		.partners {
+			.text-section {
+				h1 {
+					font-size: 3.5rem;
+				}
+			}
+			.partners {
+				justify-content: center;
+				padding: 1.5rem;
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+			}
+
+			.partners .text-section {
+				text-align: center;
+			}
+
+			.partners .cards {
+				gap: 3rem;
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: 1fr 1fr;
+			}
+		}
+
+		.data.content {
+			height: auto;
+			gap: 5rem;
+			.text-section {
+				h1 {
+					font-size: 3.5rem;
+				}
+			}
+
+			.cards {
+				display: flex;
+				flex-direction: column;
+				gap: 4rem;
+
+				.card {
+					i {
+						font-size: 3.4rem;
+					}
+					span {
+						font-size: 4rem;
+					}
+					h2 {
+						font-size: 2.5rem;
+					}
+				}
+			}
+		}
+
+		.work.content {
+			.text-section {
+				h1 {
+					font-size: 3.5rem;
+				}
+			}
+
+			.cards {
+				gap: 2rem;
+
+				.card {
+					h4 {
+						font-size: 1.8rem;
+					}
+				}
+			}
+		}
+
+		.forms-section {
+			flex-direction: column;
+
+			.text-section {
+				h1 {
+					font-size: 3.5rem;
+				}
+				h2 {
+					font-size: 2.5rem;
+				}
+				img {
+					width: 35%;
+				}
+			}
+
+			.form {
+				div {
+					label {
+						font-size: 1.8rem;
+					}
+				}
+			}
+		}
+
+		.benefits.container {
+			.title-container {
+				.title {
+					font-size: 3.5rem;
+				}
+				.subtitle {
+					font-size: 2.5rem;
+				}
+			}
+
+			.grid {
+				gap: 2.2rem;
+
+				div {
+					img {
+						width: 23%;
+					}
+					i {
+						font-size: 4rem;
+					}
 				}
 			}
 		}
@@ -473,6 +617,11 @@ export const LandingPageContainer = styled.div`
 
 		.notebookManImg {
 			margin: auto;
+		}
+
+		/* -- BENEFITS SECTION */
+		.my-toast {
+			font-size: 1rem;
 		}
 
 		/* -- PARTNERS SECTION */

@@ -65,4 +65,20 @@ export const ModalContainer = styled.div`
 			margin: 1.5rem auto 0 auto;
 		}
 	}
+
+	.lgpdH2 {
+		text-align: center;
+	}
+	.lgpdText {
+		text-align: justify;
+	}
+
+	@media (max-width: 600px) {
+		.lgpdH2 {
+			font-size: 1.6rem;
+		}
+		.lgpdText {
+			font-size: 1.2rem;
+		}
+	}
 `;

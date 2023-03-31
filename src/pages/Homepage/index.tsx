@@ -3,7 +3,7 @@ import { LandingPageContainer } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { Formik, Form, Field } from 'formik';
+import { useForm } from 'react-hook-form';
 
 import interestFormSchema from '../../shared/schemas/interestSchema';
 
@@ -27,10 +27,21 @@ import formsPersonImg from '../../assets/forms-person.svg';
 import snapFingerImg from '../../assets/easy-to-use-icon.png';
 import { Button } from '../../shared/components/Button';
 import { ShowLGPD } from '../../shared/components/User/Modals';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from 'react-toastify';
 
 export const Homepage = () => {
 	const navigate = useNavigate();
 	const [isLGPDOpen, setIsLGPDOpen] = useState(false);
+
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(interestFormSchema),
+	});
 
 	const handleShowLGPD = () => {
 		setIsLGPDOpen(true);
@@ -57,7 +68,9 @@ export const Homepage = () => {
 							<a href="#workSection">Como funciona</a>
 							<a href="#benefitsSection">Benefícios</a>
 						</nav>
-						<Button onClick={() => navigate('/login')}>Dashboard</Button>
+						<Button onClick={() => navigate('/login')} className="header-btn">
+							Dashboard
+						</Button>
 					</div>
 				</header>
 
@@ -240,18 +253,28 @@ export const Homepage = () => {
 							<img src={formsPersonImg} alt="" />
 						</div>
 
-						<form>
+						<form
+							onSubmit={handleSubmit(() => {
+								toast.success('Formulário enviado com sucesso!', {
+									style: { fontSize: ' 1.6rem' },
+									className: 'my-toast',
+								});
+								reset();
+							})}
+						>
 							<div>
 								<label>
 									<i className="ph-user"></i>Seu nome
 								</label>
 								<input
 									id="name"
-									name="name"
 									type="text"
 									placeholder="Digite aqui seu nome"
-									required
+									{...register('name')}
 								/>
+								<div className="error-yup">
+									{errors.name ? <>{errors.name?.message}</> : null}
+								</div>
 							</div>
 
 							<div>
@@ -260,11 +283,13 @@ export const Homepage = () => {
 								</label>
 								<input
 									id="email"
-									name="email"
 									type="email"
 									placeholder="Digite aqui seu e-mail"
-									required
+									{...register('email')}
 								/>
+								<div className="error-yup">
+									{errors.email ? <>{errors.email?.message}</> : null}
+								</div>
 							</div>
 
 							<p>
@@ -279,7 +304,7 @@ export const Homepage = () => {
 
 				<section className="benefits container" id="benefitsSection">
 					<div className="benefits content">
-						<div>
+						<div className="title-container">
 							<h1 className="title">Principais Benefícios</h1>
 							<h2 className="subtitle">
 								O que a TruckLog pode agregar na sua empresa
@@ -361,12 +386,12 @@ export const Homepage = () => {
 							</li>
 						</ul>
 						<hr />
-						<p>
-							2010 - 2022{' '}
+						<div className="footer-bottom">
+							<p>2010 - 2023</p>
 							<a href="#" onClick={() => handleShowLGPD()}>
-								Privacy - Terms
+								<strong>Termos de privacidade</strong>
 							</a>
-						</p>
+						</div>
 					</div>
 				</footer>
 			</LandingPageContainer>
