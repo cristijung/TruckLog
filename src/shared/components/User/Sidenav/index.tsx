@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Header } from "../Header";
 import { SidenavContainer, SidenavContent } from "./styles";
 
@@ -10,7 +10,6 @@ interface ISidenavProps {
 export const Sidenav = ({ children }: ISidenavProps) => {
   const sidenav = useRef<HTMLElement>(null);
   const container = useRef<HTMLDivElement>(null);
-  const [activeItem, setActiveItem] = useState("");
 
   const handleToggleSidenav = () => {
     if (sidenav.current && container.current) {
@@ -18,6 +17,31 @@ export const Sidenav = ({ children }: ISidenavProps) => {
       container.current.classList.toggle("expanded");
     }
   };
+
+  useEffect(() => {
+    if (sidenav.current && container.current) {
+      if (window.innerWidth <= 600) {
+        sidenav.current.classList.remove("expanded");
+        container.current.classList.add("expanded");
+      }
+    }
+
+    const updateWindowDimensions = () => {
+      const newWidth = window.innerWidth;
+
+      // MODO MOBILE
+      if (sidenav.current && container.current) {
+        if (newWidth <= 600) {
+          sidenav.current.classList.remove("expanded");
+          container.current.classList.add("expanded");
+        }
+      }
+    };
+
+    window.addEventListener("resize", updateWindowDimensions);
+
+    return () => window.removeEventListener("resize", updateWindowDimensions);
+  }, []);
 
   return (
     <SidenavContainer>
