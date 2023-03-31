@@ -1,9 +1,9 @@
-import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../utils/api";
+import { createContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../../utils/api';
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface IChildren {
   children: React.ReactNode;
@@ -27,30 +27,31 @@ export const AuthContext = createContext({} as IAuthContext);
 export const AuthProvider = ({ children }: IChildren) => {
   const navigate = useNavigate();
   const [token, setToken] = useState<string>(
-    localStorage.getItem("token") || ""
+    localStorage.getItem('token') || ''
   );
-  const [userLogin, setUserLogin] = useState<string>("");
+  const [userLogin, setUserLogin] = useState<string>('');
 
   const handleLogin = async (user: IUser) => {
     try {
       const response = await fetch(`${api}/auth`, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(user),
       });
 
       if (response.ok) {
         const token = await response.text();
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
         setToken(token);
-        navigate("/usuario/dashboard");
+
+        navigate('/usuario/dashboard');
         return true;
       }
-      
+
       return false;
     } catch (error) {
       console.error(error);
-      toast.error("Houve um erro inesperado.")
+      toast.error('Login ou senha inválidos');
       return false;
     }
   };
@@ -70,9 +71,9 @@ export const AuthProvider = ({ children }: IChildren) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setToken("");
-    navigate("/login");
+    localStorage.removeItem('token');
+    setToken('');
+    navigate('/login');
   };
 
   return (
