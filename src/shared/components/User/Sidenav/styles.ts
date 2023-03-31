@@ -11,7 +11,7 @@ export const SidenavContainer = styled.nav`
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 750px) {
     .container {
       margin-left: 0;
     }

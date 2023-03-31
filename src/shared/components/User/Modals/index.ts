@@ -32,4 +32,4 @@ export * from './RouteModals/DeleteRouteModal';
 export * from '../../Homepage/LgpdModals/LgpdModal';
 
 //Login Modal
-export * from './LoginModal/InterestModal';
+export * from '../../Homepage/LoginModal/InterestModal';
