@@ -7,6 +7,10 @@ export const LandingPageContainer = styled.div`
 		font-family: 'Red Hat Display', sans-serif;
 	}
 
+	button {
+		z-index: 1;
+	}
+	
 	.container {
 		width: 100%;
 	}

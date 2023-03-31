@@ -30,4 +30,4 @@ export * from './RouteModals/DeleteRouteModal';
 
 // Lgpd Modals
 
-export * from './LgpdModals/ShowLgpdModal';
+export * from '../../Homepage/LgpdModals/LgpdModal';
