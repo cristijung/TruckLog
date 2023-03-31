@@ -34,10 +34,6 @@ export const Roles = () => {
   useEffect(() => {
     document.title = "Efetivo e Detalhes | TruckLog";
   }, []);
-  function unique(user: IUserComplete) {
-    const result = users.filter((user, index) => users.indexOf(user) === index);
-    return result;
-  }
 
   return (
     <RolesContainer>
@@ -71,52 +67,7 @@ export const Roles = () => {
           <p>Status</p>
         </div>
 
-        <div className="gas-station-body">
-          {Array.from(new Set(users))
-            .sort((a, b) => {
-              return a.statusUsuario === "ATIVO" ? -1 : 1;
-            })
-            .filter((user) =>
-              user.nome.toLowerCase().includes(searchUsers.toLowerCase())
-            )
-            .map((user) => (
-              <div
-                className={
-                  user.statusUsuario === "ATIVO"
-                    ? "posto ativo"
-                    : "posto inativo"
-                }
-                key={user.idUsuario}
-              >
-                <p>{user.nomeUsuario}</p>
-                <p>{user.documento}</p>
-                {user.nomeUsuario.replace("ROLE_", "")}
-                <div
-                  className={
-                    user.statusUsuario === "ATIVO" ? "ativo" : "inativo"
-                  }
-                >
-                  {user.statusUsuario}
-                  <div className="btn-container">
-                    <button
-                      onClick={() =>
-                        handleDeleteByRoleModal(
-                          user.idUsuario,
-                          user.nomeUsuario
-                        )
-                      }
-                      disabled={user.statusUsuario === "ATIVO" ? false : true}
-                    >
-                      <i
-                        title="Deletar Posto"
-                        className="ph ph-trash delete-icon"
-                      ></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>
+        <div className="gas-station-body"></div>
       </main>
       <CreateDriverModal
         isOpen={isCreateByRoleModal}
