@@ -64,7 +64,7 @@ export const Homepage = () => {
               adquirir nossos serviços.
             </p>
             <a href="#registerSection">
-              <Button>Saiba Mais</Button>
+              <Button>Tenho Interesse!</Button>
             </a>
           </div>
           <img
