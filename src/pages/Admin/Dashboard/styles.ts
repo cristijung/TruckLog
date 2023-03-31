@@ -16,7 +16,7 @@ export const UsersContainer = styled.main`
     [class$="content"] {
         max-width: 80vw;
         margin: 0 auto;
-        padding: 0 1rem 0 calc(1rem + 20px);
+        padding: 0 1.5rem 0 calc(1.5rem + 20px);
     }
 
     main {
@@ -109,6 +109,7 @@ export const UsersContainer = styled.main`
         gap: 2rem;
         justify-content: space-between;
         max-height: 480px;
+        height: 100%;
         width: 100%;
 
         canvas {
@@ -125,13 +126,49 @@ export const UsersContainer = styled.main`
     }
 
     @media (max-width: 1280px) {
+        .content {
+            padding-bottom: 3rem;
+        }
+
         .data-container {
             grid-template-columns: repeat(2, 1fr);
             justify-content: center;
+            align-items: center;
         }
 
-        .canvas:last-child {
-            flex-grow: 1;
+        .chart-container {
+            max-height: none;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem;
+
+            canvas {
+                max-height: 500px;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        .page-header {
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            padding-top: 2rem;
+            h2 {
+                margin: 0;
+            }
+        }
+
+        .data-container {
+            gap: 1rem;
+
+            .card-data {
+                padding: 1rem;
+            }
+        }
+
+        [class$="content"] {
+            padding: 0 0 2rem;
+            max-width: 85vw;
         }
     }
 `;

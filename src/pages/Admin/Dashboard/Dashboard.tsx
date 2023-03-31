@@ -75,7 +75,7 @@ export const Dashboard = () => {
                     <div className="data-container">
                         <div className="card-data">
                             <div className="card-header">
-                                <span>Viagens realizadas até o momento</span>
+                                <span>Viagens realizadas</span>
                                 <FlagBanner size={32} />
                             </div>
                             <strong>2000</strong>
