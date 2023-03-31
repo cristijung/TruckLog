@@ -5,15 +5,21 @@ import { AuthContext } from '../../shared/context/AuthContext';
 import { Link } from 'react-router-dom';
 import { FaHome, BsArrowLeft } from 'react-icons/all';
 import { useState, useEffect } from 'react';
-import InputMask from 'react-input-mask';
-
 import truckImg from '../../assets/truck.png';
 import bgObject1Img from '../../assets/bg-item3.svg';
 import bgObject2Img from '../../assets/bg-item2.svg';
 import InterestModal from '../../shared/components/User/Modals/LoginModal/InterestModal';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaLogin } from './LoginSchema';
 
 export const Login = () => {
-  const { register, handleSubmit } = useForm({});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schemaLogin),
+  });
   const { handleLogin } = useContext(AuthContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
@@ -76,7 +82,6 @@ export const Login = () => {
               type="text"
               placeholder="login"
               id="login"
-              required
               {...register('login')}
               onFocus={() => {
                 document
@@ -93,6 +98,9 @@ export const Login = () => {
               }}
             />
           </div>
+          <div className="error-yup">
+            {errors.login ? <>{errors.login.message}</> : null}
+          </div>
 
           <div className="input-container visible">
             <i className="ph ph-lock-key"></i>
@@ -100,7 +108,6 @@ export const Login = () => {
               type="password"
               id="senha"
               placeholder="senha"
-              required
               {...register('senha')}
               onFocus={() => {
                 document
@@ -118,7 +125,9 @@ export const Login = () => {
               }}
             />
           </div>
-
+          <div className="error-yup">
+            {errors.senha ? <>{errors.senha.message}</> : null}
+          </div>
           <p className="error">*Login ou senha inválidos</p>
           <div className="button-section">
             <InterestModal />

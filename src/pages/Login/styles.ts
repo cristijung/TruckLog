@@ -112,6 +112,10 @@ export const LoginContainer = styled.div`
     justify-content: center;
     height: 100%;
     gap: 2rem;
+    .error-yup {
+      color: red;
+      font-size: 1.3rem;
+    }
 
     & .error {
       color: ${(props) => props.theme.status.error};
@@ -182,6 +186,7 @@ export const LoginContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 60%;
+    font-size: 1.3rem;
     max-width: 48rem;
   }
 

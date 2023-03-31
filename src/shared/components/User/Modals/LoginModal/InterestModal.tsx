@@ -1,10 +1,17 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { ModalContainer } from '../styles';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { schemaModal } from '../../../../../pages/Login/LoginSchema';
 
 export default function InterestModal() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const {
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schemaModal),
+  });
   function openModal() {
     setModalIsOpen(true);
   }
@@ -45,7 +52,6 @@ export default function InterestModal() {
                   name="name"
                   type="text"
                   placeholder="Digite aqui seu nome"
-                  required
                 />
               </div>
 
@@ -58,7 +64,6 @@ export default function InterestModal() {
                   name="email"
                   type="email"
                   placeholder="Digite aqui seu e-mail"
-                  required
                 />
               </div>
 

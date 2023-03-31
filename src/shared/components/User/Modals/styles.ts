@@ -76,6 +76,7 @@ export const ModalContainer = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    width: 50rem;
     margin: 0 auto;
     border-radius: 1rem;
     padding: 2rem;
