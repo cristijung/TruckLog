@@ -61,6 +61,9 @@ export function EditGasStationModal({
           />
 
           <Button type="submit">Editar Posto</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

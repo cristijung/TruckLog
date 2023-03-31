@@ -63,6 +63,9 @@ export function CreateTruckModal({
             {...register("nivelCombustivel")}
           />
           <Button type="submit">Cadastrar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

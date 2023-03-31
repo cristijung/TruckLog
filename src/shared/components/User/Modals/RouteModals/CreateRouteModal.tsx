@@ -67,6 +67,9 @@ export function CreateRouteModal({
           />
 
           <Button type="submit">Cadastrar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

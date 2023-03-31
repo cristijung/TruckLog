@@ -35,6 +35,7 @@ export function DeleteDriverModal({
             </p>
             <div className="delete-btn-container  ">
               <Button
+                bgColor="error"
                 className="delete-btn"
                 onClick={() =>
                   deleteUserByRole(idUsuario).then(() => {
@@ -44,7 +45,11 @@ export function DeleteDriverModal({
               >
                 Deletar
               </Button>
-              <Button className="canceal-btn" onClick={() => onRequestClose()}>
+              <Button
+                bgColor="gray"
+                className="canceal-btn"
+                onClick={() => onRequestClose()}
+              >
                 Cancelar
               </Button>
             </div>

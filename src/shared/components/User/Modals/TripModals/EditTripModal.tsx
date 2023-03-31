@@ -58,6 +58,9 @@ export function EditTripModal({
           <input id="dataFim" type="date" {...register("dataFim")} />
 
           <Button type="submit">Editar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

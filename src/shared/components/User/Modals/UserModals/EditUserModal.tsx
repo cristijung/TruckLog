@@ -80,6 +80,9 @@ export function EditUserModal({
           />
 
           <Button type="submit">Editar Usuário</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

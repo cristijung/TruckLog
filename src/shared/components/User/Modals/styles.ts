@@ -34,22 +34,7 @@ export const ModalContainer = styled.div`
       flex-direction: column;
       width: 100%;
       gap: 1rem;
-
-      .delete-btn {
-        text-align: center;
-        background-color: ${(props) => props.theme.status.error};
-      }
-
-      .canceal-btn {
-        text-align: center;
-        background-color: ${(props) => props.theme["gray-300"]};
-      }
-
-      .delete-btn:hover,
-      .canceal-btn:hover {
-        filter: brightness(0.9);
-        transition: filter 150ms;
-      }
+      text-align: center;
     }
   }
 

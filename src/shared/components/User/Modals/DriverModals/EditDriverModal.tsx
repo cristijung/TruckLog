@@ -90,6 +90,9 @@ export function EditDriverModal({
           />
 
           <Button type="submit">Editar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

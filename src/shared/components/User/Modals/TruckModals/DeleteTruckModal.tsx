@@ -34,7 +34,7 @@ export function DeleteTruckModal({
           </p>
           <div className="delete-btn-container">
             <Button
-              className="delete-btn"
+              bgColor="error"
               onClick={async () => {
                 const isOk = await deleteTruck(idCaminhao);
                 isOk && onRequestClose();
@@ -42,7 +42,7 @@ export function DeleteTruckModal({
             >
               Deletar
             </Button>
-            <Button className="canceal-btn" onClick={() => onRequestClose()}>
+            <Button bgColor="gray" onClick={() => onRequestClose()}>
               Cancelar
             </Button>
           </div>

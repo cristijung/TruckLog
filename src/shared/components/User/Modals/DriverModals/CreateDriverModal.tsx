@@ -78,6 +78,9 @@ export function CreateDriverModal({
           <label htmlFor="email">E-mail</label>
           <input type="email" placeholder="E-mail" {...register("email")} />
           <Button type="submit">Cadastrar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

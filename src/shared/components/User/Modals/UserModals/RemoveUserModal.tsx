@@ -35,7 +35,7 @@ export function RemoveUserModal({
             </p>
             <div className="delete-btn-container  ">
               <Button
-                className="delete-btn"
+                bgColor="error"
                 onClick={() =>
                   removeUser(idUsuario).then(() => {
                     onRequestClose();
@@ -44,7 +44,7 @@ export function RemoveUserModal({
               >
                 Deletar
               </Button>
-              <Button className="canceal-btn" onClick={() => onRequestClose()}>
+              <Button bgColor="gray" onClick={() => onRequestClose()}>
                 Cancelar
               </Button>
             </div>

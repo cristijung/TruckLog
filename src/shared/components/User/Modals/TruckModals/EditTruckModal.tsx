@@ -17,7 +17,7 @@ interface IUseFormProps {
 export function EditTruckModal({
   isOpen,
   onRequestClose,
-  truckId
+  truckId,
 }: IEditTruckModalProps) {
   const { register, handleSubmit } = useForm<IUseFormProps>();
   const { editTruck } = useTrucks();
@@ -49,6 +49,9 @@ export function EditTruckModal({
             {...register("nivelCombustivel")}
           />
           <Button type="submit">Abastecer</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

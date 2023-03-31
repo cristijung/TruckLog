@@ -79,6 +79,9 @@ export function CreateUserModal({
           <label htmlFor="email"></label>
           <input type="email" placeholder="E-mail" {...register("email")} />
           <Button type="submit">Cadastrar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
           {/* <label id="status" htmlFor="situation">
             Disponibilidade
           </label>
