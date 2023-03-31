@@ -388,7 +388,27 @@ export const LandingPageContainer = styled.div`
 		transform: scale(1.05);
 	}
 
-	@media (max-width: 1200px) {
+	@media screen and (min-width: 601px) and (max-width: 1080px) {
+		font-size: 1.6rem;
+
+		.content {
+			width: 95vw;
+			gap: 4rem;
+
+			.header-nav {
+				align-items: center;
+			}
+		}
+
+		.intro {
+			.text-section {
+				h1 {
+					font-size: 1.9rem;
+				}
+				p {
+				}
+			}
+		}
 	}
 
 	@media (max-width: 600px) {
