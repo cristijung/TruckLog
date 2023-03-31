@@ -1,8 +1,8 @@
-import { HeaderContainer } from "./styles";
-import { AuthContext } from "../../../context/AuthContext";
-import { useContext } from "react";
-import { BasicMenu } from "../userMenu";
-import { Link } from "react-router-dom";
+import { HeaderContainer } from './styles';
+import { AuthContext } from '../../../context/AuthContext';
+import { useContext } from 'react';
+import { BasicMenu } from '../userMenu';
+import { Link } from 'react-router-dom';
 
 interface IHeaderProps {
   handleOpenSidenav: () => void;
@@ -15,7 +15,7 @@ export const Header = ({ handleOpenSidenav }: IHeaderProps) => {
     <HeaderContainer>
       <div className="dashboard-menu">
         <i className="ph ph-list" onClick={handleOpenSidenav}></i>
-        <Link to={"/usuario/dashboard"}>
+        <Link to={'/usuario/dashboard'}>
           <h1> Dashboard</h1>
         </Link>
       </div>

@@ -1,11 +1,17 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { IApiError } from "../../@types/api";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { IApiError } from '../../@types/api';
 
-import { api } from "../../utils/api";
-import { AuthContext } from "../context/AuthContext";
+import { api } from '../../utils/api';
+import { AuthContext } from '../context/AuthContext';
 
 interface IRoutesProviderProps {
   children: ReactNode;
@@ -46,11 +52,11 @@ export function RouteProvider({ children }: IRoutesProviderProps): JSX.Element {
 
   const getRoutes = () => {
     try {
-      fetch(api + "rota", {
-        method: "GET",
+      fetch(api + 'rota', {
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          "content-type": "application/json",
+          'content-type': 'application/json',
         },
       })
         .then((response) => response.json())
@@ -66,10 +72,10 @@ export function RouteProvider({ children }: IRoutesProviderProps): JSX.Element {
   const createRoute = async (route: IRoutesData) => {
     try {
       const response = await fetch(`${api}rota`, {
-        method: "POST",
+        method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
-          "content-type": "application/json",
+          'content-type': 'application/json',
         },
         body: JSON.stringify(route),
       });
@@ -84,7 +90,7 @@ export function RouteProvider({ children }: IRoutesProviderProps): JSX.Element {
             })
           : toast.error(error.message);
       } else {
-        toast.success("Rota Cadastrada!");
+        toast.success('Rota Cadastrada!');
       }
 
       getRoutes();
@@ -98,10 +104,10 @@ export function RouteProvider({ children }: IRoutesProviderProps): JSX.Element {
   const editRoute = async (route: IRoutesData, idRota: number) => {
     try {
       const response = await fetch(`${api}rota?idRota=${idRota}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,
-          "content-type": "application/json",
+          'content-type': 'application/json',
         },
         body: JSON.stringify(route),
       });
@@ -116,11 +122,11 @@ export function RouteProvider({ children }: IRoutesProviderProps): JSX.Element {
             })
           : toast.error(error.message);
       } else {
-        toast.warning("Rota alterada!");
+        toast.warning('Rota alterada!');
       }
 
       getRoutes();
-      toast.warning("Rota alterada!");
+      toast.warning('Rota alterada!');
       return response.ok;
     } catch (e) {
       // console.log(e);
@@ -131,19 +137,19 @@ export function RouteProvider({ children }: IRoutesProviderProps): JSX.Element {
   const deleteRoute = async (idRota: number) => {
     try {
       const response = await fetch(`${api}rota?idRota=${idRota}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
-          "content-type": "application/json",
+          'content-type': 'application/json',
         },
       });
 
       if (response.ok) {
-        toast.warning("Rota deletada com sucesso!");
+        toast.warning('Rota deletada com sucesso!');
       }
     } catch (error) {
       console.error(error);
-      toast.error("Não foi possível deletar!");
+      toast.error('Não foi possível deletar!');
       return false;
     }
 

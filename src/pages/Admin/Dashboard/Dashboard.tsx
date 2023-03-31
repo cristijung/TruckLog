@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from 'react';
 
-import { useUsers } from "../../../shared/hooks/useUsers";
-import { UsersContainer } from "./styles";
-import { AuthContext } from "../../../shared/context/AuthContext";
-import { EditUserModal } from "../../../shared/components/User/Modals/UserModals/EditUserModal";
-import { CreateUserModal } from "../../../shared/components/User/Modals/UserModals/CreateUserModal";
-import { RemoveUserModal } from "../../../shared/components/User/Modals/UserModals/RemoveUserModal";
-import { AddRoleModal } from "../../../shared/components/User/Modals";
+import { useUsers } from '../../../shared/hooks/useUsers';
+import { UsersContainer } from './styles';
+import { AuthContext } from '../../../shared/context/AuthContext';
+import { EditUserModal } from '../../../shared/components/User/Modals/UserModals/EditUserModal';
+import { CreateUserModal } from '../../../shared/components/User/Modals/UserModals/CreateUserModal';
+import { RemoveUserModal } from '../../../shared/components/User/Modals/UserModals/RemoveUserModal';
+import { AddRoleModal } from '../../../shared/components/User/Modals';
 
 export const Dashboard = () => {
   const { users } = useUsers();
@@ -20,7 +20,7 @@ export const Dashboard = () => {
   const [idUserEdit, setIdUserEdit] = useState(0);
   const [idUserRemove, setIdUserRemove] = useState(0);
 
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState('');
 
   const handleAddRole = (idUsuario: number) => {
     setIsAddRoleModalOpen(true);
@@ -39,16 +39,16 @@ export const Dashboard = () => {
   };
 
   useEffect(() => {
-    document.title = "Dashboard | TruckLog"
+    document.title = 'Dashboard | TruckLog';
   }, []);
-  
-  const [searchUser, setSearchUsers] = useState("");
+
+  const [searchUser, setSearchUsers] = useState('');
   return (
     <UsersContainer>
       <main className="content">
         <div className="user-trail">
           <span>Meu Painel</span>
-          <span>{" > "}</span>
+          <span>{' > '}</span>
           <a className="selected">Dashboard</a>
         </div>
 
@@ -78,7 +78,7 @@ export const Dashboard = () => {
         <div className="gas-station-body ">
           {users
             .sort((user) => {
-              return user.status === "ATIVO" ? -1 : 1;
+              return user.status === 'ATIVO' ? -1 : 1;
             })
 
             .filter((user) =>
@@ -87,7 +87,7 @@ export const Dashboard = () => {
             .map((user) => (
               <div
                 className={
-                  user.status === "ATIVO" ? "trip ativo" : "trip inativo"
+                  user.status === 'ATIVO' ? 'trip ativo' : 'trip inativo'
                 }
                 key={user.idUsuario}
               >
@@ -96,12 +96,12 @@ export const Dashboard = () => {
                   <p>{user.documento}</p>
                 </div>
 
-                <div className={user.status === "ATIVO" ? "ativo" : "inativo"}>
+                <div className={user.status === 'ATIVO' ? 'ativo' : 'inativo'}>
                   {user.status}
                   <div className="btn-container">
                     <button
                       onClick={() => handleAddRole(user.idUsuario)}
-                      disabled={user.status === "ATIVO" ? false : true}
+                      disabled={user.status === 'ATIVO' ? false : true}
                     >
                       <i
                         title="Editar cargos "
@@ -110,7 +110,7 @@ export const Dashboard = () => {
                     </button>
                     <button
                       onClick={() => handleOpenEditModal(user.idUsuario)}
-                      disabled={user.status === "ATIVO" ? false : true}
+                      disabled={user.status === 'ATIVO' ? false : true}
                     >
                       <i title="Editar User" className="ph ph-pencil"></i>
                     </button>
@@ -119,7 +119,7 @@ export const Dashboard = () => {
                       onClick={() =>
                         handleRemoveUserModal(user.idUsuario, user.nome)
                       }
-                      disabled={user.status === "ATIVO" ? false : true}
+                      disabled={user.status === 'ATIVO' ? false : true}
                     >
                       <i
                         title="Deletar User"

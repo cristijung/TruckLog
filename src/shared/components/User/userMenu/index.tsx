@@ -1,9 +1,9 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { AuthContext } from "../../../context/AuthContext";
-import { useContext, useEffect } from "react";
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { AuthContext } from '../../../context/AuthContext';
+import { useContext, useEffect } from 'react';
 
 export function BasicMenu() {
   const { userLogin, getLoggedUsers, handleLogout } = useContext(AuthContext);
@@ -24,14 +24,14 @@ export function BasicMenu() {
     <div>
       <Button
         id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
+        aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
+        aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         sx={{
-          fontFamily: "Poppins, sans-serif",
-          fontSize: "1.4rem",
-          width: "100%",
+          fontFamily: 'Poppins, sans-serif',
+          fontSize: '1.4rem',
+          width: '100%',
         }}
       >
         {userLogin}
@@ -42,15 +42,15 @@ export function BasicMenu() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          "aria-labelledby": "basic-button",
+          'aria-labelledby': 'basic-button',
         }}
       >
         <MenuItem
           onClick={() => handleLogout()}
           sx={{
-            fontFamily: "Poppins, sans-serif",
-            fontSize: "1.2rem",
-            width: "100%",
+            fontFamily: 'Poppins, sans-serif',
+            fontSize: '1.2rem',
+            width: '100%',
           }}
         >
           Logout
