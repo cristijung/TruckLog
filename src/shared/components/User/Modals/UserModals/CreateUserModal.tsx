@@ -70,13 +70,13 @@ export function CreateUserModal({
             placeholder="CNH ou CPF"
             {...register("documento")}
           />
-          {/* <label htmlFor="Role"> Cargo</label>
+          <label htmlFor="idCargo"> Cargo</label>
           <select id="idCargo" {...register("idCargo")}>
             <option value="1">Administrador</option>
             <option value="2">Colaborador</option>
-            <option value="2">Motorista</option>
-          </select> */}
-          <label htmlFor="email"></label>
+            <option value="3">Motorista</option>
+          </select>
+          <label htmlFor="email">E-mail</label>
           <input type="email" placeholder="E-mail" {...register("email")} />
           <Button type="submit">Cadastrar</Button>
           <Button bgColor="gray" onClick={() => onRequestClose()}>

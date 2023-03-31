@@ -1,181 +1,161 @@
 import styled from "styled-components";
 
 export const UsersContainer = styled.main`
-  width: 100%;
-  overflow-x: hidden;
-
-  input[type="text"] {
-    all: unset;
-    width: 98%;
-    padding: 1.5rem;
-    border: 1px solid ${(props) => props.theme["gray-100"]};
-    font-size: 1.6rem;
-    border-radius: 0.5rem;
-  }
-  
-  [class$="content"] {
-    max-width: 80vw;
-    margin: 0 auto;
-  }
-
-  main {
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .user-trail {
-    background-color: #d8d8d8;
-    color: ${(props) => props.theme["gray-400"]};
-    border-radius: 0.5rem;
-    padding: 0.5rem 2rem;
-    width: fit-content;
-    margin-top: 1rem;
-
-    .selected {
-      text-decoration: underline;
-      cursor: default;
-    }
-  }
-
-  .title-page {
-    font-size: 2rem;
-    margin: 2rem 0;
-  }
-
-  .create-button {
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-
-    i {
-      font-size: 1.6rem;
-    }
-  }
-
-  .gas-station-header {
-    display: grid;
     width: 100%;
-    font-size: 1.6rem;
-    position: relative;
-    padding: 1.5rem 3.2rem 1.5rem 1rem;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    grid-gap: 0.5rem;
-    border-bottom: 1px solid ${(props) => props.theme["gray-200"]};
+    overflow-x: hidden;
 
-    p {
-      font-weight: 700;
-      width: fit-content;
-
-      :hover {
-        cursor: pointer;
-      }
+    [class$="content"] {
+        max-width: 80vw;
+        margin: 0 auto;
+        padding: 0 0 0 1.5rem;
     }
 
-    .select {
-      all: unset;
-    }
-  }
-
-  .gas-station-body {
-    flex: 1;
-    margin-bottom: 2.5rem;
-    overflow-y: scroll;
-
-    p {
-      display: flex;
-      justify-content: space-between;
-      flex: 1;
-    }
-
-    i,
-    .delete-icon {
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      color: ${(props) => props.theme.white};
-      background-color: ${(props) => props.theme.status.warning};
-      cursor: pointer;
-    }
-
-    .delete-icon {
-      background-color: ${(props) => props.theme.status.error};
-    }
-  }
-
-  .inativo {
-    opacity: 0.4;
-  }
-
-  .trip {
-    display: grid;
-    width: 100%;
-    font-size: 1.6rem;
-    position: relative;
-    padding: 1.5rem 1rem;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    grid-gap: 0.5rem;
-    border-bottom: 1px solid ${(props) => props.theme["gray-200"]};
-
-    :hover {
-      background-color: ${(props) => props.theme.background};
-      transition: background-color 0.2s;
-    }
-
-    div.inativo,
-    div.ativo {
-      display: flex;
-      justify-content: space-between;
-
-      .btn-container {
+    main {
+        height: 90vh;
         display: flex;
-        gap: 0.8rem;
+        flex-direction: column;
+    }
 
-        button {
-          all: unset;
-          background-color: transparent;
-          padding: 0;
+    .user-trail {
+        background-color: #d8d8d8;
+        color: ${(props) => props.theme["gray-400"]};
+        border-radius: 0.5rem;
+        padding: 0.5rem 2rem;
+        width: fit-content;
+        margin-top: 1rem;
+
+        .selected {
+            text-decoration: underline;
+            cursor: default;
         }
-      }
     }
 
-    button:disabled {
-      cursor: not-allowed;
+    .title-page {
+        font-size: 2rem;
+        margin: 2rem 0;
     }
 
-    div.inativo {
-      color: ${(props) => props.theme.status.error};
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: rem;
     }
 
-    div.ativo {
-      color: ${(props) => props.theme.status.success};
+    .charts-data-container {
+        margin: 2rem auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
     }
-  }
 
-  li p {
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    padding: 2rem 1rem;
-  }
+    .data-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+        width: 100%;
+        .card-data {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: ${(props) => props.theme.background};
 
-  li {
-    background-color: ${(props) => props.theme.white};
-  }
+            .card-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+            }
 
-  li:nth-child(odd) {
-    background-color: ${(props) => props.theme.background};
-  }
+            span {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
 
-  li:hover {
-    filter: brightness(0.8);
-    transition: filter 150ms;
-  }
+            strong {
+                font-size: 1.8rem;
+            }
+        }
+    }
 
-  p input {
-    margin-right: 1rem;
-    width: 2rem;
-    height: 2rem;
-  }
+    .chart-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        max-height: 480px;
+
+        canvas {
+            border-radius: 8px;
+            padding: 1rem;
+            background-color: ${(props) => props.theme.background};
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: 1900px) {
+        .chart-container {
+            max-height: none;
+            padding-bottom: 2rem;
+        }
+
+        canvas {
+            max-height: 500px;
+        }
+    }
+
+    @media (max-width: 1280px) {
+        .content {
+            padding-bottom: 3rem;
+            padding: 0 1.5rem 0 calc(1.5rem + 20px);
+        }
+
+        .data-container {
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chart-container {
+            max-height: none;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem;
+
+            canvas {
+                max-height: 500px;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        .page-header {
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            padding-top: 2rem;
+            h2 {
+                margin: 0;
+            }
+        }
+
+        .data-container {
+            gap: 1rem;
+
+            .card-data {
+                padding: 1rem;
+            }
+        }
+
+        [class$="content"] {
+            padding: 0 0 2rem;
+            max-width: 85vw;
+        }
+    }
 `;

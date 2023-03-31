@@ -46,7 +46,7 @@ h6 {
   }
 
   .modal-content {
-    max-width: 40vw;
+    max-width: 60vw;
     min-width: 30vw;
     height: fit-content;
     position: absolute;

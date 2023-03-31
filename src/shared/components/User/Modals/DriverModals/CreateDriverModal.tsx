@@ -26,54 +26,46 @@ export function CreateDriverModal({
       ariaHideApp={false}
     >
       <ModalContainer>
-        <h2>Adicionar Motorista</h2>
+        <h2>Adicionar</h2>
         <form
           className="form-container"
           onSubmit={handleSubmit((data) => {
-            createWithRole({
-              idUsuario: data.idUsuario,
-              login: data.login,
-              nomeUsuario: data.nomeUsuario,
-              email: data.email,
-              documento: data.documento,
-              statusUsuario: data.statusUsuario,
-              idCargo: data.idCargo,
-              nome: data.nome,
-              idCaminhao: data.idCaminhao,
-              modelo: data.modelo,
-              placa: data.placa,
-              nivelCombustivel: data.nivelCombustivel,
-              statusCaminhao: data.statusCaminhao,
-              statusGeralCaminhao: data.statusGeralCaminhao,
-              idRota: data.idRota,
-              descricaoRota: data.descricaoRota,
-              localPartida: data.localPartida,
-              localDestino: data.localDestino,
-              statusRota: data.statusRota,
-              idPosto: data.idPosto,
-              nomePosto: data.nomePosto,
-              valorCombustivel: data.valorCombustivel,
-              statusPosto: data.statusPosto,
-              idViagem: data.idViagem,
-              descricaoViagem: data.descricaoViagem,
-              dataInicio: data.dataInicio,
-              dataFim: data.dataFim,
-              statusViagem: data.statusViagem,
-            });
+            onRequestClose();
           })}
         >
           <label htmlFor="name">Nome</label>
-          <input type="text" placeholder="Nome" {...register("nome")} />
+          <input
+            id="nome"
+            type="text"
+            placeholder="Nome"
+            {...register("nome")}
+          />
           <label htmlFor="user">Usuário</label>
-          <input type="text" placeholder="Usuário" {...register("usuario")} />
+          <input
+            id="usuario"
+            type="text"
+            placeholder="Usuário"
+            {...register("usuario")}
+          />
           <label htmlFor="password">Senha</label>
-          <input type="password" placeholder="Senha" {...register("senha")} />
-          <label htmlFor="cnh">Cnh</label>
-          <input type="text" placeholder="CNH" {...register("cnh")} />
-          <label htmlFor="situation">Disponibilidade</label>
-          <select {...register("statusMotorista")}>
-            <option value="DISPONIVEL">Disponível</option>
-            <option value="EM_ESTRADA">Em estrada</option>
+          <input
+            id="senha"
+            type="password"
+            placeholder="Senha"
+            {...register("senha")}
+          />
+          <label htmlFor="documento">Documento</label>
+          <input
+            id="documento"
+            type="text"
+            placeholder="CNH ou CPF"
+            {...register("documento")}
+          />
+          <label htmlFor="idCargo"> Cargo</label>
+          <select id="idCargo" {...register("idCargo")}>
+            <option value="1">Administrador</option>
+            <option value="2">Colaborador</option>
+            <option value="3">Motorista</option>
           </select>
           <label htmlFor="email">E-mail</label>
           <input type="email" placeholder="E-mail" {...register("email")} />

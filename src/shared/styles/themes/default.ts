@@ -10,11 +10,11 @@ export const defaultTheme = {
 	'gray-200': '#c9c9c9',
 	'gray-100': '#e5e5e5',
 
-	status: {
-		error: '#e74c3c',
-		success: '#4BB543',
-		warning: '#eed202',
-	},
+  status: {
+    error: "#e74c3c",
+    success: "#4BB543",
+    warning: "#cbb944",
+  },
 
 	background: '#f0f0f5',
 	black: '#000000',
