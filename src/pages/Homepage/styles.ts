@@ -143,7 +143,7 @@ export const LandingPageContainer = styled.div`
 	.data.content {
 		justify-content: center;
 		align-items: center;
-		height: 70vh;
+		/* height: 70vh; */
 		text-align: center;
 		flex-direction: column;
 		gap: 10rem;
