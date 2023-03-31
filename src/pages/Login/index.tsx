@@ -128,7 +128,6 @@ export const Login = () => {
           <div className="error-yup">
             {errors.senha ? <>{errors.senha.message}</> : null}
           </div>
-          <p className="error">*Login ou senha inválidos</p>
           <div className="button-section">
             <InterestModal />
             <a href="#">Esqueceu sua senha?</a>
