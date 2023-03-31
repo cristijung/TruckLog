@@ -110,6 +110,7 @@ export const LoginContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
     height: 100%;
     gap: 2rem;
     .error-yup {
@@ -190,7 +191,7 @@ export const LoginContainer = styled.div`
     max-width: 48rem;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 1080px) {
     display: flex;
     justify-content: center;
 
