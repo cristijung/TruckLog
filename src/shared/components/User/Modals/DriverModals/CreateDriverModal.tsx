@@ -1,14 +1,13 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
-import { IUserComplete, useRoles } from "../../../../hooks/useRoles";
+import { useRoles } from "../../../../hooks/useRoles";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalPropsDriver {
   isOpen: boolean;
   onRequestClose: () => void;
 }
-
-// type IEditUserByRole = Pick<IUserComplete, "nome" | "senha">;
 
 export function CreateDriverModal({
   isOpen,
@@ -70,7 +69,10 @@ export function CreateDriverModal({
           </select>
           <label htmlFor="email">E-mail</label>
           <input type="email" placeholder="E-mail" {...register("email")} />
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">Cadastrar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

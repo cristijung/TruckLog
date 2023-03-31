@@ -6,6 +6,7 @@ import {
   EditRouteModal,
   DeleteRouteModal,
 } from "../../../shared/components/User/Modals";
+import { Button } from "../../../shared/components/Button";
 
 export const Rotas = () => {
   const { getRoutes, routes } = useRoutes();
@@ -45,12 +46,12 @@ export const Rotas = () => {
         </div>
 
         <h2 className="title-page">Rotas</h2>
-        <button
+        <Button
           onClick={() => setIsCreateRouteModalOpen(true)}
           className="create-button"
         >
           Cadastrar Rota <i className="ph ph-plus"></i>
-        </button>
+        </Button>
         <input
           value={searchRoute}
           onChange={(e) => setSearchRoute(e.target.value)}

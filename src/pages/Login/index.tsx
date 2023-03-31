@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import truckImg from '../../assets/truck.png';
 import bgObject1Img from '../../assets/bg-item3.svg';
 import bgObject2Img from '../../assets/bg-item2.svg';
-import InterestModal from '../../shared/components/User/Modals/LoginModal/InterestModal';
+import InterestModal from '../../shared/components/Homepage/LoginModal/InterestModal';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaLogin } from './LoginSchema';
 

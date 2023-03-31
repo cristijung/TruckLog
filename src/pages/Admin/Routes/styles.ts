@@ -125,6 +125,7 @@ export const RotasContainer = styled.main`
       gap: 0.8rem;
 
       button {
+        all: unset;
         background-color: transparent;
         padding: 0;
       }

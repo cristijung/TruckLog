@@ -20,7 +20,7 @@ export const Sidenav = ({ children }: ISidenavProps) => {
 
   useEffect(() => {
     if (sidenav.current && container.current) {
-      if (window.innerWidth <= 600) {
+      if (window.innerWidth <= 750) {
         sidenav.current.classList.remove("expanded");
         container.current.classList.add("expanded");
       }
@@ -31,7 +31,7 @@ export const Sidenav = ({ children }: ISidenavProps) => {
 
       // MODO MOBILE
       if (sidenav.current && container.current) {
-        if (newWidth <= 600) {
+        if (newWidth <= 750) {
           sidenav.current.classList.remove("expanded");
           container.current.classList.add("expanded");
         }

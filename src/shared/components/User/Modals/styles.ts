@@ -1,5 +1,4 @@
-import { api } from './../../../../utils/api';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -8,19 +7,19 @@ export const ModalContainer = styled.div`
 
   h2 {
     font-size: 1.8rem;
-    color: ${(props) => props.theme['green-700']};
+    color: ${(props) => props.theme["green-700"]};
   }
 
   p {
     padding: 1rem;
     text-align: center;
     border: 1px transparent black;
-    background-color: ${(props) => props.theme['gray-100']};
+    background-color: ${(props) => props.theme["gray-100"]};
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px 1px;
     font-size: 1.6rem;
     strong {
-      color: ${(props) => props.theme['green-700']};
+      color: ${(props) => props.theme["green-700"]};
     }
   }
 
@@ -35,22 +34,7 @@ export const ModalContainer = styled.div`
       flex-direction: column;
       width: 100%;
       gap: 1rem;
-
-      .delete-btn {
-        text-align: center;
-        background-color: ${(props) => props.theme.status.error};
-      }
-
-      .canceal-btn {
-        text-align: center;
-        background-color: ${(props) => props.theme['gray-300']};
-      }
-
-      .delete-btn:hover,
-      .canceal-btn:hover {
-        filter: brightness(0.9);
-        transition: filter 150ms;
-      }
+      text-align: center;
     }
   }
 
@@ -61,7 +45,17 @@ export const ModalContainer = styled.div`
     label {
       margin-top: 1rem;
       font-size: 1.6rem;
-      color: ${(props) => props.theme['green-700']};
+      color: ${(props) => props.theme["green-700"]};
+    }
+
+    input,
+    select {
+      all: unset;
+      width: 95%;
+      padding: 1rem;
+      border: 1px solid ${(props) => props.theme["gray-100"]};
+      font-size: 1.4rem;
+      border-radius: 0.5rem;
     }
 
     button {
@@ -69,6 +63,34 @@ export const ModalContainer = styled.div`
       padding: 1rem 1.5rem;
       margin: 1.5rem auto 0 auto;
     }
+  }
+
+  .lgpdH2 {
+    text-align: center;
+  }
+  .lgpdText {
+    text-align: justify;
+  }
+
+  @media (max-width: 600px) {
+    .lgpdH2 {
+      font-size: 1.6rem;
+    }
+    .lgpdText {
+      font-size: 1.2rem;
+    }
+  }
+
+  label {
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    color: ${(props) => props.theme["green-700"]};
+  }
+
+  button {
+    width: fit-content;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem auto 0 auto;
   }
 
   .form-interest {
@@ -83,6 +105,7 @@ export const ModalContainer = styled.div`
       font-size: 1.8rem;
     }
   }
+
   .text-section {
     display: flex;
     font-size: 1.3rem;
@@ -96,6 +119,7 @@ export const ModalContainer = styled.div`
       font-size: 2rem;
     }
   }
+
   form div {
     display: flex;
     flex-direction: column;
@@ -118,12 +142,12 @@ export const ModalContainer = styled.div`
     height: 3rem;
     margin-right: 1rem;
     border-radius: 4px;
-    background-color: ${(props) => props.theme['green-500']};
+    background-color: ${(props) => props.theme["green-500"]};
     color: ${(props) => props.theme.white};
   }
 
   form > div input {
-    border: 1px solid ${(props) => props.theme['gray-300']};
+    border: 1px solid ${(props) => props.theme["gray-300"]};
     width: 100%;
     padding: 1rem;
     border-radius: 0.5rem;
