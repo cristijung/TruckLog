@@ -4,19 +4,10 @@ export const UsersContainer = styled.main`
     width: 100%;
     overflow-x: hidden;
 
-    input[type="text"] {
-        all: unset;
-        width: 98%;
-        padding: 1.5rem;
-        border: 1px solid ${(props) => props.theme["gray-100"]};
-        font-size: 1.6rem;
-        border-radius: 0.5rem;
-    }
-
     [class$="content"] {
         max-width: 80vw;
         margin: 0 auto;
-        padding: 0 1.5rem 0 calc(1.5rem + 20px);
+        padding: 0 0 0 1.5rem;
     }
 
     main {
@@ -44,22 +35,11 @@ export const UsersContainer = styled.main`
         margin: 2rem 0;
     }
 
-    .create-button {
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 2rem;
-
-        i {
-            font-size: 1.6rem;
-        }
-    }
-
     .page-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-top: rem;
     }
 
     .charts-data-container {
@@ -134,6 +114,7 @@ export const UsersContainer = styled.main`
     @media (max-width: 1280px) {
         .content {
             padding-bottom: 3rem;
+            padding: 0 1.5rem 0 calc(1.5rem + 20px);
         }
 
         .data-container {

@@ -8,6 +8,8 @@ import {
 import { IUserComplete, useRoles } from "../../../shared/hooks/useRoles";
 import { RolesContainer } from "./styles";
 
+import { Pagination } from "@mui/material";
+
 export const Roles = () => {
   const { users } = useRoles();
 
@@ -67,7 +69,9 @@ export const Roles = () => {
           <p>Status</p>
         </div>
 
-        <div className="gas-station-body"></div>
+        <div className="gas-station-body">
+          <Pagination count={10} variant="outlined" shape="rounded" />
+        </div>
       </main>
       <CreateDriverModal
         isOpen={isCreateByRoleModal}

@@ -68,9 +68,9 @@ export const Sidenav = ({ children }: ISidenavProps) => {
             <i className="ph ph-path"></i> Viagens
           </Link>
           <Link
-            to={"/usuario/efetivo"}
+            to={"/usuario/motoristas"}
             className={`item ${
-              location.pathname === "/usuario/efetivo" ? "active" : ""
+              location.pathname === "/usuario/motoristas" ? "active" : ""
             }`}
           >
             <i className="ph ph-user"></i> Motoristas
