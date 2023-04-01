@@ -11,3 +11,11 @@ export interface IgetGasStation {
     valorCombustivel: number;
     status: string;
 }
+
+export interface IFormRespose {
+    nome: string;
+    longitude: string;
+    latitude: string;
+    cidade: string;
+    valorCombustivel: number;
+}
