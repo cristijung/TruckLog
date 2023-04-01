@@ -3,6 +3,7 @@ import { api } from "../../../utils/api";
 import {
     IgetGasStation,
     IFormRespose,
+    IeditGasStation,
 } from "../../../utils/interfaces/IGasStationAPI";
 
 const token = localStorage.getItem("token");
@@ -25,7 +26,17 @@ const gasStationSlice = apiSliceWithTag.injectEndpoints({
         addGasStation: build.mutation<IFormRespose, IFormRespose>({
             query: (gasStation) => ({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto`,
-                method: "Post",
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: gasStation,
+            }),
+        }),
+        editGasStation: build.mutation<IeditGasStation, IeditGasStation>({
+            query: (gasStation) => ({
+                url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto${gasStation.id}`,
+                method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

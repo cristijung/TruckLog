@@ -9,6 +9,7 @@ import {
 import { Button } from "../../../shared/components/Button";
 import { useGetGasStationQuery } from "../../../redux/features/gasStation/gasStationSlice";
 import { IgetGasStation } from "../../../utils/interfaces/IGasStationAPI";
+import { IeditGasStation } from "../../../utils/interfaces/IGasStationAPI";
 
 export const Postos = () => {
     const { gasStations } = useGasStations();
@@ -21,14 +22,14 @@ export const Postos = () => {
     const [isRemoveGasStationModalOpen, setIsRemoveGasStationModalOpen] =
         useState(false);
 
-    const [idPostoEdit, setIdPostoEdit] = useState("");
+    const [PostoEdit, setPostoEdit] = useState({});
     const [idPostoRemove, setIdPostoRemove] = useState("");
 
     const [gasStationName, setGasStationName] = useState("");
 
-    const handleOpenEditModal = (idPosto: string) => {
+    const handleOpenEditModal = (gasStation: IeditGasStation) => {
         setIsEditGasStationModalOpen(true);
-        setIdPostoEdit(idPosto);
+        setPostoEdit(gasStation);
     };
 
     const handleRemoveEditModal = (idPosto: string, namePosto: string) => {
@@ -82,7 +83,6 @@ export const Postos = () => {
                             .sort((item) => {
                                 return item.status === "ATIVO" ? -1 : 1;
                             })
-
                             .filter((gasStation) =>
                                 gasStation.nome
                                     .toLowerCase()
@@ -121,7 +121,7 @@ export const Postos = () => {
                                             <button
                                                 onClick={() =>
                                                     handleOpenEditModal(
-                                                        gasStation.id
+                                                        gasStation
                                                     )
                                                 }
                                                 disabled={
@@ -174,7 +174,7 @@ export const Postos = () => {
             <EditGasStationModal
                 isOpen={isEditGasStationModalOpen}
                 onRequestClose={() => setIsEditGasStationModalOpen(false)}
-                idPosto={idPostoEdit}
+                posto={PostoEdit}
             />
 
             <RemoveGasStationModal
