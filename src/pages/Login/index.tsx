@@ -11,39 +11,27 @@ import bgObject2Img from '../../assets/bg-item2.svg';
 import InterestModal from '../../shared/components/User/Modals/LoginModal/InterestModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthLoginMutation } from '../../redux/features/Authentication/authenticationSlice';
+import { toast } from 'react-toastify';
 
-import { IUser } from '../../utils/interfaces/IUser';
+export interface IUser {
+  login: string;
+  senha: string;
+}
 
 interface ILoginForm {
   login: string;
   senha: string;
 }
 interface AuthLoginOptions {
-  onSuccess?: () => void;
+  onSuccess?: (token: string) => void;
   onError?: (error: any) => void;
 }
 export const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ILoginForm>({
-    resolver: yupResolver(schemaLogin),
-  });
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const { register, handleSubmit } = useForm();
+  const [authLogin] = useAuthLoginMutation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<IUser>({ login: '', senha: '' });
-  const [login, { isLoading }] = useAuthLoginMutation();
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const result = await login(user).unwrap();
-      console.log('Usuário logado:', result);
-    } catch (error) {
-      console.error('Erro ao fazer login:', error);
-    }
-  };
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 600);
   };
@@ -79,7 +67,16 @@ export const Login = () => {
           alt="imagem de uma caminhão em uma extremidade com a logo do trucklog"
         />
       </div>
-      <form onSubmit={handleLogin}>
+      <form
+        onSubmit={handleSubmit((data) => {
+          authLogin({
+            login: data.login,
+            senha: data.senha,
+          });
+          navigate('/usuario/dashboard');
+          console.log(authLogin());
+        })}
+      >
         <div className="form-section">
           <h1>Login</h1>
           <h3>Insira seus dados de acesso:</h3>
@@ -90,7 +87,7 @@ export const Login = () => {
               type="text"
               placeholder="login"
               id="login"
-              {...register('login', { required: true })}
+              {...register('login')}
               name="login"
               onFocus={() => {
                 document
@@ -107,9 +104,7 @@ export const Login = () => {
               }}
             />
           </div>
-          <div className="error-yup">
-            {errors.login ? <>{errors.login.message}</> : null}
-          </div>
+          <div className="error-yup"></div>
 
           <div className="input-container visible">
             <i className="ph ph-lock-key"></i>
@@ -117,7 +112,8 @@ export const Login = () => {
               type="password"
               id="senha"
               placeholder="senha"
-              {...register('senha', { required: true })}
+              {...register('senha')}
+              required
               name="senha"
               onFocus={() => {
                 document
@@ -135,9 +131,7 @@ export const Login = () => {
               }}
             />
           </div>
-          <div className="error-yup">
-            {errors.senha ? <>{errors.senha.message}</> : null}
-          </div>
+          <div className="error-yup"></div>
           <div className="button-section">
             <InterestModal />
             <a href="#">Esqueceu sua senha?</a>

@@ -1,37 +1,29 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IUser } from '../../../utils/interfaces/IUser';
 import { ILoggedUser } from '../../../utils/interfaces/IAuthentication.';
+import { IUser } from '../../../utils/interfaces/IUser';
+import { apiSlice } from '../../rootReducer';
 
-export const apiSlice = createApi({
-  reducerPath: 'auth',
-  baseQuery: fetchBaseQuery({
-    baseUrl:
-      'http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/',
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as any).auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
-  endpoints: (builder) => ({
-    authLogin: builder.mutation<{ data: string }, IUser>({
+const token = localStorage.getItem('token');
+
+const authenticationSlice = apiSlice.injectEndpoints({
+  endpoints: (build) => ({
+    authLogin: build.mutation<IUser, void>({
       query: (user) => ({
-        url: '/auth',
+        url: 'http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/auth',
         method: 'POST',
-        body: user,
-        responseHandler: (response) => response.json(),
+        body: JSON.stringify(user),
       }),
     }),
-
-    getLoggedUser: builder.query<ILoggedUser, void>({
+    getLoggedUser: build.query<ILoggedUser, void>({
       query: () => ({
-        url: 'usuario/usuario-logado',
+        url: 'http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/usuario/usuario-logado',
         method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
     }),
   }),
 });
 
-export const { useAuthLoginMutation, useGetLoggedUserQuery } = apiSlice;
+export const { useAuthLoginMutation, useGetLoggedUserQuery } =
+  authenticationSlice;

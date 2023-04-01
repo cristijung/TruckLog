@@ -1,8 +1,13 @@
-import { combineReducers } from 'redux';
-import { apiSlice } from './features/Authentication/authenticationSlice';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { api } from '../utils/api';
 
-const rootReducer = combineReducers({
-  [apiSlice.reducerPath]: apiSlice.reducer,
+export const apiSlice = createApi({
+  reducerPath: 'apiSlice',
+  keepUnusedDataFor: 0,
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${api}`,
+  }),
+  endpoints: () => ({}),
 });
 
-export default rootReducer;
+export const apiReducer = apiSlice.reducer;
