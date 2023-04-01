@@ -7,7 +7,8 @@ import {
     RemoveGasStationModal,
 } from "../../../shared/components/User/Modals";
 import { Button } from "../../../shared/components/Button";
-import { useGetGasStationQuery } from "../../../redux/features/gasStation/gasStationApi";
+import { useGetGasStationQuery } from "../../../redux/features/gasStation/gasStationSlice";
+import { IgetGasStation } from "../../../utils/interfaces/IGasStationAPI";
 
 export const Postos = () => {
     const { gasStations } = useGasStations();
@@ -20,17 +21,17 @@ export const Postos = () => {
     const [isRemoveGasStationModalOpen, setIsRemoveGasStationModalOpen] =
         useState(false);
 
-    const [idPostoEdit, setIdPostoEdit] = useState(0);
-    const [idPostoRemove, setIdPostoRemove] = useState(0);
+    const [idPostoEdit, setIdPostoEdit] = useState("");
+    const [idPostoRemove, setIdPostoRemove] = useState("");
 
     const [gasStationName, setGasStationName] = useState("");
 
-    const handleOpenEditModal = (idPosto: number) => {
+    const handleOpenEditModal = (idPosto: string) => {
         setIsEditGasStationModalOpen(true);
         setIdPostoEdit(idPosto);
     };
 
-    const handleRemoveEditModal = (idPosto: number, namePosto: string) => {
+    const handleRemoveEditModal = (idPosto: string, namePosto: string) => {
         setIsRemoveGasStationModalOpen(true);
         setIdPostoRemove(idPosto);
         setGasStationName(namePosto);
@@ -75,86 +76,93 @@ export const Postos = () => {
                 </div>
 
                 <div className="gas-station-body ">
-                    {gasStations
-                        .sort((item) => {
-                            return item.status === "ATIVO" ? -1 : 1;
-                        })
+                    {data ? (
+                        data
+                            .slice()
+                            .sort((item) => {
+                                return item.status === "ATIVO" ? -1 : 1;
+                            })
 
-                        .filter((gasStation) =>
-                            gasStation.nome
-                                .toLowerCase()
-                                .includes(searchGasStation.toLowerCase())
-                        )
-                        .map((gasStation) => (
-                            <div
-                                className={
-                                    gasStation.status === "ATIVO"
-                                        ? "posto ativo"
-                                        : "posto inativo"
-                                }
-                                key={gasStation.idPosto}
-                            >
-                                <p>{gasStation.nome}</p>
-                                <div>
-                                    <p>
-                                        {gasStation.valorCombustivel.toLocaleString(
-                                            "pt-br",
-                                            {
-                                                style: "currency",
-                                                currency: "BRL",
-                                            }
-                                        )}
-                                    </p>
-                                </div>
+                            .filter((gasStation) =>
+                                gasStation.nome
+                                    .toLowerCase()
+                                    .includes(searchGasStation.toLowerCase())
+                            )
+                            .map((gasStation) => (
                                 <div
                                     className={
                                         gasStation.status === "ATIVO"
-                                            ? "ativo"
-                                            : "inativo"
+                                            ? "posto ativo"
+                                            : "posto inativo"
                                     }
+                                    key={gasStation.id}
                                 >
-                                    {gasStation.status}
-                                    <div className="btn-container">
-                                        <button
-                                            onClick={() =>
-                                                handleOpenEditModal(
-                                                    gasStation.idPosto
-                                                )
-                                            }
-                                            disabled={
-                                                gasStation.status === "ATIVO"
-                                                    ? false
-                                                    : true
-                                            }
-                                        >
-                                            <i
-                                                title="Editar Posto"
-                                                className="ph ph-pencil"
-                                            ></i>
-                                        </button>
+                                    <p>{gasStation.nome}</p>
+                                    <div>
+                                        <p>
+                                            {gasStation.valorCombustivel.toLocaleString(
+                                                "pt-br",
+                                                {
+                                                    style: "currency",
+                                                    currency: "BRL",
+                                                }
+                                            )}
+                                        </p>
+                                    </div>
+                                    <div
+                                        className={
+                                            gasStation.status === "ATIVO"
+                                                ? "ativo"
+                                                : "inativo"
+                                        }
+                                    >
+                                        {gasStation.status}
+                                        <div className="btn-container">
+                                            <button
+                                                onClick={() =>
+                                                    handleOpenEditModal(
+                                                        gasStation.id
+                                                    )
+                                                }
+                                                disabled={
+                                                    gasStation.status ===
+                                                    "ATIVO"
+                                                        ? false
+                                                        : true
+                                                }
+                                            >
+                                                <i
+                                                    title="Editar Posto"
+                                                    className="ph ph-pencil"
+                                                ></i>
+                                            </button>
 
-                                        <button
-                                            onClick={() =>
-                                                handleRemoveEditModal(
-                                                    gasStation.idPosto,
-                                                    gasStation.nome
-                                                )
-                                            }
-                                            disabled={
-                                                gasStation.status === "ATIVO"
-                                                    ? false
-                                                    : true
-                                            }
-                                        >
-                                            <i
-                                                title="Deletar Posto"
-                                                className="ph ph-trash delete-icon"
-                                            ></i>
-                                        </button>
+                                            <button
+                                                onClick={() =>
+                                                    handleRemoveEditModal(
+                                                        gasStation.id,
+                                                        gasStation.nome
+                                                    )
+                                                }
+                                                disabled={
+                                                    gasStation.status ===
+                                                    "ATIVO"
+                                                        ? false
+                                                        : true
+                                                }
+                                            >
+                                                <i
+                                                    title="Deletar Posto"
+                                                    className="ph ph-trash delete-icon"
+                                                ></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                    ) : (
+                        <p>Estamos carregando a página</p>
+                    )}
                 </div>
             </main>
 
