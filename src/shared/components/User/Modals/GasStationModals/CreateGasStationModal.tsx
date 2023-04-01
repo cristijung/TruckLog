@@ -3,7 +3,10 @@ import { useGasStations } from "../../../../hooks";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
 import { Button } from "../../../Button";
-import { useAddGasStationMutation } from "../../../../../redux/features/gasStation/gasStationSlice";
+import {
+    useAddGasStationMutation,
+    useGetGasStationQuery,
+} from "../../../../../redux/features/gasStation/gasStationSlice";
 import { IFormRespose } from "../../../../../utils/interfaces/IGasStationAPI";
 
 interface ICreateEntityModalProps {
@@ -20,8 +23,8 @@ export function CreateGasStationModal({
     isOpen,
     onRequestClose,
 }: ICreateEntityModalProps) {
-    const { addNewGasStation } = useGasStations();
     const { register, handleSubmit } = useForm();
+    const { refetch } = useGetGasStationQuery();
     const [addGasStation] = useAddGasStationMutation();
 
     return (
@@ -40,11 +43,12 @@ export function CreateGasStationModal({
                         addGasStation({
                             nome: data.nome,
                             cidade: data.cidade,
-                            latitude: 22,
-                            longitude: 18,
+                            latitude: "22",
+                            longitude: "12",
                             valorCombustivel: data.valorCombustivel,
                         });
-                        // return response && onRequestClose();
+                        refetch();
+                        onRequestClose();
                     })}
                 >
                     <label htmlFor="nome">Nome do Posto</label>

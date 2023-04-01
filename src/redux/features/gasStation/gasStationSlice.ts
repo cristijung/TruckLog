@@ -6,7 +6,12 @@ import {
 } from "../../../utils/interfaces/IGasStationAPI";
 
 const token = localStorage.getItem("token");
-const gasStationSlice = apiSlice.injectEndpoints({
+
+const apiSliceWithTag = apiSlice.enhanceEndpoints({
+    addTagTypes: ["gasStations"],
+});
+
+const gasStationSlice = apiSliceWithTag.injectEndpoints({
     endpoints: (build) => ({
         getGasStation: build.query<IgetGasStation[], void>({
             query: () => ({
@@ -17,7 +22,7 @@ const gasStationSlice = apiSlice.injectEndpoints({
                 },
             }),
         }),
-        addGasStation: build.mutation<IFormRespose, void>({
+        addGasStation: build.mutation<IFormRespose, IFormRespose>({
             query: (gasStation) => ({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto`,
                 method: "Post",

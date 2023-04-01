@@ -19,3 +19,11 @@ export interface IFormRespose {
     cidade: string;
     valorCombustivel: number;
 }
+export interface IeditGasStation {
+    nome: string;
+    longitude: string;
+    latitude: string;
+    cidade: string;
+    id: number;
+    valorCombustivel: number;
+}
