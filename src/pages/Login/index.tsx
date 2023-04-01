@@ -1,33 +1,54 @@
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { LoginContainer } from './styles';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../shared/context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaHome, BsArrowLeft } from 'react-icons/all';
-import { useState, useEffect } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaLogin } from './LoginSchema';
 import truckImg from '../../assets/truck.png';
 import bgObject1Img from '../../assets/bg-item3.svg';
 import bgObject2Img from '../../assets/bg-item2.svg';
 import InterestModal from '../../shared/components/User/Modals/LoginModal/InterestModal';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaLogin } from './LoginSchema';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAuthLoginMutation } from '../../redux/features/Authentication/authenticationSlice';
 
+import { IUser } from '../../utils/interfaces/IUser';
+
+interface ILoginForm {
+  login: string;
+  senha: string;
+}
+interface AuthLoginOptions {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+}
 export const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ILoginForm>({
     resolver: yupResolver(schemaLogin),
   });
-  const { handleLogin } = useContext(AuthContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const navigate = useNavigate();
+  const [user, setUser] = useState<IUser>({ login: '', senha: '' });
+  const [login, { isLoading }] = useAuthLoginMutation();
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const result = await login(user).unwrap();
+      console.log('Usuário logado:', result);
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+    }
+  };
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 600);
+  };
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 600);
-    };
-
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
@@ -58,20 +79,7 @@ export const Login = () => {
           alt="imagem de uma caminhão em uma extremidade com a logo do trucklog"
         />
       </div>
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          const isOk = await handleLogin({
-            login: data.login,
-            senha: data.senha,
-          });
-
-          !isOk &&
-            (document.querySelector('.error')?.classList.add('visible'),
-            document.querySelectorAll('.input-container').forEach((input) => {
-              input.classList.add('outlined-error');
-            }));
-        })}
-      >
+      <form onSubmit={handleLogin}>
         <div className="form-section">
           <h1>Login</h1>
           <h3>Insira seus dados de acesso:</h3>
@@ -82,7 +90,8 @@ export const Login = () => {
               type="text"
               placeholder="login"
               id="login"
-              {...register('login')}
+              {...register('login', { required: true })}
+              name="login"
               onFocus={() => {
                 document
                   .querySelectorAll('.input-container')[0]
@@ -108,7 +117,8 @@ export const Login = () => {
               type="password"
               id="senha"
               placeholder="senha"
-              {...register('senha')}
+              {...register('senha', { required: true })}
+              name="senha"
               onFocus={() => {
                 document
                   .querySelectorAll('.input-container')[1]

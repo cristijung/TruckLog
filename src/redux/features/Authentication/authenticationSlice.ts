@@ -1,32 +1,37 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IUser } from '../../../utils/interfaces/IUser';
 import { ILoggedUser } from '../../../utils/interfaces/IAuthentication.';
-import { apiSlice } from '../../apiSlice';
 
-export const getToken = (): string => {
-  return localStorage.getItem('token') || '';
-};
-
-const Authentication = apiSlice.injectEndpoints({
-  endpoints: (build) => ({
-    authLogin: build.mutation<string, IUser>({
+export const apiSlice = createApi({
+  reducerPath: 'auth',
+  baseQuery: fetchBaseQuery({
+    baseUrl:
+      'http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/',
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as any).auth.token;
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
+  endpoints: (builder) => ({
+    authLogin: builder.mutation<{ data: string }, IUser>({
       query: (user) => ({
-        url: `/auth`,
+        url: '/auth',
         method: 'POST',
         body: user,
-        responseHandler: (response) => response.text(),
+        responseHandler: (response) => response.json(),
       }),
     }),
-    getLoggedUser: build.query<ILoggedUser, void>({
+
+    getLoggedUser: builder.query<ILoggedUser, void>({
       query: () => ({
-        url: `/auth/usuario-logado`,
+        url: 'usuario/usuario-logado',
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
       }),
     }),
   }),
-  overrideExisting: false,
 });
 
-export const { useAuthLoginMutation, useGetLoggedUserQuery } = Authentication;
+export const { useAuthLoginMutation, useGetLoggedUserQuery } = apiSlice;
