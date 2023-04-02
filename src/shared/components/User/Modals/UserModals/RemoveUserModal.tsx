@@ -28,7 +28,7 @@ export function RemoveUserModal({
     >
       <ModalContainer>
         <div>
-          <div className="delete-gas-station">
+          <div className="delete-section">
             <h2>Tem certeza que deseja deletar?</h2>
             <p>
               Nome: <strong>{nomeUsuario}</strong>

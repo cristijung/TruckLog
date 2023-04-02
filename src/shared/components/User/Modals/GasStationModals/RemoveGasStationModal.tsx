@@ -33,17 +33,16 @@ export function RemoveGasStationModal({
             ariaHideApp={false}
         >
             <ModalContainer>
-                <div className="delete-gas-station">
+                <div className="delete-section">
                     <h2>Tem certeza que deseja deletar?</h2>
-
                     <div className="posto-info-container">
                         <p>
                             Você está deletando: <strong>{namePosto}</strong>
                         </p>
                     </div>
-
                     <div className="delete-btn-container">
                         <Button
+                            expanded
                             bgColor="error"
                             className="delete-btn"
                             onClick={() => {
@@ -59,6 +58,7 @@ export function RemoveGasStationModal({
                             Deletar
                         </Button>
                         <Button
+                            expanded
                             bgColor="gray"
                             className="canceal-btn"
                             onClick={onRequestClose}

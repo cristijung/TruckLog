@@ -31,6 +31,7 @@ export function EditTruckModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Abastecer Caminhão</h2>
         <form
           className="form-container"
@@ -49,9 +50,7 @@ export function EditTruckModal({
             {...register("nivelCombustivel")}
           />
           <Button type="submit">Abastecer</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>

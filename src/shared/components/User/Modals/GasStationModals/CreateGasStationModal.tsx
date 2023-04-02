@@ -1,23 +1,16 @@
 import Modal from "react-modal";
-import { useGasStations } from "../../../../hooks";
 import { ModalContainer } from "../styles";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button } from "../../../Button";
 import {
     useAddGasStationMutation,
     useGetGasStationQuery,
 } from "../../../../../redux/features/gasStation/gasStationSlice";
-import { IFormRespose } from "../../../../../utils/interfaces/IGasStationAPI";
 import { toast } from "react-toastify";
 
 interface ICreateEntityModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
-}
-
-interface ICreateGasStation {
-    nome: string;
-    valorCombustivel: string;
 }
 
 export function CreateGasStationModal({
@@ -37,6 +30,10 @@ export function CreateGasStationModal({
             ariaHideApp={false}
         >
             <ModalContainer>
+                <i
+                    onClick={onRequestClose}
+                    className="ph ph-x-circle close-btn"
+                ></i>
                 <h2>Cadastrar Posto</h2>
                 <form
                     className="form-container"
@@ -74,7 +71,6 @@ export function CreateGasStationModal({
                         placeholder="Digite o nome do posto aqui"
                         {...register("nome")}
                     />
-
                     <label htmlFor="nome">Cidade localizada</label>
                     <input
                         id="cidade"
@@ -92,9 +88,6 @@ export function CreateGasStationModal({
                     />
 
                     <Button type="submit">Cadastrar</Button>
-                    <Button bgColor="gray" onClick={() => onRequestClose()}>
-                        Cancelar
-                    </Button>
                 </form>
             </ModalContainer>
         </Modal>
