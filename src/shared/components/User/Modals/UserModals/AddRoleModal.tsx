@@ -30,6 +30,7 @@ export function AddRoleModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Adicionar Cargo para o usuário:</h2>
         <form
           className="form-container"
@@ -46,9 +47,7 @@ export function AddRoleModal({
           </select>
 
           <Button type="submit">Cadastrar</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -7,33 +7,50 @@ export const ModalContainer = styled.div`
 
   h2 {
     font-size: 1.8rem;
-    color: ${(props) => props.theme["green-700"]};
+    color: ${props => props.theme['green-700']};
   }
 
   p {
     padding: 1rem;
     text-align: center;
     border: 1px transparent black;
-    background-color: ${(props) => props.theme["gray-100"]};
+    background-color: ${props => props.theme['gray-100']};
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px 1px;
     font-size: 1.6rem;
     strong {
-      color: ${(props) => props.theme["green-700"]};
+      color: ${props => props.theme['green-700']};
     }
   }
 
-  .delete-gas-station {
+  .close-btn {
+    position: absolute;
+    font-size: 3rem;
+    top: 2rem;
+    right: 2rem;
+    cursor: pointer;
+
+    filter: invert(32%) sepia(6%) saturate(0%) hue-rotate(235deg)
+      brightness(98%) contrast(88%);
+  }
+
+  .delete-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: 
     gap: 3rem;
 
+    > h2 {
+      margin-bottom: 2rem;
+    }
+    
     .delete-btn-container {
       display: flex;
-      flex-direction: column;
       width: 100%;
-      gap: 1rem;
+      padding: 2rem 0;
+      gap: 0.5rem;
+      flex-direction: column;
       text-align: center;
     }
   }
@@ -45,7 +62,7 @@ export const ModalContainer = styled.div`
     label {
       margin-top: 1rem;
       font-size: 1.6rem;
-      color: ${(props) => props.theme["green-700"]};
+      color: ${props => props.theme['green-700']};
     }
 
     input,
@@ -53,44 +70,61 @@ export const ModalContainer = styled.div`
       all: unset;
       width: 95%;
       padding: 1rem;
-      border: 1px solid ${(props) => props.theme["gray-100"]};
+      border: 1px solid ${props => props.theme['gray-100']};
       font-size: 1.4rem;
       border-radius: 0.5rem;
     }
 
     button {
-      width: fit-content;
-      padding: 1rem 1.5rem;
-      margin: 1.5rem auto 0 auto;
+      margin-top: 1.5rem;
     }
   }
 
-  .lgpdH2 {
-    text-align: center;
+  .error-yup {
+    color: ${props => props.theme.status['error']};
+    font-size: 1.4rem;
   }
-  .lgpdText {
-    text-align: justify;
+  
+  .lgpd {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+    h2 {
+      text-align: center;
+    }
+
+    p {
+      text-align: justify;
+    }
+
+    button {
+        width: fit-content;
+        margin: auto;
+       }
   }
 
   @media (max-width: 600px) {
-    .lgpdH2 {
-      font-size: 1.6rem;
-    }
-    .lgpdText {
-      font-size: 1.2rem;
+    .lgpd {
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+       }
     }
   }
 
   label {
     margin-top: 1rem;
     font-size: 1.6rem;
-    color: ${(props) => props.theme["green-700"]};
+    color: ${props => props.theme['green-700']};
+    display: flex;
   }
 
   button {
-    width: fit-content;
-    padding: 1rem 1.5rem;
-    margin: 1.5rem auto 0 auto;
+    max-width: 90%;
   }
 
   .form-interest {
@@ -142,12 +176,12 @@ export const ModalContainer = styled.div`
     height: 3rem;
     margin-right: 1rem;
     border-radius: 4px;
-    background-color: ${(props) => props.theme["green-500"]};
-    color: ${(props) => props.theme.white};
+    background-color: ${props => props.theme['green-500']};
+    color: ${props => props.theme.white};
   }
 
   form > div input {
-    border: 1px solid ${(props) => props.theme["gray-300"]};
+    border: 1px solid ${props => props.theme['gray-300']};
     width: 100%;
     padding: 1rem;
     border-radius: 0.5rem;

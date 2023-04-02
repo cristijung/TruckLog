@@ -11,7 +11,7 @@ export const ButtonContainer = styled.button<IButtonProps>`
   all: unset;
   cursor: pointer;
 
-  ${(props) => props.expanded && "width: 100%;"};
+  ${(props) => props.expanded && "width: 100%; text-align: center;"};
 
   background-color: ${(props) =>
     props.outlined ? props.theme.white : props.theme["green-500"]};

@@ -1,6 +1,7 @@
 //Trips Modals
 export * from './TripModals/CreateTripModal';
 export * from './TripModals/EditTripModal';
+export * from './TripModals/DeleteTripModal';
 
 //Driver Modals
 export * from './DriverModals/CreateDriverModal';
@@ -29,7 +30,7 @@ export * from './RouteModals/EditRouteModal';
 export * from './RouteModals/DeleteRouteModal';
 
 // Lgpd Modals
-export * from '../../Homepage/LgpdModals/LgpdModal';
+export * from '../../Homepage/LgpdModal';
 
 //Login Modal
-export * from '../../Homepage/LoginModal/InterestModal';
+export * from '../../Homepage/InterestModal';

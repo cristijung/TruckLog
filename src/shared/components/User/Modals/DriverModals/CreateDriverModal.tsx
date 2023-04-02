@@ -26,6 +26,7 @@ export function CreateDriverModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Adicionar</h2>
         <form
           className="form-container"
@@ -70,9 +71,7 @@ export function CreateDriverModal({
           <label htmlFor="email">E-mail</label>
           <input type="email" placeholder="E-mail" {...register("email")} />
           <Button type="submit">Cadastrar</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>
