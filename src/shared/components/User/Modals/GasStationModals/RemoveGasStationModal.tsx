@@ -35,9 +35,13 @@ export function RemoveGasStationModal({
             <ModalContainer>
                 <div className="delete-gas-station">
                     <h2>Tem certeza que deseja deletar?</h2>
-                    <p>
-                        Posto: <strong>{namePosto}</strong>
-                    </p>
+
+                    <div className="posto-info-container">
+                        <p>
+                            Você está deletando: <strong>{namePosto}</strong>
+                        </p>
+                    </div>
+
                     <div className="delete-btn-container">
                         <Button
                             bgColor="error"

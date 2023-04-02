@@ -65,7 +65,11 @@ export function EditGasStationModal({
                         })
                     )}
                 >
-                    <p>Você está editando: {nomePosto}</p>
+                    <div className="posto-info-container">
+                        <p>
+                            Você está editando: <strong>{nomePosto}</strong>
+                        </p>
+                    </div>
                     <label htmlFor="nome">Nome do Posto</label>
                     <input
                         id="nome"
