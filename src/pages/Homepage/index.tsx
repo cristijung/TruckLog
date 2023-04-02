@@ -29,7 +29,6 @@ import { Button } from "../../shared/components/Button";
 import { LgpdModal } from "../../shared/components/User/Modals";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
-import zIndex from "@mui/material/styles/zIndex";
 
 export const Homepage = () => {
   const navigate = useNavigate();
