@@ -46,9 +46,8 @@ export function EditRouteModal({
               localDestino: data.localDestino,
               idRota: idRota,
             });
-            refetch();
-            console.log(data);
             onRequestClose();
+            refetch();
           })}
         >
           <label htmlFor="descricao">Descrição rota</label>
