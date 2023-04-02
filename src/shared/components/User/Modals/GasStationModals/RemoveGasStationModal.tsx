@@ -6,6 +6,7 @@ import {
     useDeleteGasStationMutation,
     useGetGasStationQuery,
 } from "../../../../../redux/features/gasStation/gasStationSlice";
+import { toast } from "react-toastify";
 
 interface ICreateEntityModalProps {
     isOpen: boolean;
@@ -32,27 +33,32 @@ export function RemoveGasStationModal({
             ariaHideApp={false}
         >
             <ModalContainer>
-                <div className="delete-gas-station">
+                <div className="delete-section">
                     <h2>Tem certeza que deseja deletar?</h2>
-                    <p>
-                        Posto: <strong>{namePosto}</strong>
-                    </p>
+                    <div className="posto-info-container">
+                        <p>
+                            Você está deletando: <strong>{namePosto}</strong>
+                        </p>
+                    </div>
                     <div className="delete-btn-container">
                         <Button
+                            expanded
                             bgColor="error"
                             className="delete-btn"
                             onClick={() => {
-                                deleteGasStation(idPosto)
-                                    .unwrap()
-                                    .then((payload) => {
-                                        console.log(payload);
-                                        onRequestClose();
-                                    });
+                                deleteGasStation(idPosto).then(() => {
+                                    refetch();
+                                    toast.success(
+                                        "Posto deletado  com sucesso!"
+                                    );
+                                    onRequestClose();
+                                });
                             }}
                         >
                             Deletar
                         </Button>
                         <Button
+                            expanded
                             bgColor="gray"
                             className="canceal-btn"
                             onClick={onRequestClose}

@@ -38,20 +38,22 @@ export function DeleteTripModal({
 				<div className="delete-gas-station">
 					<h2>Tem certeza que deseja finalizar a viagem?</h2>
 					<p className="desc-modal">{tripName}</p>
-					<div className="delete-btn-container">
-						<Button
-							bgColor="error"
-							onClick={async () => {
-								const isOk = await deleteTrip({ idMotorista, idViagem });
-								isOk && onRequestClose();
-								refetch();
-							}}
-						>
-							Finalizar
-						</Button>
-						<Button bgColor="gray" onClick={() => onRequestClose()}>
-							Cancelar
-						</Button>
+					<div className="delete-section">
+						<div className="delete-btn-container">
+							<Button
+								bgColor="error"
+								onClick={async () => {
+									const isOk = await deleteTrip({ idMotorista, idViagem });
+									isOk && onRequestClose();
+									refetch();
+								}}
+							>
+								Finalizar
+							</Button>
+							<Button bgColor="gray" onClick={() => onRequestClose()}>
+								Cancelar
+							</Button>
+						</div>
 					</div>
 				</div>
 			</ModalContainer>

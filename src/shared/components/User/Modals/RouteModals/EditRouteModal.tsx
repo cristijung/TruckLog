@@ -35,6 +35,7 @@ export function EditRouteModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Edite a Rota:</h2>
         <h3>{descricaoRota}</h3>
         <form
@@ -74,9 +75,7 @@ export function EditRouteModal({
           />
 
           <Button type="submit">Editar</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>

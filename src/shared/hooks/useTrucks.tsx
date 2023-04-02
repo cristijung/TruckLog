@@ -4,12 +4,12 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { api } from "../../utils/api";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { IApiError } from "../../@types/api";
-import { AuthContext } from "../context/AuthContext";
+} from 'react';
+import { api } from '../../utils/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { IApiError } from '../../@types/api';
+import { AuthContext } from '../context/AuthContext';
 
 interface ITruckProviderProps {
   children: ReactNode;
@@ -20,8 +20,8 @@ interface ITruck {
   placa: string;
   nivelCombustivel: number;
   idCaminhao: number;
-  statusCaminhao: "ESTACIONADO" | "EM_VIAGEM";
-  status: "ATIVO" | "INATIVO";
+  statusCaminhao: 'ESTACIONADO' | 'EM_VIAGEM';
+  status: 'ATIVO' | 'INATIVO';
   idUsuario: number;
 }
 
@@ -34,7 +34,7 @@ interface ITruckContextData {
 
 export type ICreateTruckDTO = Pick<
   ITruck,
-  "modelo" | "placa" | "nivelCombustivel"
+  'modelo' | 'placa' | 'nivelCombustivel'
 >;
 
 const TrucksContext = createContext({} as ITruckContextData);
@@ -44,7 +44,7 @@ export function TrucksProvider({ children }: ITruckProviderProps): JSX.Element {
   const { token } = useContext(AuthContext);
 
   const getTrucks = () => {
-    fetch(api + "caminhao", {
+    fetch(api + 'caminhao', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -60,10 +60,10 @@ export function TrucksProvider({ children }: ITruckProviderProps): JSX.Element {
   const createTruck = async (truckData: ICreateTruckDTO) => {
     try {
       const response = await fetch(api + `caminhao?idColaborador=42`, {
-        method: "POST",
+        method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         body: JSON.stringify(truckData),
       });
@@ -78,7 +78,7 @@ export function TrucksProvider({ children }: ITruckProviderProps): JSX.Element {
             })
           : toast.error(error.message);
       } else {
-        toast.success("Caminhão Cadastrado!");
+        toast.success('Caminhão Cadastrado!');
       }
 
       getTrucks();
@@ -95,22 +95,22 @@ export function TrucksProvider({ children }: ITruckProviderProps): JSX.Element {
         api +
           `/caminhao/abastecer?idCaminhao=${id}&Quantidade%20de%20gasolina=${gas}`,
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-type": "application/json",
+            'Content-type': 'application/json',
           },
         }
       );
 
       !response.ok
-        ? toast.error("Quantidade de gasolina inválida.")
-        : toast.success("Caminhão abastecido!");
+        ? toast.error('Quantidade de gasolina inválida.')
+        : toast.success('Caminhão abastecido!');
 
       getTrucks();
       return response.ok;
     } catch (e) {
-      toast.error("Quantidade de gasolina inválida.");
+      toast.error('Quantidade de gasolina inválida.');
       return false;
     }
   };
@@ -118,19 +118,19 @@ export function TrucksProvider({ children }: ITruckProviderProps): JSX.Element {
   const deleteTruck = async (truckId: number) => {
     try {
       const response = await fetch(api + `/caminhao?idCaminhao=${truckId}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
       });
 
       if (response.ok) {
-        toast.warning("Caminhão deletado com sucesso!");
+        toast.warning('Caminhão deletado com sucesso!');
       }
     } catch (error) {
       console.error(error);
-      toast.error("Não foi possível deletar!");
+      toast.error('Não foi possível deletar!');
       return false;
     }
 

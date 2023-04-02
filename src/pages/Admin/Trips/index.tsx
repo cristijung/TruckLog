@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { useGetTripsQuery } from '../../../redux/features/trip/tripSlice';
+import { useGetGasStationQuery } from '../../../redux/features/gasStation/gasStationSlice';
 import {
 	CreateTripModal,
 	EditTripModal,
 	DeleteTripModal,
 } from '../../../shared/components/User/Modals';
-import { useTrips } from '../../../shared/hooks/useTrips';
 
 import { ViagensContainer } from './styles';
 import { ITrip } from '../../../utils/interfaces/ITripAPI';

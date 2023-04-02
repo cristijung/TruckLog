@@ -30,7 +30,7 @@ export * from './RouteModals/EditRouteModal';
 export * from './RouteModals/DeleteRouteModal';
 
 // Lgpd Modals
-export * from '../../Homepage/LgpdModals/LgpdModal';
+export * from '../../Homepage/LgpdModal';
 
 //Login Modal
-export * from '../../Homepage/LoginModal/InterestModal';
+export * from '../../Homepage/InterestModal';

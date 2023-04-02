@@ -62,6 +62,7 @@ export function RouteProvider({ children }: IRoutesProviderProps): JSX.Element {
 				.then(response => response.json())
 				.then(data => {
 					setRoutes(data);
+					console.log(data);
 				});
 		} catch (error) {
 			console.error(error);

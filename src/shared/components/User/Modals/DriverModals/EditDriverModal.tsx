@@ -32,6 +32,7 @@ export function EditDriverModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Editar Usuario</h2>
         <form
           className="form-container"
@@ -90,9 +91,7 @@ export function EditDriverModal({
           />
 
           <Button type="submit">Editar</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>

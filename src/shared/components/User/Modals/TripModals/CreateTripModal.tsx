@@ -5,6 +5,7 @@ import {
 	useGetTripsQuery,
 	useAddTripsMutation,
 } from '../../../../../redux/features/trip/tripSlice';
+import { useGetRouteQuery } from '../../../../../redux/features/route/routeSlice';
 
 import { useState } from 'react';
 import { useForm, Controller, FieldValues } from 'react-hook-form';
@@ -22,8 +23,11 @@ export function CreateTripModal({
 	const { register, handleSubmit } = useForm();
 	const { trucks } = useTrucks();
 	const { drivers } = useRoles();
-	const { routes } = useRoutes();
+	// const { routes } = useRoutes();
 	const { createTrip } = useTrips();
+
+	const { data: routes } = useGetRouteQuery();
+	console.log(routes);
 
 	const [addTrips] = useAddTripsMutation();
 
@@ -36,6 +40,7 @@ export function CreateTripModal({
 			ariaHideApp={false}
 		>
 			<ModalContainer>
+				<i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
 				<h2>Criar viagem</h2>
 				<form
 					className="form-container"
@@ -104,24 +109,25 @@ export function CreateTripModal({
 
 					<label htmlFor="idRota">Escolha uma rota</label>
 					<select id="idRota" {...register('idRota')}>
-						{routes
-							.filter(route => {
-								if (route.status === 'ATIVO') {
-									return route;
-								}
-							})
-							.map(route => {
-								return (
-									<option key={route.idRota} value={route.idRota}>
-										{route.descricao}
-									</option>
-								);
-							})}
+						{routes ? (
+							routes
+								.filter(route => {
+									if (route.status === 'ATIVO') {
+										return route;
+									}
+								})
+								.map(route => {
+									return (
+										<option key={route.idRota} value={route.idRota}>
+											{route.descricao}
+										</option>
+									);
+								})
+						) : (
+							<option>Carregando...</option>
+						)}
 					</select>
 					<Button type="submit">Criar</Button>
-					<Button bgColor="gray" onClick={() => onRequestClose()}>
-						Cancelar
-					</Button>
 				</form>
 			</ModalContainer>
 		</Modal>

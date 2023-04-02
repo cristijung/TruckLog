@@ -40,6 +40,7 @@ export function EditTripModal({
 			ariaHideApp={false}
 		>
 			<ModalContainer>
+				<i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
 				<h2>Editar viagem</h2>
 				<p className="desc-modal">
 					<span>Descrição da viagem:</span> {tripName}
@@ -75,9 +76,6 @@ export function EditTripModal({
 					<input id="dataFim" type="date" {...register('dataFim')} />
 
 					<Button type="submit">Editar</Button>
-					<Button bgColor="gray" onClick={() => onRequestClose()}>
-						Cancelar
-					</Button>
 				</form>
 			</ModalContainer>
 		</Modal>

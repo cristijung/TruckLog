@@ -8,12 +8,6 @@ import {
 import { Button } from "../../../shared/components/Button";
 import { useGetGasStationQuery } from "../../../redux/features/gasStation/gasStationSlice";
 import { IgetGasStation } from "../../../utils/interfaces/IGasStationAPI";
-import { IeditGasStation } from "../../../utils/interfaces/IGasStationAPI";
-
-interface IEditGasStation {
-    id: string;
-    name: string;
-}
 
 export const Postos = () => {
     const [searchGasStation, setGasStation] = useState("");
