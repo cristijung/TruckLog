@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { UsersContainer } from "./styles";
 import { useGetLoggedUserQuery } from "../../../redux/features/Authentication/authenticationSlice";
+import { useGetGasStationQuery } from "../../../redux/features/gasStation/gasStationSlice";
 import { FlagBanner, GasPump, Users, Truck } from "@phosphor-icons/react";
 import { BarChart } from "../../../shared/components/User/BarChart";
 import { PieChart } from "../../../shared/components/User/PieChart";
 export const Dashboard = () => {
     const { data: loggedUser } = useGetLoggedUserQuery();
+    const { data } = useGetGasStationQuery();
+    const postosCadastrados = data?.length;
+    const postosDisponiveis = data?.filter((posto) => {
+        return posto.status === "ATIVO";
+    }).length;
 
     useEffect(() => {
         document.title = "Dashboard | TruckLog";
@@ -45,8 +51,10 @@ export const Dashboard = () => {
                                 <span>Postos cadastrados</span>
                                 <GasPump size={32} />
                             </div>
-                            <strong>2000</strong>
-                            <span>15 nos útimos 7 dias</span>
+                            <strong>{postosCadastrados}</strong>
+                            <span>
+                                {postosDisponiveis} estão disponíveis atualmente
+                            </span>
                         </div>
                         <div className="card-data">
                             <div className="card-header">
