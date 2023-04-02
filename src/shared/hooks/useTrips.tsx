@@ -4,9 +4,9 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { api } from "../../utils/api";
-import { AuthContext } from "../context/AuthContext";
+} from 'react';
+import { api } from '../../utils/api';
+import { AuthContext } from '../context/AuthContext';
 
 interface ITripProviderProps {
   children: ReactNode;
@@ -19,7 +19,7 @@ interface ITrip {
   idCaminhao: number;
   idRota: number;
   idViagem: number;
-  statusViagem: "FINALIZADA" | "EM_ANDAMENTO";
+  statusViagem: 'FINALIZADA' | 'EM_ANDAMENTO';
   idUsuario: number;
 }
 
@@ -57,7 +57,7 @@ export function TripsProvider({ children }: ITripProviderProps): JSX.Element {
 
   const getTrip = async () => {
     try {
-      await fetch(api + "viagem", {
+      await fetch(api + 'viagem', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -75,10 +75,10 @@ export function TripsProvider({ children }: ITripProviderProps): JSX.Element {
       const response = await fetch(
         api + `viagem?idMotorista=${data.idMotorista}`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`,
-            "content-type": "application/json",
+            'content-type': 'application/json',
           },
           body: JSON.stringify({
             descricao: data.descricao,
@@ -91,7 +91,7 @@ export function TripsProvider({ children }: ITripProviderProps): JSX.Element {
       );
 
       if (response.ok) {
-        alert("Viagem cadastrada com sucesso");
+        alert('Viagem cadastrada com sucesso');
         getTrip();
       }
     } catch (error) {
@@ -111,10 +111,10 @@ export function TripsProvider({ children }: ITripProviderProps): JSX.Element {
       const response = await fetch(
         api + `viagem?idMotorista=${idMotorista}&idViagem=${idViagem}`,
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
-            "content-type": "application/json",
+            'content-type': 'application/json',
           },
           body: JSON.stringify({
             descricao: descricao,
@@ -125,7 +125,7 @@ export function TripsProvider({ children }: ITripProviderProps): JSX.Element {
       );
 
       if (response.ok) {
-        alert("Viagem editada com sucesso");
+        alert('Viagem editada com sucesso');
         getTrip();
       }
     } catch (error) {

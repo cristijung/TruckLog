@@ -4,12 +4,12 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { api } from "../../utils/api";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { IApiError } from "../../@types/api";
-import { AuthContext } from "../context/AuthContext";
+} from 'react';
+import { api } from '../../utils/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { IApiError } from '../../@types/api';
+import { AuthContext } from '../context/AuthContext';
 
 interface IGasStationProviderProps {
   children: ReactNode;
@@ -51,11 +51,11 @@ export function GasStationProvider({
   const { token } = useContext(AuthContext);
 
   const getGasStations = () => {
-    fetch(api + "posto", {
-      method: "GET",
+    fetch(api + 'posto', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
       },
     })
       .then((response) => response.json())
@@ -69,11 +69,10 @@ export function GasStationProvider({
     // console.log("entrou", gasStationdata);
     try {
       const response = await fetch(api + `/posto?idColaborador=42`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Authorization:
-            `Bearer ${token}`,
-          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
         },
         body: JSON.stringify(gasStationdata),
       });
@@ -88,13 +87,13 @@ export function GasStationProvider({
             })
           : toast.error(error.message);
       } else {
-        toast.success("Posto Cadastrado!");
+        toast.success('Posto Cadastrado!');
       }
 
       getGasStations();
       return response.ok;
     } catch (error) {
-      toast.error("Ocorreu um erro inesperado!");
+      toast.error('Ocorreu um erro inesperado!');
       return false;
     }
   };
@@ -109,11 +108,10 @@ export function GasStationProvider({
       const response = await fetch(
         api + `/posto?idColaborador=42&idPosto=${idPosto}`,
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
-            Authorization:
-              `Bearer ${token}`,
-            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
           },
           body: JSON.stringify(gasStationdata),
         }
@@ -129,13 +127,13 @@ export function GasStationProvider({
             })
           : toast.error(error.message);
       } else {
-        toast.success("Posto Alterado!");
+        toast.success('Posto Alterado!');
       }
 
       getGasStations();
       return response.ok;
     } catch (error) {
-      toast.error("Ocorreu um erro inesperado!");
+      toast.error('Ocorreu um erro inesperado!');
       return false;
     }
   };
@@ -143,19 +141,18 @@ export function GasStationProvider({
   const removeGasStation = async (idPosto: number) => {
     try {
       await fetch(api + `/posto?idPosto=${idPosto}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          Authorization:
-            `Bearer ${token}`,
-          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
         },
       });
 
-      toast.success("Posto Desativado!");
+      toast.success('Posto Desativado!');
       getGasStations();
       return true;
     } catch (error) {
-      toast.error("Houve um erro inesperado!");
+      toast.error('Houve um erro inesperado!');
       return false;
     }
   };
