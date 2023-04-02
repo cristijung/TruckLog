@@ -24,6 +24,6 @@ export interface IeditGasStation {
     longitude: string;
     latitude: string;
     cidade: string;
-    id: number;
     valorCombustivel: number;
+    id: string;
 }

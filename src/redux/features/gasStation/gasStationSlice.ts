@@ -35,16 +35,35 @@ const gasStationSlice = apiSliceWithTag.injectEndpoints({
         }),
         editGasStation: build.mutation<IeditGasStation, IeditGasStation>({
             query: (gasStation) => ({
-                url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto${gasStation.id}`,
+                url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto?idPosto=${gasStation.id}`,
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-                body: gasStation,
+                body: {
+                    nome: gasStation.nome,
+                    longitude: gasStation.longitude,
+                    latitude: gasStation.latitude,
+                    cidade: gasStation.cidade,
+                    valorCombustivel: gasStation.valorCombustivel,
+                },
+            }),
+        }),
+        deleteGasStation: build.mutation<string, string>({
+            query: (idPosto) => ({
+                url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto?idPosto=${idPosto}`,
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             }),
         }),
     }),
 });
 
-export const { useGetGasStationQuery, useAddGasStationMutation } =
-    gasStationSlice;
+export const {
+    useGetGasStationQuery,
+    useAddGasStationMutation,
+    useEditGasStationMutation,
+    useDeleteGasStationMutation,
+} = gasStationSlice;

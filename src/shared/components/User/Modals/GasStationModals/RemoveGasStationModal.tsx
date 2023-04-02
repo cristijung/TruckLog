@@ -1,7 +1,11 @@
 import Modal from "react-modal";
-import { useGasStations } from "../../../../hooks/useGasStations";
+
 import { Button } from "../../../Button";
 import { ModalContainer } from "../styles";
+import {
+    useDeleteGasStationMutation,
+    useGetGasStationQuery,
+} from "../../../../../redux/features/gasStation/gasStationSlice";
 
 interface ICreateEntityModalProps {
     isOpen: boolean;
@@ -16,7 +20,8 @@ export function RemoveGasStationModal({
     idPosto,
     namePosto,
 }: ICreateEntityModalProps) {
-    const { removeGasStation } = useGasStations();
+    const [deleteGasStation] = useDeleteGasStationMutation();
+    const { refetch } = useGetGasStationQuery();
 
     return (
         <Modal
@@ -36,11 +41,13 @@ export function RemoveGasStationModal({
                         <Button
                             bgColor="error"
                             className="delete-btn"
-                            onClick={async () => {
-                                const response = await removeGasStation(
-                                    idPosto
-                                );
-                                return response && onRequestClose();
+                            onClick={() => {
+                                deleteGasStation(idPosto)
+                                    .unwrap()
+                                    .then((payload) => {
+                                        console.log(payload);
+                                        onRequestClose();
+                                    });
                             }}
                         >
                             Deletar

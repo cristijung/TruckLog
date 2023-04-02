@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useGasStations } from "../../../shared/hooks/useGasStations";
 import { PostosContainer } from "./styles";
 import {
     CreateGasStationModal,
@@ -11,8 +10,12 @@ import { useGetGasStationQuery } from "../../../redux/features/gasStation/gasSta
 import { IgetGasStation } from "../../../utils/interfaces/IGasStationAPI";
 import { IeditGasStation } from "../../../utils/interfaces/IGasStationAPI";
 
+interface IEditGasStation {
+    id: string;
+    name: string;
+}
+
 export const Postos = () => {
-    const { gasStations } = useGasStations();
     const [searchGasStation, setGasStation] = useState("");
     const [isCreateGasStationModalOpen, setIsCreateGasStationModalOpen] =
         useState(false);
@@ -22,19 +25,18 @@ export const Postos = () => {
     const [isRemoveGasStationModalOpen, setIsRemoveGasStationModalOpen] =
         useState(false);
 
-    const [PostoEdit, setPostoEdit] = useState({});
-    const [idPostoRemove, setIdPostoRemove] = useState("");
-
+    const [idpostoEdit, setIdPostoEdit] = useState("");
     const [gasStationName, setGasStationName] = useState("");
 
-    const handleOpenEditModal = (gasStation: IeditGasStation) => {
+    const handleOpenEditModal = (namePosto: string, idPosto: string) => {
         setIsEditGasStationModalOpen(true);
-        setPostoEdit(gasStation);
+        setIdPostoEdit(idPosto);
+        setGasStationName(namePosto);
     };
 
     const handleRemoveEditModal = (idPosto: string, namePosto: string) => {
         setIsRemoveGasStationModalOpen(true);
-        setIdPostoRemove(idPosto);
+        setIdPostoEdit(idPosto);
         setGasStationName(namePosto);
     };
 
@@ -88,7 +90,7 @@ export const Postos = () => {
                                     .toLowerCase()
                                     .includes(searchGasStation.toLowerCase())
                             )
-                            .map((gasStation) => (
+                            .map((gasStation: IgetGasStation) => (
                                 <div
                                     className={
                                         gasStation.status === "ATIVO"
@@ -121,7 +123,8 @@ export const Postos = () => {
                                             <button
                                                 onClick={() =>
                                                     handleOpenEditModal(
-                                                        gasStation
+                                                        gasStation.nome,
+                                                        gasStation.id
                                                     )
                                                 }
                                                 disabled={
@@ -174,13 +177,14 @@ export const Postos = () => {
             <EditGasStationModal
                 isOpen={isEditGasStationModalOpen}
                 onRequestClose={() => setIsEditGasStationModalOpen(false)}
-                posto={PostoEdit}
+                idPosto={idpostoEdit}
+                nomePosto={gasStationName}
             />
 
             <RemoveGasStationModal
                 isOpen={isRemoveGasStationModalOpen}
                 onRequestClose={() => setIsRemoveGasStationModalOpen(false)}
-                idPosto={idPostoRemove}
+                idPosto={idpostoEdit}
                 namePosto={gasStationName}
             />
         </PostosContainer>
