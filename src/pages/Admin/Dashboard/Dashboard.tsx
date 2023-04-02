@@ -2,15 +2,29 @@ import { useEffect, useState } from "react";
 import { UsersContainer } from "./styles";
 import { useGetLoggedUserQuery } from "../../../redux/features/Authentication/authenticationSlice";
 import { useGetGasStationQuery } from "../../../redux/features/gasStation/gasStationSlice";
+import { useGetTruckQuery } from "../../../redux/features/truck/truckSlice";
+import { useGetTripsQuery } from "../../../redux/features/trip/tripSlice";
 import { FlagBanner, GasPump, Users, Truck } from "@phosphor-icons/react";
 import { BarChart } from "../../../shared/components/User/BarChart";
 import { PieChart } from "../../../shared/components/User/PieChart";
 export const Dashboard = () => {
     const { data: loggedUser } = useGetLoggedUserQuery();
     const { data } = useGetGasStationQuery();
+    const { data: trucks } = useGetTruckQuery();
+    const { data: trips } = useGetTripsQuery();
     const postosCadastrados = data?.length;
     const postosDisponiveis = data?.filter((posto) => {
         return posto.status === "ATIVO";
+    }).length;
+    const caminhoesCadastrados = trucks?.length;
+    const caminhoesDisponiveis = trucks?.filter((caminhao) => {
+        return caminhao.status === "ATIVO";
+    }).length;
+
+    console.log(trips);
+    const viagensCadastradas = trips?.length;
+    const viagensAtuais = trips?.filter((trip: any) => {
+        return trip.statusViagem === "EM_ANDAMENTO";
     }).length;
 
     useEffect(() => {
@@ -43,8 +57,12 @@ export const Dashboard = () => {
                                 <span>Viagens realizadas</span>
                                 <FlagBanner size={32} />
                             </div>
-                            <strong>2000</strong>
-                            <span>15 nos útimos 7 dias</span>
+                            <strong>{viagensCadastradas}</strong>
+                            <span>
+                                {viagensAtuais
+                                    ? `${viagensAtuais} sendo realizadas no momento`
+                                    : null}
+                            </span>
                         </div>
                         <div className="card-data">
                             <div className="card-header">
@@ -61,8 +79,12 @@ export const Dashboard = () => {
                                 <span>Caminhões cadastrados</span>
                                 <Users size={32} />
                             </div>
-                            <strong>2000</strong>
-                            <span>15 nos útimos 7 dias</span>
+                            <strong>{caminhoesCadastrados}</strong>
+                            <span>
+                                {caminhoesDisponiveis
+                                    ? `${caminhoesDisponiveis} disponíveis para viagens`
+                                    : null}
+                            </span>
                         </div>
                         <div className="card-data">
                             <div className="card-header">
