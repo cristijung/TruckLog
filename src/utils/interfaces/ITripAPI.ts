@@ -26,5 +26,4 @@ export interface IEditTrip {
 
 export interface IDeleteTrip {
 	idMotorista: number;
-	idViagem: number;
 }

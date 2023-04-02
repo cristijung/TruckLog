@@ -5,6 +5,7 @@ import { ModalContainer } from '../styles';
 import {
 	useEditTripsMutation,
 	useGetTripsQuery,
+	useDeleteTripMutation,
 } from '../../../../../redux/features/trip/tripSlice';
 
 interface ICreateEntityModalProps {
@@ -12,6 +13,7 @@ interface ICreateEntityModalProps {
 	onRequestClose: () => void;
 	idMotorista: number;
 	idViagem: number;
+	tripName: string;
 }
 
 export function DeleteTripModal({
@@ -19,9 +21,10 @@ export function DeleteTripModal({
 	onRequestClose,
 	idMotorista,
 	idViagem,
+	tripName,
 }: ICreateEntityModalProps) {
-	// const { deleteRoute } = useRoutes();
-	// const [deleteTrip] = useDeleteTripMutation();
+	const [deleteTrip] = useDeleteTripMutation();
+	const { refetch } = useGetTripsQuery();
 
 	return (
 		<Modal
@@ -33,17 +36,18 @@ export function DeleteTripModal({
 		>
 			<ModalContainer>
 				<div className="delete-gas-station">
-					<h2>Tem certeza que deseja deletar?</h2>
-
+					<h2>Tem certeza que deseja finalizar a viagem?</h2>
+					<p className="desc-modal">{tripName}</p>
 					<div className="delete-btn-container">
 						<Button
 							bgColor="error"
 							onClick={async () => {
-								// const isOk = await deleteTrip({ idMotorista, idViagem });
-								// isOk && onRequestClose();
+								const isOk = await deleteTrip({ idMotorista, idViagem });
+								isOk && onRequestClose();
+								refetch();
 							}}
 						>
-							Deletar
+							Finalizar
 						</Button>
 						<Button bgColor="gray" onClick={() => onRequestClose()}>
 							Cancelar

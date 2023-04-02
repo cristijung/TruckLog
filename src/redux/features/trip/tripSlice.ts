@@ -42,7 +42,7 @@ export const tripSlice = apiSlice.injectEndpoints({
 		}),
 		deleteTrip: build.mutation<IDeleteTrip, any>({
 			query: data => ({
-				url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem?idUsuario=${data.idUsuario}`,
+				url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem?idMotorista=${data.idMotorista}&idViagem=${data.idViagem}`,
 				method: 'DELETE',
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -52,4 +52,5 @@ export const tripSlice = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useGetTripsQuery, useEditTripsMutation } = tripSlice;
+export const { useGetTripsQuery, useEditTripsMutation, useDeleteTripMutation } =
+	tripSlice;

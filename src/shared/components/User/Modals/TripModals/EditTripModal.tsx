@@ -14,6 +14,7 @@ interface ICreateEntityModalProps {
 	onRequestClose: () => void;
 	idViagem: number;
 	idMotorista: number;
+	tripName: string;
 }
 
 export function EditTripModal({
@@ -21,6 +22,7 @@ export function EditTripModal({
 	onRequestClose,
 	idViagem,
 	idMotorista,
+	tripName,
 }: ICreateEntityModalProps) {
 	const { register, handleSubmit } = useForm();
 	const { drivers } = useRoles();
@@ -39,6 +41,9 @@ export function EditTripModal({
 		>
 			<ModalContainer>
 				<h2>Editar viagem</h2>
+				<p className="desc-modal">
+					<span>Descrição da viagem:</span> {tripName}
+				</p>
 				<form
 					className="form-container"
 					onSubmit={handleSubmit(data => {
@@ -53,6 +58,7 @@ export function EditTripModal({
 						}).then(() => {
 							refetch();
 						});
+						onRequestClose();
 					})}
 				>
 					<label htmlFor="descricao">Descrição</label>

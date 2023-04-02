@@ -21,16 +21,24 @@ export const Viagens = () => {
 	const [idMotorista, setMotorista] = useState(0);
 	const [idUsuario, setIdUsuario] = useState(0);
 
-	const handleEditTrip = (idViagem: number, idMotorista: number) => {
+	const [tripName, setTripName] = useState('');
+
+	const handleEditTrip = (
+		idViagem: number,
+		idMotorista: number,
+		tripName: string
+	) => {
 		setIsEditTripModalOpen(true);
 		setIdViagem(idViagem);
 		setMotorista(idMotorista);
-		console.log(idViagem, idMotorista);
+		setTripName(tripName);
 	};
 
-	const handleDeleteTrip = (idUsuario: number) => {
+	const handleDeleteTrip = (idUsuario: number, idViagem: number) => {
 		setIsDeleteTripModalOpen(true);
 		setIdUsuario(idUsuario);
+		setIdViagem(idViagem);
+		setTripName(tripName);
 	};
 	const { data } = useGetTripsQuery();
 	const tripsData = data as unknown as ITrip[];
@@ -70,23 +78,25 @@ export const Viagens = () => {
 				<div className="trips-body">
 					{tripsData ? (
 						tripsData
+							.slice()
+							.sort(item => {
+								return item.statusViagem === 'EM_ANDAMENTO' ? -1 : 1;
+							})
 							.filter(trip =>
 								trip.descricao.toLowerCase().includes(searchTrip.toLowerCase())
 							)
 							.map(trip => (
-								<div className="trip" key={trip.idViagem}>
+								<div
+									className={
+										trip.statusViagem === 'EM_ANDAMENTO'
+											? 'trip ativo'
+											: 'trip inativo'
+									}
+									key={trip.idViagem}
+								>
 									<p>{trip.descricao}</p>
-									<p>
-										{trip.dataInicio}
-										<br />
-
-										{/* {new Date(Date.parse(trip.dataInicio))
-											.toLocaleDateString('pt-BR')
-											.split('/')
-											.map(value => value.padStart(2, '0'))
-											.join('-')} */}
-									</p>
-									<p>{trip.dataFim}</p>
+									<p>{new Date(trip.dataInicio).toLocaleDateString('pt-BR')}</p>
+									{new Date(trip.dataFim).toLocaleDateString('pt-BR')}
 
 									<p
 										className={
@@ -98,14 +108,33 @@ export const Viagens = () => {
 										{trip.statusViagem.replace('_', ' ')}{' '}
 									</p>
 
-									<button
-										onClick={() => {
-											console.log(trip.idViagem, trip.idUsuario);
-											handleEditTrip(trip.idViagem, trip.idUsuario);
-										}}
-									>
-										<i className="ph ph-pencil"></i>
-									</button>
+									<div className="btn-container">
+										<button
+											onClick={() => {
+												console.log(trip.idViagem, trip.idUsuario);
+												handleEditTrip(
+													trip.idViagem,
+													trip.idUsuario,
+													trip.descricao
+												);
+											}}
+											disabled={
+												trip.statusViagem === 'EM_ANDAMENTO' ? false : true
+											}
+										>
+											<i className="ph ph-pencil"></i>
+										</button>
+										<button
+											onClick={() => {
+												handleDeleteTrip(trip.idUsuario, trip.idViagem);
+											}}
+											disabled={
+												trip.statusViagem === 'EM_ANDAMENTO' ? false : true
+											}
+										>
+											<i className="ph ph-check check-icon"></i>
+										</button>
+									</div>
 								</div>
 							))
 					) : (
@@ -123,12 +152,14 @@ export const Viagens = () => {
 				onRequestClose={() => setIsEditTripModalOpen(false)}
 				idViagem={idViagem}
 				idMotorista={idMotorista}
+				tripName={tripName}
 			/>
 			<DeleteTripModal
 				isOpen={isDeleteTripModalOpen}
 				onRequestClose={() => setIsDeleteTripModalOpen(false)}
+				idMotorista={idUsuario}
 				idViagem={idViagem}
-				idMotorista={idMotorista}
+				tripName={tripName}
 			/>
 		</ViagensContainer>
 	);
