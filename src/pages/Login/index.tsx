@@ -1,9 +1,8 @@
-import { useContext, useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginContainer } from "./styles";
 
-import { AuthContext } from "../../shared/context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FaHome, BsArrowLeft } from "react-icons/all";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,7 +14,13 @@ import bgObject2Img from "../../assets/bg-item2.svg";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaLogin } from "./LoginSchema";
 
+import { useAuthLoginMutation } from "../../redux/features/Authentication/authenticationSlice";
 import InterestModal from "../../shared/components/Homepage/LoginModal/InterestModal";
+
+interface ILoginForm {
+  login: string;
+  senha: string;
+}
 
 export const Login = () => {
   const {
@@ -25,19 +30,42 @@ export const Login = () => {
   } = useForm({
     resolver: yupResolver(schemaLogin),
   });
-  const { handleLogin } = useContext(AuthContext);
+
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
-  const [isInterestModalOpen, setInterestModalOpen] = useState(false);
+  const [authLogin] = useAuthLoginMutation();
+  const navigate = useNavigate();
+  const [_token, setToken] = useState(localStorage.getItem("token"));
+  const [isInterestModalOpen, setIsInterestModalOpen] = useState(false);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 600);
+  };
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 600);
-    };
-
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleLoginSubmit: SubmitHandler<any> = (data: ILoginForm) => {
+    authLogin({
+      login: data.login,
+      senha: data.senha,
+    })
+      .unwrap()
+      .then((response: any) => {
+        localStorage.setItem("token", response);
+        setToken(response);
+        navigate("/usuario/dashboard");
+      })
+      .catch((error: any) => {
+        document.querySelector(".error")?.classList.add("visible"),
+          document.querySelectorAll(".input-container").forEach((input) => {
+            input.classList.add("outlined-error");
+          });
+        toast.error("Login ou senha inválido");
+      });
+  };
 
   return (
     <LoginContainer>
@@ -64,22 +92,7 @@ export const Login = () => {
           alt="imagem de uma caminhão em uma extremidade com a logo do trucklog"
         />
       </div>
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          const isOk = await handleLogin({
-            login: data.login,
-            senha: data.senha,
-          });
-
-          !isOk &&
-            (document.querySelector(".error")?.classList.add("visible"),
-            document.querySelectorAll(".input-container").forEach((input) => {
-              input.classList.add("outlined-error");
-            }));
-
-          !isOk && toast.error("Login ou senha inválidos!");
-        })}
-      >
+      <form onSubmit={handleSubmit(handleLoginSubmit)}>
         <div className="form-section">
           <h1>Login</h1>
           <h3>Insira seus dados de acesso:</h3>
@@ -91,6 +104,7 @@ export const Login = () => {
               placeholder="login"
               id="login"
               {...register("login")}
+              name="login"
               onFocus={() => {
                 document
                   .querySelectorAll(".input-container")[0]
@@ -126,6 +140,8 @@ export const Login = () => {
               id="senha"
               placeholder="senha"
               {...register("senha")}
+              required
+              name="senha"
               onFocus={() => {
                 document
                   .querySelectorAll(".input-container")[1]
@@ -156,12 +172,9 @@ export const Login = () => {
           </div>
           <div className="button-section">
             <a href="#">Esqueceu sua senha?</a>
-            <a onClick={() => setInterestModalOpen(true)} className="title">
+            <a onClick={() => setIsInterestModalOpen(true)} className="title">
               Se interessou?
             </a>
-            {/* <a href="#" onClick={() => setIsLogin(false)}>
-                Ainda não possui uma conta?
-              </a> */}
             <button type="submit">
               Entrar <i className="ph ph-sign-in"></i>
             </button>
@@ -170,7 +183,7 @@ export const Login = () => {
       </form>
       <InterestModal
         isOpen={isInterestModalOpen}
-        onRequestClose={() => setInterestModalOpen(false)}
+        onRequestClose={() => setIsInterestModalOpen(false)}
       />
       <ToastContainer />
     </LoginContainer>
