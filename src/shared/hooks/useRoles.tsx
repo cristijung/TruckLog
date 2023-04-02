@@ -4,10 +4,9 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { toast } from "react-toastify";
-import { api } from "../../utils/api";
-import { AuthContext } from "../context/AuthContext";
+} from 'react';
+import { toast } from 'react-toastify';
+import { api } from '../../utils/api';
 
 interface IRolesProviderProps {
   children: ReactNode;
@@ -19,29 +18,29 @@ export interface IUserComplete {
   nomeUsuario: string;
   email: string;
   documento: string;
-  statusUsuario: "INATIVO" | "ATIVO";
+  statusUsuario: 'INATIVO' | 'ATIVO';
   idCargo: number;
   nome: string;
   idCaminhao: number;
   modelo: string;
   placa: string;
   nivelCombustivel: number;
-  statusCaminhao: "ESTACIONADO" | "EM_VIAGEM";
-  statusGeralCaminhao: "INATIVO" | "ATIVO";
+  statusCaminhao: 'ESTACIONADO' | 'EM_VIAGEM';
+  statusGeralCaminhao: 'INATIVO' | 'ATIVO';
   idRota: number;
   descricaoRota: string;
   localPartida: string;
   localDestino: string;
-  statusRota: "INATIVO" | "ATIVO";
+  statusRota: 'INATIVO' | 'ATIVO';
   idPosto: number;
   nomePosto: string;
   valorCombustivel: number;
-  statusPosto: "INATIVO" | "ATIVO";
+  statusPosto: 'INATIVO' | 'ATIVO';
   idViagem: number;
   descricaoViagem: number;
   dataInicio: string;
   dataFim: string;
-  statusViagem: "EM_ANDAMENTO" | "FINALIZADA";
+  statusViagem: 'EM_ANDAMENTO' | 'FINALIZADA';
 }
 //statusMotorista: "DISPONIVEL" | "EM_ESTRADA"; removido do backend
 
@@ -51,29 +50,29 @@ export interface IEditByRole extends IUserComplete {
   nomeUsuario: string;
   email: string;
   documento: string;
-  statusUsuario: "INATIVO" | "ATIVO";
+  statusUsuario: 'INATIVO' | 'ATIVO';
   idCargo: number;
   nome: string;
   idCaminhao: number;
   modelo: string;
   placa: string;
   nivelCombustivel: number;
-  statusCaminhao: "ESTACIONADO" | "EM_VIAGEM";
-  statusGeralCaminhao: "INATIVO" | "ATIVO";
+  statusCaminhao: 'ESTACIONADO' | 'EM_VIAGEM';
+  statusGeralCaminhao: 'INATIVO' | 'ATIVO';
   idRota: number;
   descricaoRota: string;
   localPartida: string;
   localDestino: string;
-  statusRota: "INATIVO" | "ATIVO";
+  statusRota: 'INATIVO' | 'ATIVO';
   idPosto: number;
   nomePosto: string;
   valorCombustivel: number;
-  statusPosto: "INATIVO" | "ATIVO";
+  statusPosto: 'INATIVO' | 'ATIVO';
   idViagem: number;
   descricaoViagem: number;
   dataInicio: string;
   dataFim: string;
-  statusViagem: "EM_ANDAMENTO" | "FINALIZADA";
+  statusViagem: 'EM_ANDAMENTO' | 'FINALIZADA';
 }
 
 interface IDriversData {
@@ -91,7 +90,7 @@ interface IDrivers {
   email: string;
   documento: string;
   idUsuario: number;
-  status: "INATIVO" | "ATIVO";
+  status: 'INATIVO' | 'ATIVO';
 }
 
 interface IRolesContextData {
@@ -106,19 +105,21 @@ interface IRolesContextData {
 const RolesContext = createContext({} as IRolesContextData);
 
 export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
-  const { token } = useContext(AuthContext);
   const [allUsers, setAllUsersInfo] = useState<IUserComplete[]>([]);
   const [drivers, setDrivers] = useState<IDrivers[]>([]);
+  const getToken = (): string => {
+    return localStorage.getItem('token') || '';
+  };
 
   const getAllUsers = async () => {
     try {
       const response = await fetch(
-        api + "usuario/relatorio-completo?page=0&size=75",
+        api + 'usuario/relatorio-completo?page=0&size=75',
         {
-          method: "GET",
+          method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken}`,
+            'Content-Type': 'application/json',
           },
         }
       );
@@ -138,21 +139,21 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
   async function createWithRole(data: IUserComplete) {
     try {
       const response = await fetch(
-        api + "usuario/relatorio-completo?page=0&size=100",
+        api + 'usuario/relatorio-completo?page=0&size=100',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken}`,
 
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
         }
       );
       if (response.ok) {
-        console.log("Cadastrado com sucesso!");
+        console.log('Cadastrado com sucesso!');
       } else {
-        console.log("Erro ao cadastrar!");
+        console.log('Erro ao cadastrar!');
       }
       console.log(response);
     } catch (error) {
@@ -165,11 +166,11 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
       const response = await fetch(
         `${api}/motorista?idMotorista=${idUsuario}`,
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken}`,
 
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(edit),
         }
@@ -177,9 +178,9 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
       console.log();
       if (response.ok) {
         getAllUsers();
-        console.log("Editado com sucesso");
+        console.log('Editado com sucesso');
       } else {
-        console.log("Erro ao editar usuario");
+        console.log('Erro ao editar usuario');
       }
     } catch (error) {
       console.log(error);
@@ -190,18 +191,18 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
     console.log(idUsuario);
     try {
       const response = await fetch(`${api}/usuario?idUsuario=${idUsuario}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken}`,
+          'Content-Type': 'application/json',
         },
       });
       console.log();
       if (response.ok) {
-        toast.success("Usuario removido com sucesso!");
+        toast.success('Usuario removido com sucesso!');
         getAllUsers();
       } else {
-        console.log("Erro ao remover usuario!");
+        console.log('Erro ao remover usuario!');
       }
     } catch (error) {
       console.log(error);
@@ -211,12 +212,12 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
   const getDrivers = async () => {
     try {
       const response = await fetch(
-        api + "usuario/listar-por-cargo?cargo=ROLE_MOTORISTA&page=0&size=70",
+        api + 'usuario/listar-por-cargo?cargo=ROLE_MOTORISTA&page=0&size=70',
         {
-          method: "GET",
+          method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken}`,
+            'Content-Type': 'application/json',
           },
         }
       );

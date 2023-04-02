@@ -28,13 +28,14 @@ export function DeleteDriverModal({
     >
       <ModalContainer>
         <div>
-          <div className="delete-gas-station">
+          <div className="delete-section">
             <h2>Tem certeza que deseja deletar?</h2>
             <p>
               Usuario: <strong>{nomeUsuario}</strong>
             </p>
             <div className="delete-btn-container  ">
               <Button
+                expanded
                 bgColor="error"
                 className="delete-btn"
                 onClick={() =>
@@ -46,6 +47,7 @@ export function DeleteDriverModal({
                 Deletar
               </Button>
               <Button
+                expanded
                 bgColor="gray"
                 className="canceal-btn"
                 onClick={() => onRequestClose()}

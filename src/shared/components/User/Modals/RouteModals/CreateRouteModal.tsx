@@ -32,6 +32,7 @@ export function CreateRouteModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Cadastrar Rota</h2>
         <form
           className="form-container"
@@ -70,9 +71,7 @@ export function CreateRouteModal({
           />
 
           <Button type="submit">Cadastrar</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>

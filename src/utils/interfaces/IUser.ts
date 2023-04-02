@@ -1,3 +1,8 @@
+
+export interface IUser {
+  login: string;
+  senha: string;
+
 export interface IDriver {
   idUsuario: 0;
   login: "string";
