@@ -4,6 +4,7 @@ import { useGetLoggedUserQuery } from "../../../redux/features/Authentication/au
 import { useGetGasStationQuery } from "../../../redux/features/gasStation/gasStationSlice";
 import { useGetTruckQuery } from "../../../redux/features/truck/truckSlice";
 import { useGetTripsQuery } from "../../../redux/features/trip/tripSlice";
+import { useGetDriversQuery } from "../../../redux/features/role/roleSlice";
 import { FlagBanner, GasPump, Users, Truck } from "@phosphor-icons/react";
 import { BarChart } from "../../../shared/components/User/BarChart";
 import { PieChart } from "../../../shared/components/User/PieChart";
@@ -12,6 +13,8 @@ export const Dashboard = () => {
     const { data } = useGetGasStationQuery();
     const { data: trucks } = useGetTruckQuery();
     const { data: trips } = useGetTripsQuery();
+    const { data: drivers } = useGetDriversQuery(0);
+
     const postosCadastrados = data?.length;
     const postosDisponiveis = data?.filter((posto) => {
         return posto.status === "ATIVO";
@@ -21,11 +24,17 @@ export const Dashboard = () => {
         return caminhao.status === "ATIVO";
     }).length;
 
-    console.log(trips);
     const viagensCadastradas = trips?.length;
     const viagensAtuais = trips?.filter((trip: any) => {
         return trip.statusViagem === "EM_ANDAMENTO";
     }).length;
+
+    const motoristasCadastrados = drivers?.length;
+    const motoristasDisponiveis = drivers?.filter(
+        (driver: { status: string }) => {
+            return driver.status === "ATIVO";
+        }
+    ).length;
 
     useEffect(() => {
         document.title = "Dashboard | TruckLog";
@@ -91,8 +100,12 @@ export const Dashboard = () => {
                                 <span>Motoristas cadastrados</span>
                                 <Truck size={32} />
                             </div>
-                            <strong>2000</strong>
-                            <span>15 nos útimos 7 dias</span>
+                            <strong>{motoristasCadastrados}</strong>
+                            <span>
+                                {motoristasDisponiveis
+                                    ? `${motoristasDisponiveis} estão disponíveis para viagens`
+                                    : null}
+                            </span>
                         </div>
                     </div>
                     <div className="chart-container">
