@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useRoutes } from "../../../../hooks";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -28,6 +29,7 @@ export function EditRouteModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Edite a Rota:</h2>
         <h3>{descricaoRota}</h3>
         <form
@@ -68,7 +70,8 @@ export function EditRouteModal({
             {...register("localDestino")}
           />
 
-          <button type="submit">Editar</button>
+          <Button type="submit">Editar</Button>
+          
         </form>
       </ModalContainer>
     </Modal>

@@ -4,6 +4,7 @@ import { ModalContainer } from "../styles";
 import { useState } from "react";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import { useTrucks, useRoles, useRoutes, useTrips } from "../../../../hooks";
+import { Button } from "../../../Button";
 interface ICreateEntityModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -28,6 +29,7 @@ export function CreateTripModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Criar viagem</h2>
         <form
           className="form-container"
@@ -107,7 +109,7 @@ export function CreateTripModal({
                 );
               })}
           </select>
-          <button type="submit">Criar</button>
+          <Button type="submit">Criar</Button>
         </form>
       </ModalContainer>
     </Modal>

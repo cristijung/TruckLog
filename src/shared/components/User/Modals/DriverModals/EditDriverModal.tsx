@@ -7,6 +7,13 @@ import {
 } from "../../../../../redux/features/role/roleSlice";
 import { useState } from "react";
 
+import { Button } from "../../../Button";
+
+interface IEditDriver {
+  nome: string;
+  senha: string;
+}
+
 interface IEditDriverModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -30,6 +37,7 @@ export function EditDriverModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Editar Usuario</h2>
         <form
           className="form-container"
@@ -72,7 +80,7 @@ export function EditDriverModal({
             maxLength={11}
             {...register("documento")}
           />
-          <button type="submit">Editar</button>
+          <Button type="submit">Editar</Button>
         </form>
       </ModalContainer>
     </Modal>

@@ -28,5 +28,8 @@ export * from './RouteModals/CreateRouteModal';
 export * from './RouteModals/EditRouteModal';
 export * from './RouteModals/DeleteRouteModal';
 
+// Lgpd Modals
+export * from '../../Homepage/LgpdModal';
+
 //Login Modal
-export * from './LoginModal/InterestModal';
+export * from '../../Homepage/InterestModal';

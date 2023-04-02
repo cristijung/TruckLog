@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
 import { IUserComplete, useUsers } from "../../../../hooks/useUsers";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalPropsDriver {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export function AddRoleModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Adicionar Cargo para o usuário:</h2>
         <form
           className="form-container"
@@ -44,7 +46,8 @@ export function AddRoleModal({
             <option value="3">Motorista</option>
           </select>
 
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">Cadastrar</Button>
+          
         </form>
       </ModalContainer>
     </Modal>

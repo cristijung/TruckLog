@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useRoutes } from "../../../../hooks";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export function CreateRouteModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Cadastrar Rota</h2>
         <form
           className="form-container"
@@ -65,7 +67,8 @@ export function CreateRouteModal({
             {...register("localDestino")}
           />
 
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">Cadastrar</Button>
+          
         </form>
       </ModalContainer>
     </Modal>

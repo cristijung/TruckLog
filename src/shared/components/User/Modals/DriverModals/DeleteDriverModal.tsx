@@ -6,6 +6,8 @@ import {
 } from "../../../../../redux/features/role/roleSlice";
 import { ref } from "yup";
 
+import { Button } from "../../../Button";
+
 interface ICreateEntityModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -32,13 +34,15 @@ export function DeleteDriverModal({
     >
       <ModalContainer>
         <div>
-          <div className="delete-gas-station">
+          <div className="delete-section">
             <h2>Tem certeza que deseja deletar?</h2>
             <p>
               Usuario: <strong>{nomeUsuario}</strong>
             </p>
             <div className="delete-btn-container  ">
-              <button
+              <Button
+                expanded
+                bgColor="error"
                 className="delete-btn"
                 onClick={() => {
                   deleteDriver(idUsuario);
@@ -47,10 +51,15 @@ export function DeleteDriverModal({
                 }}
               >
                 Deletar
-              </button>
-              <button className="canceal-btn" onClick={() => onRequestClose()}>
+              </Button>
+              <Button
+                expanded
+                bgColor="gray"
+                className="canceal-btn"
+                onClick={() => onRequestClose()}
+              >
                 Cancelar
-              </button>
+              </Button>
             </div>
           </div>
         </div>

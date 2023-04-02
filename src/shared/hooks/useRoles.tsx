@@ -7,7 +7,6 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import { api } from "../../utils/api";
-import { AuthContext } from "../context/AuthContext";
 
 interface IRolesProviderProps {
   children: ReactNode;
@@ -106,9 +105,11 @@ interface IRolesContextData {
 const RolesContext = createContext({} as IRolesContextData);
 
 export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
-  const { token } = useContext(AuthContext);
   const [allUsers, setAllUsersInfo] = useState<IUserComplete[]>([]);
   const [drivers, setDrivers] = useState<IDrivers[]>([]);
+  const getToken = (): string => {
+    return localStorage.getItem("token") || "";
+  };
 
   const getAllUsers = async () => {
     try {
@@ -117,7 +118,7 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken}`,
             "Content-Type": "application/json",
           },
         }
@@ -142,7 +143,7 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken}`,
 
             "Content-Type": "application/json",
           },
@@ -167,7 +168,7 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken}`,
 
             "Content-Type": "application/json",
           },
@@ -192,7 +193,7 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
       const response = await fetch(`${api}/usuario?idUsuario=${idUsuario}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getToken}`,
           "Content-Type": "application/json",
         },
       });
@@ -215,7 +216,7 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getToken}`,
             "Content-Type": "application/json",
           },
         }

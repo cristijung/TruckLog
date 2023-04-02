@@ -10,6 +10,8 @@ import {
   useGetDriversQuery,
 } from "../../../../../redux/features/role/roleSlice";
 
+import { Button } from "../../../Button";
+
 interface ICreateEntityModalPropsDriver {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -32,6 +34,7 @@ export function CreateDriverModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Adicionar</h2>
         <form
           className="form-container"
@@ -81,7 +84,7 @@ export function CreateDriverModal({
           />
           <label htmlFor="email">E-mail</label>
           <input type="email" placeholder="E-mail" {...register("email")} />
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">Cadastrar</Button>
         </form>
       </ModalContainer>
     </Modal>
