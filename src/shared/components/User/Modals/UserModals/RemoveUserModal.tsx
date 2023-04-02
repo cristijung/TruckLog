@@ -27,8 +27,9 @@ export function RemoveUserModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <div>
-          <div className="delete-gas-station">
+          <div className="delete-section">
             <h2>Tem certeza que deseja deletar?</h2>
             <p>
               Nome: <strong>{nomeUsuario}</strong>

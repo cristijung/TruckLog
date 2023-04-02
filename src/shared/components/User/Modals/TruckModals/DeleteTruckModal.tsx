@@ -27,13 +27,15 @@ export function DeleteTruckModal({
       ariaHideApp={false}
     >
       <ModalContainer>
-        <div className="delete-gas-station">
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
+        <div className="delete-section">
           <h2>Tem certeza que deseja deletar? </h2>
           <p>
             Caminhão Placa: <strong>{placaCaminhao}</strong>
           </p>
           <div className="delete-btn-container">
             <Button
+              expanded
               bgColor="error"
               onClick={async () => {
                 const isOk = await deleteTruck(idCaminhao);
@@ -42,7 +44,7 @@ export function DeleteTruckModal({
             >
               Deletar
             </Button>
-            <Button bgColor="gray" onClick={() => onRequestClose()}>
+            <Button expanded bgColor="gray" onClick={() => onRequestClose()}>
               Cancelar
             </Button>
           </div>

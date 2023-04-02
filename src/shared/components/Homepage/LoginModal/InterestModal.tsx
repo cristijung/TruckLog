@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import Modal from 'react-modal';
-import { ModalContainer } from '../../User/Modals/styles';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import { schemaModal } from '../../../../pages/Login/LoginSchema';
-import { Button } from '../../Button';
+import { useState } from "react";
+import Modal from "react-modal";
+import { ModalContainer } from "../../User/Modals/styles";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { schemaModal } from "../../../../pages/Login/LoginSchema";
+import { Button } from "../../Button";
 
 export default function InterestModal() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -34,6 +34,7 @@ export default function InterestModal() {
         ariaHideApp={false}
       >
         <ModalContainer>
+          <i onClick={closeModal} className="ph ph-x-circle close-btn"></i>
           <div>
             <div className="text-section">
               <div>

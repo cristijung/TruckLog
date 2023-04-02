@@ -401,9 +401,10 @@ export const LandingPageContainer = styled.div`
 		gap: 1.2rem;
 		align-items: center;
 
-		a:hover {
+		span:hover {
 			color: ${props => props.theme['green-600']};
 			text-decoration: underline;
+			cursor: pointer;
 		}
 	}
 

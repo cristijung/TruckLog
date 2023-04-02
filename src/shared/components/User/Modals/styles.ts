@@ -23,17 +23,32 @@ export const ModalContainer = styled.div`
     }
   }
 
-  .delete-gas-station {
+  .close-btn {
+    position: absolute;
+    font-size: 3rem;
+    top: 2rem;
+    right: 2rem;
+    cursor: pointer;
+
+    filter: invert(32%) sepia(6%) saturate(0%) hue-rotate(235deg)
+      brightness(98%) contrast(88%);
+  }
+
+  .delete-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: 
     gap: 3rem;
 
+    > h2 {
+      margin-bottom: 2rem;
+    }
+    
     .delete-btn-container {
       display: flex;
-      flex-direction: column;
       width: 100%;
-      gap: 1rem;
+      flex-direction: column;
       text-align: center;
     }
   }
@@ -59,25 +74,31 @@ export const ModalContainer = styled.div`
     }
 
     button {
-      width: fit-content;
+      /* width: fit-content; */
       padding: 1rem 1.5rem;
       margin: 1.5rem auto 0 auto;
     }
   }
 
-  .lgpdH2 {
-    text-align: center;
-  }
-  .lgpdText {
-    text-align: justify;
+  .lgpd {
+    h2 {
+      text-align: center;
+    }
+
+    p {
+      text-align: justify;
+    }
   }
 
   @media (max-width: 600px) {
-    .lgpdH2 {
-      font-size: 1.6rem;
-    }
-    .lgpdText {
-      font-size: 1.2rem;
+    .lgpd {
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+       }
     }
   }
 
@@ -88,7 +109,8 @@ export const ModalContainer = styled.div`
   }
 
   button {
-    width: fit-content;
+    /* width: fit-content; */
+    max-width: 90%;
     padding: 1rem 1.5rem;
     margin: 1.5rem auto 0 auto;
   }
