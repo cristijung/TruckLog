@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useUsers } from "../../../../hooks/useUsers";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -33,8 +34,8 @@ export function RemoveUserModal({
               Nome: <strong>{nomeUsuario}</strong>
             </p>
             <div className="delete-btn-container  ">
-              <button
-                className="delete-btn"
+              <Button
+                bgColor="error"
                 onClick={() =>
                   removeUser(idUsuario).then(() => {
                     onRequestClose();
@@ -42,10 +43,10 @@ export function RemoveUserModal({
                 }
               >
                 Deletar
-              </button>
-              <button className="canceal-btn" onClick={() => onRequestClose()}>
+              </Button>
+              <Button bgColor="gray" onClick={() => onRequestClose()}>
                 Cancelar
-              </button>
+              </Button>
             </div>
           </div>
         </div>

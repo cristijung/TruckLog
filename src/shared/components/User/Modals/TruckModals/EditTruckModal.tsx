@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
 import { useTrucks } from "../../../../hooks";
+import { Button } from "../../../Button";
 
 interface IEditTruckModalProps {
   isOpen: boolean;
@@ -16,7 +17,7 @@ interface IUseFormProps {
 export function EditTruckModal({
   isOpen,
   onRequestClose,
-  truckId
+  truckId,
 }: IEditTruckModalProps) {
   const { register, handleSubmit } = useForm<IUseFormProps>();
   const { editTruck } = useTrucks();
@@ -47,7 +48,10 @@ export function EditTruckModal({
             placeholder="Digite a quantidade a abastecer"
             {...register("nivelCombustivel")}
           />
-          <button type="submit">Abastecer</button>
+          <Button type="submit">Abastecer</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

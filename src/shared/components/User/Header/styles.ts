@@ -10,7 +10,9 @@ export const HeaderContainer = styled.header`
   box-shadow: 2px 0 3px rgba(0, 0, 0, 0.1);
 
   gap: 0.5rem;
-
+  .header-icon {
+    width: 5rem;
+  }
   .dashboard-menu {
     display: flex;
     align-items: center;

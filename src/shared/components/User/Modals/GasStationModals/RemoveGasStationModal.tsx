@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import { useGasStations } from "../../../../hooks/useGasStations";
+import { Button } from "../../../Button";
 import { ModalContainer } from "../styles";
 
 interface ICreateEntityModalProps {
@@ -32,7 +33,8 @@ export function RemoveGasStationModal({
             Posto: <strong>{namePosto}</strong>
           </p>
           <div className="delete-btn-container">
-            <button
+            <Button
+              bgColor="error"
               className="delete-btn"
               onClick={async () => {
                 const response = await removeGasStation(idPosto);
@@ -40,10 +42,14 @@ export function RemoveGasStationModal({
               }}
             >
               Deletar
-            </button>
-            <button className="canceal-btn" onClick={onRequestClose}>
+            </Button>
+            <Button
+              bgColor="gray"
+              className="canceal-btn"
+              onClick={onRequestClose}
+            >
               Cancelar
-            </button>
+            </Button>
           </div>
         </div>
       </ModalContainer>

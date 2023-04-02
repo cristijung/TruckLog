@@ -1,8 +1,9 @@
 import Modal from "react-modal";
-import { ModalContainer } from "../styles";
+import { ModalContainer } from "../../User/Modals/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { schemaModal } from "../../../../../pages/Login/LoginSchema";
+import { schemaModal } from "../../../../pages/Login/LoginSchema";
+import { Button } from "../../Button";
 
 interface IInterestModalProps {
   isOpen: boolean;
@@ -67,7 +68,7 @@ export default function InterestModal({
               e correções do sistema
             </p>
 
-            <button>Enviar</button>
+            <Button>Enviar</Button>
           </form>
         </div>
       </ModalContainer>

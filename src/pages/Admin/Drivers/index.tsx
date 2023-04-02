@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { Button } from "../../../shared/components/Button";
 import {
   CreateDriverModal,
   EditDriverModal,
   DeleteDriverModal,
 } from "../../../shared/components/User/Modals";
 
-import { useRoles } from "../../../shared/hooks/useRoles";
+import { IUserComplete, useRoles } from "../../../shared/hooks/useRoles";
 import { RolesContainer } from "./styles";
+
+import { Pagination } from "@mui/material";
 
 export const Roles = () => {
   const { users } = useRoles();
@@ -41,16 +44,16 @@ export const Roles = () => {
         <div className="user-trail">
           <span>Meu Painel</span>
           <span>{" > "}</span>
-          <a className="selected">Relatório completo</a>
+          <a className="selected">Motoristas</a>
         </div>
 
         <h2 className="title-page">Efetivo e Detalhes</h2>
-        <button
+        <Button
           className="create-button"
           onClick={() => setIsCreateByRoleModalOpen(true)}
         >
           Cadastro Completo <i className="ph ph-plus"></i>
-        </button>
+        </Button>
         <input
           value={searchUsers}
           onChange={(e) => setSearchUsers(e.target.value)}
@@ -68,60 +71,7 @@ export const Roles = () => {
         </div>
 
         <div className="gas-station-body">
-          {users
-            .sort((user) => {
-              return user.statusUsuario === "ATIVO" ? -1 : 1;
-            })
-
-            .filter((user) =>
-              user.nome.toLowerCase().includes(searchUsers.toLowerCase())
-            )
-            .map((user) => (
-              <div
-                className={
-                  user.statusUsuario === "ATIVO"
-                    ? "posto ativo"
-                    : "posto inativo"
-                }
-                key={user.idUsuario}
-              >
-                <p>{user.nomeUsuario}</p>
-                <p>{user.documento}</p>
-                {user.nome.replace("ROLE_", "")}
-                <div
-                  className={
-                    user.statusUsuario === "ATIVO" ? "ativo" : "inativo"
-                  }
-                >
-                  {user.statusUsuario}
-                  <div className="btn-container">
-                    {/* <button
-                      onClick={() =>
-                        handleEditByRoleModal(user.idUsuario, user.nome)
-                      }
-                      disabled={user.statusUsuario === "ATIVO" ? false : true}
-                    >
-                      <i title="Editar Posto" className="ph ph-pencil"></i>
-                    </button> */}
-
-                    <button
-                      onClick={() =>
-                        handleDeleteByRoleModal(
-                          user.idUsuario,
-                          user.nomeUsuario
-                        )
-                      }
-                      disabled={user.statusUsuario === "ATIVO" ? false : true}
-                    >
-                      <i
-                        title="Deletar Posto"
-                        className="ph ph-trash delete-icon"
-                      ></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <Pagination count={10} variant="outlined" shape="rounded" />
         </div>
       </main>
       <CreateDriverModal

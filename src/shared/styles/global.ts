@@ -32,22 +32,6 @@ h6 {
   font-weight: 700;
 }
 
-button {
-  all: unset;
-  font-family: "Poppins", sans-serif;
-  font-size: 1.4rem;
-  background-color: ${(props) => props.theme['green-500']};
-  color: ${(props) => props.theme.white};
-  padding: 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: ${(props) => props.theme['green-600']};
-  transition: background-color 200ms;
-}
-
 /* Modal */
 .modal-overlay {
     width: 100%;
@@ -84,6 +68,18 @@ button:hover {
           margin: 0;
         }
       }
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 1080px){
+    .modal-content {
+      min-width: 70vw;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .modal-content {
+      min-width: 80vw;
+    }
   }
 
 `;

@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import { useTrucks } from "../../../../hooks";
+import { Button } from "../../../Button";
 import { ModalContainer } from "../styles";
 
 interface ICreateEntityModalProps {
@@ -32,18 +33,18 @@ export function DeleteTruckModal({
             Caminhão Placa: <strong>{placaCaminhao}</strong>
           </p>
           <div className="delete-btn-container">
-            <button
-              className="delete-btn"
+            <Button
+              bgColor="error"
               onClick={async () => {
                 const isOk = await deleteTruck(idCaminhao);
                 isOk && onRequestClose();
               }}
             >
               Deletar
-            </button>
-            <button className="canceal-btn" onClick={() => onRequestClose()}>
+            </Button>
+            <Button bgColor="gray" onClick={() => onRequestClose()}>
               Cancelar
-            </button>
+            </Button>
           </div>
         </div>
       </ModalContainer>

@@ -106,6 +106,7 @@ export const ViagensContainer = styled.main`
     border-bottom: 1px solid ${(props) => props.theme["gray-200"]};
 
     button {
+      all: unset;
       background-color: transparent;
       display: flex;
       align-items: center;

@@ -1,17 +1,21 @@
-import { useContext } from "react";
-import { LoginContainer } from "./styles";
+import { useContext, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { LoginContainer } from "./styles";
+
 import { AuthContext } from "../../shared/context/AuthContext";
 import { Link } from "react-router-dom";
+
 import { FaHome, BsArrowLeft } from "react-icons/all";
-import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
 import truckImg from "../../assets/truck.png";
 import bgObject1Img from "../../assets/bg-item3.svg";
 import bgObject2Img from "../../assets/bg-item2.svg";
-import InterestModal from "../../shared/components/User/Modals/LoginModal/InterestModal";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaLogin } from "./LoginSchema";
-import { ToastContainer, toast } from "react-toastify";
+
+import InterestModal from "../../shared/components/Homepage/LoginModal/InterestModal";
 
 export const Login = () => {
   const {

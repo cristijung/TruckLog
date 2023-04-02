@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useGasStations } from "../../../../hooks";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -56,7 +57,10 @@ export function CreateGasStationModal({
             {...register("valorCombustivel")}
           />
 
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">Cadastrar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>
