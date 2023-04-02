@@ -55,12 +55,12 @@ export const Roles: React.FC = () => {
           <a className="selected">Motoristas</a>
         </div>
 
-        <h2 className="title-page">Efetivo e Detalhes</h2>
+        <h2 className="title-page">Motoristas</h2>
         <Button
           className="create-button"
           onClick={() => setIsCreateByRoleModalOpen(true)}
         >
-          Cadastro Completo <i className="ph ph-plus"></i>
+          Cadastrar motorista <i className="ph ph-plus"></i>
         </Button>
         <input
           value={searchUsers}
@@ -88,9 +88,19 @@ export const Roles: React.FC = () => {
               .filter((driver: IDriver) => {
                 if (
                   driver.cargos.length == 1 &&
-                  driver.cargos[0].nome !== "ROLE_ADMIN"
+                  driver.cargos[0].nome !== "ROLE_ADMIN" &&
+                  driver.nome.toLowerCase().includes(searchUsers.toLowerCase())
                 ) {
                   return driver;
+                }
+              })
+              .sort((a, b) => {
+                if (a.status === "ATIVO" && b.status !== "ATIVO") {
+                  return -1; // "a" vem primeiro que "b"
+                } else if (a.status !== "ATIVO" && b.status === "ATIVO") {
+                  return 1; // "b" vem primeiro que "a"
+                } else {
+                  return 0; // não muda a ordem
                 }
               })
 
