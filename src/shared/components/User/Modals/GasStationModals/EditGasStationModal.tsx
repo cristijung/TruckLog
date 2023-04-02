@@ -1,27 +1,26 @@
-import Modal from "react-modal";
-import { useGasStations } from "../../../../hooks/useGasStations";
-import { ModalContainer } from "../styles";
-import { FieldValues, useForm } from "react-hook-form";
-import { Button } from "../../../Button";
+import Modal from 'react-modal';
+import { ModalContainer } from '../styles';
+import { FieldValues, useForm } from 'react-hook-form';
+import { Button } from '../../../Button';
+import { useEditGasStationMutation } from '../../../../../redux/features/gasStation/gasStationSlice';
+import { useGetRouteQuery } from '../../../../../redux/features/route/routeSlice';
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  idPosto: number;
-}
-
-interface IEditGasStation {
-  nome: string;
-  valorCombustivel: string;
+  idPosto: string;
+  nomePosto: string;
 }
 
 export function EditGasStationModal({
   isOpen,
   onRequestClose,
   idPosto,
+  nomePosto,
 }: ICreateEntityModalProps) {
-  const { editGasStation } = useGasStations();
+  const [editGasStation] = useEditGasStationMutation();
   const { register, handleSubmit } = useForm();
+  const { refetch } = useGetRouteQuery();
 
   return (
     <Modal
@@ -36,28 +35,39 @@ export function EditGasStationModal({
         <form
           className="form-container"
           onSubmit={handleSubmit((data: FieldValues) =>
-            editGasStation(
-              {
-                nome: data.nome,
-                valorCombustivel: parseInt(data.valorCombustivel, 10),
-              },
-              idPosto
-            )
+            editGasStation({
+              nome: data.nome,
+              cidade: data.cidade,
+              latitude: '20',
+              longitude: '30',
+              valorCombustivel: parseInt(data.valorCombustivel, 10),
+              id: idPosto,
+            })
           )}
         >
+          <p>você está editando: {nomePosto}</p>
           <label htmlFor="nome">Nome do Posto</label>
           <input
             id="nome"
             type="text"
             placeholder="Digite o novo nome do posto"
-            {...register("nome")}
+            {...register('nome')}
           />
+
+          <label htmlFor="cidade">Cidade do Posto</label>
+          <input
+            id="cidade"
+            type="text"
+            placeholder="Digite o novo cidade da cidade do posto"
+            {...register('cidade')}
+          />
+
           <label htmlFor="valorCombustivel">Valor Combustível</label>
           <input
             id="valorCombustivel"
             type="text"
             placeholder="Digite o novo valor do combustível"
-            {...register("valorCombustivel")}
+            {...register('valorCombustivel')}
           />
 
           <Button type="submit">Editar Posto</Button>
