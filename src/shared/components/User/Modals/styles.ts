@@ -48,6 +48,8 @@ export const ModalContainer = styled.div`
     .delete-btn-container {
       display: flex;
       width: 100%;
+      padding: 2rem 0;
+      gap: 0.5rem;
       flex-direction: column;
       text-align: center;
     }

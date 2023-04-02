@@ -1,26 +1,27 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { LoginContainer } from "./styles";
-
 import { Link, useNavigate } from "react-router-dom";
 
 import { FaHome, BsArrowLeft } from "react-icons/all";
-import { ToastContainer, toast } from "react-toastify";
+import { LoginContainer } from "./styles";
 
-import truckImg from "../../assets/truck.png";
 import bgObject1Img from "../../assets/bg-item3.svg";
 import bgObject2Img from "../../assets/bg-item2.svg";
+import truckImg from "../../assets/truck.png";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaLogin } from "./LoginSchema";
 
+import { ToastContainer, toast } from "react-toastify";
 import { useAuthLoginMutation } from "../../redux/features/Authentication/authenticationSlice";
+
+// MODALS
 import InterestModal from "../../shared/components/Homepage/InterestModal";
 import ForgotPassModal from "../../shared/components/Homepage/ForgotPassModal";
 
 interface ILoginForm {
-  login: string;
-  senha: string;
+    login: string;
+    senha: string;
 }
 
 export const Login = () => {
@@ -31,7 +32,7 @@ export const Login = () => {
   } = useForm({
     resolver: yupResolver(schemaLogin),
   });
-
+  
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
@@ -42,66 +43,60 @@ export const Login = () => {
   // AUTHENTICATION
   const [_token, setToken] = useState(localStorage.getItem("token"));
   const [authLogin] = useAuthLoginMutation();
+    const handleResize = () => {
+        setIsMobile(window.innerWidth <= 600);
+    };
 
-  const handleResize = () => {
-    setIsMobile(window.innerWidth <= 600);
-  };
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const handleLoginSubmit: SubmitHandler<any> = (data: ILoginForm) => {
-    authLogin({
-      login: data.login,
-      senha: data.senha,
-    })
-      .unwrap()
-      .then((response: any) => {
-        localStorage.setItem("token", response);
-        setToken(response);
-        navigate("/usuario/dashboard");
-      })
-      .catch((error: any) => {
-        document.querySelector(".error")?.classList.add("visible"),
-          document.querySelectorAll(".input-container").forEach((input) => {
-            input.classList.add("outlined-error");
-          });
-        toast.error("Login ou senha inválido");
-      });
-  };
-
-  return (
-    <LoginContainer>
-      <div className="back-button">
-        <Link className="link-button" to="/">
-          {isMobile ? (
-            <>
-              <FaHome size={45} />
-            </>
-          ) : (
-            <>
-              <BsArrowLeft size={35} />
-              <span>Página Inicial</span>
-            </>
-          )}
-        </Link>
-      </div>
-      <div className="bg-items">
-        <img className="bg-object1" src={bgObject1Img} alt="" />
-        <img className="bg-object2" src={bgObject2Img} alt="" />
-        <img
-          className="bg-truck"
-          src={truckImg}
-          alt="imagem de uma caminhão em uma extremidade com a logo do trucklog"
-        />
-      </div>
-      <form onSubmit={handleSubmit(handleLoginSubmit)}>
-        <div className="form-section">
-          <h1>Login</h1>
-          <h3>Insira seus dados de acesso:</h3>
+    const handleLoginSubmit: SubmitHandler<any> = (data: ILoginForm) => {
+        authLogin({
+            login: data.login,
+            senha: data.senha,
+        })
+            .unwrap()
+            .then((response: any) => {
+                localStorage.setItem("token", response);
+                setToken(response);
+                navigate("/usuario/dashboard");
+            })
+            .catch((error: any) => {
+                toast.error(error.message);
+            });
+    };
+    return (
+        <LoginContainer>
+            <div className="back-button">
+                <Link className="link-button" to="/">
+                    {isMobile ? (
+                        <>
+                            <FaHome size={45} />
+                        </>
+                    ) : (
+                        <>
+                            <BsArrowLeft size={35} />
+                            <span>Página Inicial</span>
+                        </>
+                    )}
+                </Link>
+            </div>
+            <div className="bg-items">
+                <img className="bg-object1" src={bgObject1Img} alt="" />
+                <img className="bg-object2" src={bgObject2Img} alt="" />
+                <img
+                    className="bg-truck"
+                    src={truckImg}
+                    alt="imagem de uma caminhão em uma extremidade com a logo do trucklog"
+                />
+            </div>
+            <form onSubmit={handleSubmit(handleLoginSubmit)}>
+                <div className="form-section">
+                    <h1>Login</h1>
+                    <h3>Insira seus dados de acesso:</h3>
 
           <div className={`input-container `}>
             <i className="ph ph-envelope"></i>
