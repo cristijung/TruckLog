@@ -1,5 +1,10 @@
 import Modal from 'react-modal';
 import { ModalContainer } from '../styles';
+import {
+	useEditTripsMutation,
+	useGetTripsQuery,
+	useAddTripsMutation,
+} from '../../../../../redux/features/trip/tripSlice';
 
 import { useState } from 'react';
 import { useForm, Controller, FieldValues } from 'react-hook-form';
@@ -20,6 +25,8 @@ export function CreateTripModal({
 	const { routes } = useRoutes();
 	const { createTrip } = useTrips();
 
+	const [addTrips] = useAddTripsMutation();
+
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -33,13 +40,16 @@ export function CreateTripModal({
 				<form
 					className="form-container"
 					onSubmit={handleSubmit(data =>
-						createTrip({
-							descricao: data.descricao,
-							dataInicio: data.dataInicio,
-							dataFim: data.dataFim,
-							idCaminhao: parseInt(data.idCaminhao, 10),
+						addTrips({
+							viagem: {
+								descricao: data.descricao,
+								dataInicio: data.dataInicio,
+								dataFim: data.dataFim,
+								idCaminhao: parseInt(data.idCaminhao, 10),
+								idRota: parseInt(data.idRota, 10),
+							},
+
 							idMotorista: parseInt(data.idMotorista, 10),
-							idRota: parseInt(data.idRota, 10),
 						})
 					)}
 				>

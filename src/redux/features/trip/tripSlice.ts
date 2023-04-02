@@ -20,16 +20,16 @@ export const tripSlice = apiSlice.injectEndpoints({
 				},
 			}),
 		}),
-		// addTrips: build.mutation<void, any>({
-		// 	query: (args: { data?: IAddTrip; idMotorista: number }) => ({
-		// 		url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem?idMotorista=${args.idMotorista}&idViagem=${args.idViagem}`,
-		// 		mehtod: 'POST',
-		// 		headers: {
-		// 			Authorization: `Bearer ${token}`,
-		// 		},
-		// 		body: args.data,
-		// 	}),
-		// }),
+		addTrips: build.mutation<IAddTrip, any>({
+			query: data => ({
+				url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem?idMotorista=${data.idMotorista}`,
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+				body: data.viagem,
+			}),
+		}),
 		editTrips: build.mutation<IEditTrip, any>({
 			query: data => ({
 				url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem?idMotorista=${data.idMotorista}&idViagem=${data.idViagem}`,
@@ -52,5 +52,9 @@ export const tripSlice = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useGetTripsQuery, useEditTripsMutation, useDeleteTripMutation } =
-	tripSlice;
+export const {
+	useGetTripsQuery,
+	useEditTripsMutation,
+	useDeleteTripMutation,
+	useAddTripsMutation,
+} = tripSlice;
