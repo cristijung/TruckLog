@@ -27,7 +27,6 @@ export function DeleteRouteModal({
       ariaHideApp={false}
     >
       <ModalContainer>
-        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <div className="delete-section">
           <h2>Tem certeza que deseja deletar?</h2>
           <p>

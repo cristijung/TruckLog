@@ -1,16 +1,21 @@
-import { useContext } from 'react';
-import { LoginContainer } from './styles';
-import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../shared/context/AuthContext';
-import { Link } from 'react-router-dom';
-import { FaHome, BsArrowLeft } from 'react-icons/all';
-import { useState, useEffect } from 'react';
-import truckImg from '../../assets/truck.png';
-import bgObject1Img from '../../assets/bg-item3.svg';
-import bgObject2Img from '../../assets/bg-item2.svg';
-import InterestModal from '../../shared/components/Homepage/LoginModal/InterestModal';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaLogin } from './LoginSchema';
+import { useContext, useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { LoginContainer } from "./styles";
+
+import { AuthContext } from "../../shared/context/AuthContext";
+import { Link } from "react-router-dom";
+
+import { FaHome, BsArrowLeft } from "react-icons/all";
+import { ToastContainer, toast } from "react-toastify";
+
+import truckImg from "../../assets/truck.png";
+import bgObject1Img from "../../assets/bg-item3.svg";
+import bgObject2Img from "../../assets/bg-item2.svg";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaLogin } from "./LoginSchema";
+
+import InterestModal from "../../shared/components/Homepage/LoginModal/InterestModal";
 
 export const Login = () => {
   const {
@@ -22,15 +27,16 @@ export const Login = () => {
   });
   const { handleLogin } = useContext(AuthContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const [isInterestModalOpen, setInterestModalOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -66,10 +72,12 @@ export const Login = () => {
           });
 
           !isOk &&
-            (document.querySelector('.error')?.classList.add('visible'),
-            document.querySelectorAll('.input-container').forEach((input) => {
-              input.classList.add('outlined-error');
+            (document.querySelector(".error")?.classList.add("visible"),
+            document.querySelectorAll(".input-container").forEach((input) => {
+              input.classList.add("outlined-error");
             }));
+
+          !isOk && toast.error("Login ou senha inválidos!");
         })}
       >
         <div className="form-section">
@@ -82,24 +90,33 @@ export const Login = () => {
               type="text"
               placeholder="login"
               id="login"
-              {...register('login')}
+              {...register("login")}
               onFocus={() => {
                 document
-                  .querySelectorAll('.input-container')[0]
-                  .classList.add('outlined');
+                  .querySelectorAll(".input-container")[0]
+                  .classList.add("outlined");
               }}
               onBlur={() => {
                 document
-                  .querySelectorAll('.input-container')[0]
-                  .classList.remove('outlined');
+                  .querySelectorAll(".input-container")[0]
+                  .classList.remove("outlined");
                 document
-                  .querySelectorAll('.input-container')[0]
-                  .classList.remove('outlined-error');
+                  .querySelectorAll(".input-container")[0]
+                  .classList.remove("outlined-error");
               }}
             />
           </div>
           <div className="error-yup">
-            {errors.login ? <>{errors.login.message}</> : null}
+            {errors.login ? (
+              <>
+                {
+                  (document
+                    .querySelectorAll(".input-container")[0]
+                    .classList.add("outlined-error"),
+                  errors.login.message)
+                }
+              </>
+            ) : null}
           </div>
 
           <div className="input-container visible">
@@ -108,29 +125,40 @@ export const Login = () => {
               type="password"
               id="senha"
               placeholder="senha"
-              {...register('senha')}
+              {...register("senha")}
               onFocus={() => {
                 document
-                  .querySelectorAll('.input-container')[1]
-                  .classList.add('outlined');
+                  .querySelectorAll(".input-container")[1]
+                  .classList.add("outlined");
               }}
               onBlur={() => {
                 document
-                  .querySelectorAll('.input-container')[1]
-                  .classList.remove('outlined');
+                  .querySelectorAll(".input-container")[1]
+                  .classList.remove("outlined");
 
                 document
-                  .querySelectorAll('.input-container')[1]
-                  .classList.remove('outlined-error');
+                  .querySelectorAll(".input-container")[1]
+                  .classList.remove("outlined-error");
               }}
             />
           </div>
           <div className="error-yup">
-            {errors.senha ? <>{errors.senha.message}</> : null}
+            {errors.senha ? (
+              <>
+                {
+                  (document
+                    .querySelectorAll(".input-container")[1]
+                    .classList.add("outlined-error"),
+                  errors.senha.message)
+                }
+              </>
+            ) : null}
           </div>
           <div className="button-section">
-            <InterestModal />
             <a href="#">Esqueceu sua senha?</a>
+            <a onClick={() => setInterestModalOpen(true)} className="title">
+              Se interessou?
+            </a>
             {/* <a href="#" onClick={() => setIsLogin(false)}>
                 Ainda não possui uma conta?
               </a> */}
@@ -140,6 +168,11 @@ export const Login = () => {
           </div>
         </div>
       </form>
+      <InterestModal
+        isOpen={isInterestModalOpen}
+        onRequestClose={() => setInterestModalOpen(false)}
+      />
+      <ToastContainer />
     </LoginContainer>
   );
 };
