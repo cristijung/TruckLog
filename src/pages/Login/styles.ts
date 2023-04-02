@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const LoginContainer = styled.div`
   display: grid;
@@ -6,7 +6,7 @@ export const LoginContainer = styled.div`
   grid-template-rows: 1fr;
 
   body {
-    font-family: 'Red Hat Display', sans-serif;
+    font-family: "Red Hat Display", sans-serif;
   }
   .back-button {
     position: absolute;
@@ -36,7 +36,7 @@ export const LoginContainer = styled.div`
 
   button {
     all: unset;
-    background-color: ${(props) => props.theme['green-700']};
+    background-color: ${(props) => props.theme["green-700"]};
     color: ${(props) => props.theme.white};
     padding: 1rem 2rem;
     border-radius: 0.8rem;
@@ -49,7 +49,7 @@ export const LoginContainer = styled.div`
   }
 
   button:hover {
-    background-color: ${(props) => props.theme['green-500']};
+    background-color: ${(props) => props.theme["green-500"]};
   }
 
   button i {
@@ -58,7 +58,7 @@ export const LoginContainer = styled.div`
 
   h1,
   h3 {
-    color: ${(props) => props.theme['green-700']};
+    color: ${(props) => props.theme["green-700"]};
   }
 
   h1 {
@@ -67,19 +67,19 @@ export const LoginContainer = styled.div`
 
   h3 {
     font-size: 1.8rem;
-    font-family: 'Red Hat Display', sans-serif;
+    font-family: "Red Hat Display", sans-serif;
   }
 
   a {
     font-size: 1.4rem;
     font-weight: 700;
-    color: ${(props) => props.theme['green-700']};
+    color: ${(props) => props.theme["green-700"]};
     transition: color 100ms;
     width: fit-content;
   }
 
   a:hover {
-    color: ${(props) => props.theme['green-500']};
+    color: ${(props) => props.theme["green-500"]};
   }
 
   .bg-items {
@@ -112,8 +112,9 @@ export const LoginContainer = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
-    gap: 2rem;
+    gap: 1rem;
     .error-yup {
+      height: 1.3rem;
       color: red;
       font-size: 1.3rem;
     }
@@ -130,9 +131,7 @@ export const LoginContainer = styled.div`
       }
     }
   }
-  .error {
-    color: red;
-  }
+
   .input-container {
     display: flex;
     gap: 1rem;
@@ -141,7 +140,7 @@ export const LoginContainer = styled.div`
     width: 60%;
     max-width: 48rem;
     border-radius: 1rem;
-    background-color: ${(props) => props.theme['gray-100']};
+    background-color: ${(props) => props.theme["gray-100"]};
     font-size: 1.6rem;
 
     i {
@@ -178,7 +177,7 @@ export const LoginContainer = styled.div`
     }
 
     &.outlined {
-      border: 2px solid ${(props) => props.theme['green-500']};
+      border: 2px solid ${(props) => props.theme["green-500"]};
     }
   }
 
