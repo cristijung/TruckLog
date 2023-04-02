@@ -2,7 +2,11 @@ import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
 import { Button } from "../../../Button";
-import { useEditGasStationMutation } from "../../../../../redux/features/gasStation/gasStationSlice";
+import {
+    useEditGasStationMutation,
+    useGetGasStationQuery,
+} from "../../../../../redux/features/gasStation/gasStationSlice";
+import { toast } from "react-toastify";
 
 interface ICreateEntityModalProps {
     isOpen: boolean;
@@ -18,7 +22,9 @@ export function EditGasStationModal({
     nomePosto,
 }: ICreateEntityModalProps) {
     const [editGasStation] = useEditGasStationMutation();
-    const { register, handleSubmit } = useForm();
+    const { refetch } = useGetGasStationQuery();
+
+    const { register, handleSubmit, reset } = useForm();
 
     return (
         <Modal
@@ -38,15 +44,28 @@ export function EditGasStationModal({
                             cidade: data.cidade,
                             latitude: "20",
                             longitude: "30",
-                            valorCombustivel: parseInt(
-                                data.valorCombustivel,
-                                10
-                            ),
+                            valorCombustivel: parseFloat(data.valorCombustivel),
                             id: idPosto,
+                        }).then((response: any) => {
+                            if (response.error) {
+                                response.error.data.errors.map(
+                                    (err: string, i: number) => {
+                                        if (i < err.length) {
+                                            console.log("entrou");
+                                            return toast.error(err);
+                                        }
+                                    }
+                                );
+                            } else {
+                                refetch();
+                                reset();
+                                toast.success("Posto editado com sucesso!");
+                                onRequestClose();
+                            }
                         })
                     )}
                 >
-                    <p>você está editando: {nomePosto}</p>
+                    <p>Você está editando: {nomePosto}</p>
                     <label htmlFor="nome">Nome do Posto</label>
                     <input
                         id="nome"

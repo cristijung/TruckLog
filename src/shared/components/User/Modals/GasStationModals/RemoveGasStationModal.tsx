@@ -6,6 +6,7 @@ import {
     useDeleteGasStationMutation,
     useGetGasStationQuery,
 } from "../../../../../redux/features/gasStation/gasStationSlice";
+import { toast } from "react-toastify";
 
 interface ICreateEntityModalProps {
     isOpen: boolean;
@@ -42,12 +43,13 @@ export function RemoveGasStationModal({
                             bgColor="error"
                             className="delete-btn"
                             onClick={() => {
-                                deleteGasStation(idPosto)
-                                    .unwrap()
-                                    .then((payload) => {
-                                        console.log(payload);
-                                        onRequestClose();
-                                    });
+                                deleteGasStation(idPosto).then(() => {
+                                    refetch();
+                                    toast.success(
+                                        "Posto deletado  com sucesso!"
+                                    );
+                                    onRequestClose();
+                                });
                             }}
                         >
                             Deletar

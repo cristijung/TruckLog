@@ -8,6 +8,7 @@ import {
     useGetGasStationQuery,
 } from "../../../../../redux/features/gasStation/gasStationSlice";
 import { IFormRespose } from "../../../../../utils/interfaces/IGasStationAPI";
+import { toast } from "react-toastify";
 
 interface ICreateEntityModalProps {
     isOpen: boolean;
@@ -23,7 +24,7 @@ export function CreateGasStationModal({
     isOpen,
     onRequestClose,
 }: ICreateEntityModalProps) {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const { refetch } = useGetGasStationQuery();
     const [addGasStation] = useAddGasStationMutation();
 
@@ -46,9 +47,24 @@ export function CreateGasStationModal({
                             latitude: "22",
                             longitude: "12",
                             valorCombustivel: data.valorCombustivel,
+                        }).then((response: any) => {
+                            if (response.error) {
+                                response.error.data.errors.map(
+                                    (err: string, i: number) => {
+                                        if (i < err.length) {
+                                            console.log("entrou");
+                                            return toast.error(err);
+                                        }
+                                    }
+                                );
+                            } else {
+                                console.log(response);
+                                reset();
+                                refetch();
+                                toast.success("Posto criado com sucesso!");
+                                onRequestClose();
+                            }
                         });
-                        refetch();
-                        onRequestClose();
                     })}
                 >
                     <label htmlFor="nome">Nome do Posto</label>
