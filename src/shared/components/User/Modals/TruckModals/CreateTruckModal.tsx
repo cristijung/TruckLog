@@ -1,8 +1,12 @@
-import Modal from "react-modal";
-import { ModalContainer } from "../styles";
-import { useForm } from "react-hook-form";
-import { ICreateTruckDTO, useTrucks } from "../../../../hooks";
-import { Button } from "../../../Button";
+import Modal from 'react-modal';
+import { ModalContainer } from '../styles';
+import { useForm } from 'react-hook-form';
+import { ICreateTruckDTO, useTrucks } from '../../../../hooks';
+import { Button } from '../../../Button';
+import {
+  useAddTruckMutation,
+  useGetTruckQuery,
+} from '../../../../../redux/features/truck/truckSlice';
 
 interface ICreateTruckModalProps {
   isOpen: boolean;
@@ -16,8 +20,8 @@ export function CreateTruckModal({
   onRequestClose,
 }: ICreateTruckModalProps) {
   const { register, handleSubmit } = useForm<IFieldValues>();
-  const { createTruck } = useTrucks();
-
+  const { refetch } = useGetTruckQuery();
+  const [addTruck] = useAddTruckMutation();
   return (
     <Modal
       isOpen={isOpen}
@@ -30,37 +34,36 @@ export function CreateTruckModal({
         <h2>Cadastrar Caminhão</h2>
         <form
           className="form-container"
-          onSubmit={handleSubmit(
-            async ({ modelo, nivelCombustivel, placa }: IFieldValues) => {
-              const response = await createTruck({
-                modelo,
-                nivelCombustivel,
-                placa,
-              });
-              return response ? onRequestClose() : null;
-            }
-          )}
+          onSubmit={handleSubmit((data) => {
+            addTruck({
+              modelo: data.modelo,
+              nivelCombustivel: data.nivelCombustivel,
+              placa: data.placa,
+            });
+            refetch();
+            onRequestClose();
+          })}
         >
           <label htmlFor="modelo">Modelo</label>
           <input
             id="modelo"
             type="text"
             placeholder="Digite o nome do modelo"
-            {...register("modelo")}
+            {...register('modelo')}
           />
           <label htmlFor="placa">Placa</label>
           <input
             id="placa"
             type="Text"
             placeholder="Digite o número da Placa"
-            {...register("placa")}
+            {...register('placa')}
           />
           <label htmlFor="nivelCombustivel">Combustível</label>
           <input
             id="nivelCombustivel"
             type="number"
             placeholder="Digite nível de Combustível"
-            {...register("nivelCombustivel")}
+            {...register('nivelCombustivel')}
           />
           <Button type="submit">Cadastrar</Button>
           <Button bgColor="gray" onClick={() => onRequestClose()}>

@@ -20,7 +20,6 @@ export function EditGasStationModal({
 }: ICreateEntityModalProps) {
   const [editGasStation] = useEditGasStationMutation();
   const { register, handleSubmit } = useForm();
-  const { refetch } = useGetRouteQuery();
 
   return (
     <Modal
