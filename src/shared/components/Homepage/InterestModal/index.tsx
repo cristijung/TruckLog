@@ -2,8 +2,8 @@ import Modal from "react-modal";
 import { ModalContainer } from "../../User/Modals/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { schemaModal } from "../../../../pages/Login/LoginSchema";
 import { Button } from "../../Button";
+import interestFormSchema from "../../../schemas/interestSchema";
 
 interface IInterestModalProps {
   isOpen: boolean;
@@ -16,8 +16,10 @@ export default function InterestModal({
 }: IInterestModalProps) {
   const {
     formState: { errors },
+    handleSubmit,
+    register,
   } = useForm({
-    resolver: yupResolver(schemaModal),
+    resolver: yupResolver(interestFormSchema),
   });
 
   return (
@@ -39,17 +41,24 @@ export default function InterestModal({
             </div>
           </div>
 
-          <form className="form-interest">
+          <form
+            onSubmit={handleSubmit(() => onRequestClose())}
+            className="form-interest"
+          >
             <div>
               <label>
                 <i className="ph-user"></i>Seu nome
               </label>
               <input
                 id="name"
-                name="name"
                 type="text"
                 placeholder="Digite aqui seu nome"
+                {...register("name")}
               />
+
+              <div className="error-yup">
+                {errors.name ? <>*{errors.name?.message}</> : null}
+              </div>
             </div>
 
             <div>
@@ -58,10 +67,13 @@ export default function InterestModal({
               </label>
               <input
                 id="email"
-                name="email"
                 type="email"
                 placeholder="Digite aqui seu e-mail"
+                {...register("email")}
               />
+              <div className="error-yup">
+                {errors.email ? <>*{errors.email?.message}</> : null}
+              </div>
             </div>
 
             <p>
@@ -69,7 +81,7 @@ export default function InterestModal({
               e correções do sistema
             </p>
 
-            <Button>Enviar</Button>
+            <Button type="submit">Enviar</Button>
           </form>
         </div>
       </ModalContainer>

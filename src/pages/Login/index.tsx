@@ -15,7 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaLogin } from "./LoginSchema";
 
 import { useAuthLoginMutation } from "../../redux/features/Authentication/authenticationSlice";
-import InterestModal from "../../shared/components/Homepage/LoginModal/InterestModal";
+import InterestModal from "../../shared/components/Homepage/InterestModal";
 
 interface ILoginForm {
   login: string;

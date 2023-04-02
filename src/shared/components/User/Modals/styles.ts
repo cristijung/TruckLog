@@ -80,6 +80,11 @@ export const ModalContainer = styled.div`
     }
   }
 
+  .error-yup {
+    color: ${(props) => props.theme.status["error"]};
+    font-size: 1.4rem;
+  }
+  
   .lgpd {
     h2 {
       text-align: center;
