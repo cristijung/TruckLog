@@ -35,7 +35,7 @@ export const Roles = () => {
   };
 
   useEffect(() => {
-    document.title = "Efetivo e Detalhes | TruckLog";
+    document.title = "Motoristas | TruckLog";
   }, []);
 
   return (
