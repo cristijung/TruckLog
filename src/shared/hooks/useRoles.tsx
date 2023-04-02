@@ -131,10 +131,10 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getAllUsers();
-    getDrivers();
-  }, []);
+  // useEffect(() => {
+  //   getAllUsers();
+  //   getDrivers();
+  // }, []);
   async function createWithRole(data: IUserComplete) {
     try {
       const response = await fetch(
@@ -176,7 +176,7 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
       );
       console.log();
       if (response.ok) {
-        getAllUsers();
+        //
         console.log("Editado com sucesso");
       } else {
         console.log("Erro ao editar usuario");
@@ -199,7 +199,7 @@ export function RolesProvider({ children }: IRolesProviderProps): JSX.Element {
       console.log();
       if (response.ok) {
         toast.success("Usuario removido com sucesso!");
-        getAllUsers();
+        //getAllUsers();
       } else {
         console.log("Erro ao remover usuario!");
       }

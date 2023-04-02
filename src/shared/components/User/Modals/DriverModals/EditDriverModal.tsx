@@ -1,12 +1,11 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm, FieldValues } from "react-hook-form";
-import { useRoles } from "../../../../hooks/useRoles";
-
-interface IEditDriver {
-  nome: string;
-  senha: string;
-}
+import {
+  useEditDriversMutation,
+  useGetDriversQuery,
+} from "../../../../../redux/features/role/roleSlice";
+import { useState } from "react";
 
 interface IEditDriverModalProps {
   isOpen: boolean;
@@ -19,9 +18,9 @@ export function EditDriverModal({
   onRequestClose,
   idUsuario,
 }: IEditDriverModalProps) {
-  const { editUserByRole } = useRoles();
   const { register, handleSubmit } = useForm();
-
+  const [editDriver] = useEditDriversMutation();
+  const { refetch } = useGetDriversQuery(0);
   return (
     <Modal
       isOpen={isOpen}
@@ -34,43 +33,20 @@ export function EditDriverModal({
         <h2>Editar Usuario</h2>
         <form
           className="form-container"
-          onSubmit={handleSubmit((data: FieldValues) => {
-            idUsuario == data.idUsuario;
+          onSubmit={handleSubmit((data) => {
+            console.log(idUsuario);
+            console.log(data);
+            // manter o idUsuario atual
 
-            editUserByRole(
-              {
-                idUsuario: data.idUsuario,
-                login: data.login,
-                nomeUsuario: data.nomeUsuario,
-                email: data.email,
-                documento: data.documento,
-                statusUsuario: data.statusUsuario,
-                idCargo: data.idCargo,
-                nome: data.nome,
-                idCaminhao: data.idCaminhao,
-                modelo: data.modelo,
-                placa: data.placa,
-                nivelCombustivel: data.nivelCombustivel,
-                statusCaminhao: data.statusCaminhao,
-                statusGeralCaminhao: data.statusGeralCaminhao,
-                idRota: data.idRota,
-                descricaoRota: data.descricaoRota,
-                localPartida: data.localPartida,
-                localDestino: data.localDestino,
-                statusRota: data.statusRota,
-                idPosto: data.idPosto,
-                nomePosto: data.nomePosto,
-                valorCombustivel: data.valorCombustivel,
-                statusPosto: data.statusPosto,
-                idViagem: data.idViagem,
-                descricaoViagem: data.descricaoViagem,
-                dataInicio: data.dataInicio,
-                dataFim: data.dataFim,
-                statusViagem: data.statusViagem,
-                // statusMotorista: "DISPONIVEL" || "EM_ESTRADA",
-              },
-              idUsuario
-            );
+            editDriver({
+              idUsuario: idUsuario,
+              nome: data.nome,
+              senha: data.senha,
+              email: data.email,
+              documento: data.documento,
+            });
+            refetch();
+            onRequestClose();
           })}
         >
           <label htmlFor="name">Nome</label>
@@ -86,8 +62,16 @@ export function EditDriverModal({
             type="password"
             placeholder="Senha"
             {...register("senha")}
+          />{" "}
+          <label htmlFor="email">Email</label>
+          <input id="email" type="text" {...register("email")} />
+          <label htmlFor="document">Documento</label>
+          <input
+            id="documento"
+            type="text"
+            maxLength={11}
+            {...register("documento")}
           />
-
           <button type="submit">Editar</button>
         </form>
       </ModalContainer>

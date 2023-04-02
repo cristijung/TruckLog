@@ -1,6 +1,10 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
-import { useRoles } from "../../../../hooks/useRoles";
+import {
+  useDeleteDriversMutation,
+  useGetDriversQuery,
+} from "../../../../../redux/features/role/roleSlice";
+import { ref } from "yup";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -15,7 +19,8 @@ export function DeleteDriverModal({
   nomeUsuario,
   idUsuario,
 }: ICreateEntityModalProps) {
-  const { deleteUserByRole } = useRoles();
+  const [deleteDriver] = useDeleteDriversMutation();
+  const { refetch } = useGetDriversQuery(0);
 
   return (
     <Modal
@@ -35,11 +40,11 @@ export function DeleteDriverModal({
             <div className="delete-btn-container  ">
               <button
                 className="delete-btn"
-                onClick={() =>
-                  deleteUserByRole(idUsuario).then(() => {
-                    onRequestClose();
-                  })
-                }
+                onClick={() => {
+                  deleteDriver(idUsuario);
+                  refetch();
+                  onRequestClose();
+                }}
               >
                 Deletar
               </button>

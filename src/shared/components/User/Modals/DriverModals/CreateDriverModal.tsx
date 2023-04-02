@@ -1,22 +1,27 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
-import { useForm } from "react-hook-form";
-import { IUserComplete, useRoles } from "../../../../hooks/useRoles";
+import { useForm, FieldValues } from "react-hook-form";
+import {
+  IDriver,
+  INewUserFromDriver,
+} from "../../../../../utils/interfaces/IDriver";
+import {
+  useCreateDriverMutation,
+  useGetDriversQuery,
+} from "../../../../../redux/features/role/roleSlice";
 
 interface ICreateEntityModalPropsDriver {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-// type IEditUserByRole = Pick<IUserComplete, "nome" | "senha">;
-
 export function CreateDriverModal({
   isOpen,
   onRequestClose,
 }: ICreateEntityModalPropsDriver) {
-  const { createWithRole, deleteUserByRole, editUserByRole } = useRoles();
-
   const { register, handleSubmit } = useForm();
+  const [createDriver] = useCreateDriverMutation();
+  const { refetch } = useGetDriversQuery(0);
 
   return (
     <Modal
@@ -31,6 +36,17 @@ export function CreateDriverModal({
         <form
           className="form-container"
           onSubmit={handleSubmit((data) => {
+            const newUser: INewUserFromDriver = {
+              nome: data.nome,
+              login: data.usuario,
+              senha: data.senha,
+              documento: data.documento,
+              email: data.email,
+              nomeCargo: "ROLE_MOTORISTA",
+            };
+
+            createDriver(newUser);
+            refetch();
             onRequestClose();
           })}
         >
@@ -60,14 +76,9 @@ export function CreateDriverModal({
             id="documento"
             type="text"
             placeholder="CNH ou CPF"
+            maxLength={11}
             {...register("documento")}
           />
-          <label htmlFor="idCargo"> Cargo</label>
-          <select id="idCargo" {...register("idCargo")}>
-            <option value="1">Administrador</option>
-            <option value="2">Colaborador</option>
-            <option value="3">Motorista</option>
-          </select>
           <label htmlFor="email">E-mail</label>
           <input type="email" placeholder="E-mail" {...register("email")} />
           <button type="submit">Cadastrar</button>
