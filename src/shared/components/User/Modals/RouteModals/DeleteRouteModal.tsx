@@ -1,12 +1,16 @@
-import Modal from "react-modal";
-import { useRoutes } from "../../../../hooks";
-import { Button } from "../../../Button";
-import { ModalContainer } from "../styles";
+import Modal from 'react-modal';
+import { useRoutes } from '../../../../hooks';
+import { Button } from '../../../Button';
+import { ModalContainer } from '../styles';
+import {
+  useDeleteRouteMutation,
+  useGetRouteQuery,
+} from '../../../../../redux/features/route/routeSlice';
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  idRota: number;
+  idRota: string;
   descricaoRota: string;
 }
 
@@ -16,7 +20,8 @@ export function DeleteRouteModal({
   idRota,
   descricaoRota,
 }: ICreateEntityModalProps) {
-  const { deleteRoute } = useRoutes();
+  const [deleteRoute] = useDeleteRouteMutation();
+  const { refetch } = useGetRouteQuery();
 
   return (
     <Modal
@@ -36,9 +41,14 @@ export function DeleteRouteModal({
             <Button
               expanded
               bgColor="error"
-              onClick={async () => {
-                const isOk = await deleteRoute(idRota);
-                isOk && onRequestClose();
+              onClick={() => {
+                deleteRoute(idRota)
+                  .unwrap()
+                  .then((payload: any) => {
+                    console.log(payload);
+                    refetch();
+                    onRequestClose();
+                  });
               }}
             >
               Deletar
