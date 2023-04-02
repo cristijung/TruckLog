@@ -29,6 +29,7 @@ export default function InterestModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <div>
           <div className="text-section">
             <div>

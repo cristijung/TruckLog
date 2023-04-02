@@ -34,6 +34,7 @@ export function EditUserModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Editar Usuário</h2>
         <form
           className="form-container"
@@ -80,9 +81,7 @@ export function EditUserModal({
           />
 
           <Button type="submit">Editar Usuário</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>

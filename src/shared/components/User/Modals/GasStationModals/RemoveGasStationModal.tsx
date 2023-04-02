@@ -27,13 +27,14 @@ export function RemoveGasStationModal({
       ariaHideApp={false}
     >
       <ModalContainer>
-        <div className="delete-gas-station">
+        <div className="delete-section">
           <h2>Tem certeza que deseja deletar?</h2>
           <p>
             Posto: <strong>{namePosto}</strong>
           </p>
           <div className="delete-btn-container">
             <Button
+              expanded
               bgColor="error"
               className="delete-btn"
               onClick={async () => {
@@ -44,6 +45,7 @@ export function RemoveGasStationModal({
               Deletar
             </Button>
             <Button
+              expanded
               bgColor="gray"
               className="canceal-btn"
               onClick={onRequestClose}

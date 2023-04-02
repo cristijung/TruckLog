@@ -30,6 +30,7 @@ export function CreateGasStationModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Cadastrar Posto</h2>
         <form
           className="form-container"
@@ -58,9 +59,7 @@ export function CreateGasStationModal({
           />
 
           <Button type="submit">Cadastrar</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>

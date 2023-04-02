@@ -29,10 +29,11 @@ import { Button } from "../../shared/components/Button";
 import { LgpdModal } from "../../shared/components/User/Modals";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
+import zIndex from "@mui/material/styles/zIndex";
 
 export const Homepage = () => {
   const navigate = useNavigate();
-  const [isLGPDOpen, setIsLGPDOpen] = useState(false);
+  const [isLGPDModalOpen, setIsLGPDModalOpen] = useState(false);
 
   const {
     register,
@@ -42,10 +43,6 @@ export const Homepage = () => {
   } = useForm({
     resolver: yupResolver(interestFormSchema),
   });
-
-  const handleShowLGPD = () => {
-    setIsLGPDOpen(true);
-  };
 
   return (
     <>
@@ -388,15 +385,15 @@ export const Homepage = () => {
             <hr />
             <div className="footer-bottom">
               <p>2010 - 2023</p>
-              <a href="#" onClick={() => handleShowLGPD()}>
+              <span onClick={() => setIsLGPDModalOpen(true)}>
                 <strong>Termos de privacidade</strong>
-              </a>
+              </span>
             </div>
           </div>
         </footer>
         <LgpdModal
-          isOpen={isLGPDOpen}
-          onRequestClose={() => setIsLGPDOpen(false)}
+          isOpen={isLGPDModalOpen}
+          onRequestClose={() => setIsLGPDModalOpen(false)}
         />
       </LandingPageContainer>
     </>

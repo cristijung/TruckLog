@@ -32,6 +32,7 @@ export function EditGasStationModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <h2>Edite os dados do Posto</h2>
         <form
           className="form-container"
@@ -61,9 +62,7 @@ export function EditGasStationModal({
           />
 
           <Button type="submit">Editar Posto</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
+          
         </form>
       </ModalContainer>
     </Modal>
