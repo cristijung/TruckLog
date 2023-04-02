@@ -1,14 +1,19 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
+import { useNavigate } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import { AuthContext } from '../../../context/AuthContext';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 export function BasicMenu() {
-  const { userLogin, getLoggedUsers, handleLogout } = useContext(AuthContext);
+  const { userLogin, getLoggedUsers } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
+  const [token, setToken] = useState<string>(
+    localStorage.getItem('token') || ''
+  );
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -19,6 +24,11 @@ export function BasicMenu() {
   useEffect(() => {
     getLoggedUsers();
   }, []);
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken('');
+    navigate('/login');
+  };
 
   return (
     <div>
