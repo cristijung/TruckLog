@@ -7,11 +7,11 @@ import { EditUserModal } from '../../../shared/components/User/Modals/UserModals
 import { CreateUserModal } from '../../../shared/components/User/Modals/UserModals/CreateUserModal';
 import { RemoveUserModal } from '../../../shared/components/User/Modals/UserModals/RemoveUserModal';
 import { AddRoleModal } from '../../../shared/components/User/Modals';
+import { useGetLoggedUserQuery } from '../../../redux/features/Authentication/authenticationSlice';
 
 export const Dashboard = () => {
   const { users } = useUsers();
-
-  const { userLogin } = useContext(AuthContext);
+  const { data: loggedUser } = useGetLoggedUserQuery();
   const [isCreateUserModalOpen, setIsCreateUserModalOpen] = useState(false);
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
   const [isRemoveUSerModalOpen, setIsRemoveUserModalOpen] = useState(false);
@@ -52,7 +52,7 @@ export const Dashboard = () => {
           <a className="selected">Dashboard</a>
         </div>
 
-        <h2 className="title-page">Olá {userLogin}</h2>
+        <h2 className="title-page">Olá {loggedUser?.nome}</h2>
         <button
           onClick={() => setIsCreateUserModalOpen(true)}
           className="create-button"
