@@ -7,6 +7,7 @@ import {
 	DeleteTripModal,
 } from '../../../shared/components/User/Modals';
 import { useTrips } from '../../../shared/hooks/useTrips';
+
 import { ViagensContainer } from './styles';
 import { ITrip } from '../../../utils/interfaces/ITripAPI';
 
@@ -42,6 +43,8 @@ export const Viagens = () => {
 	};
 	const { data } = useGetTripsQuery();
 	const tripsData = data as unknown as ITrip[];
+
+	const regex = /^(\d{4})-(\d{2})-(\d{2})$/;
 
 	return (
 		<ViagensContainer>
@@ -95,18 +98,15 @@ export const Viagens = () => {
 									key={trip.idViagem}
 								>
 									<p>{trip.descricao}</p>
-									<p>{new Date(trip.dataInicio).toLocaleDateString('pt-BR')}</p>
-									{new Date(trip.dataFim).toLocaleDateString('pt-BR')}
-
+									<p>{trip.dataInicio}</p>
+									<p>{trip.dataFim}</p>
 									<p
 										className={
 											trip.statusViagem === 'FINALIZADA'
 												? 'finished'
 												: 'progress'
 										}
-									>
-										{trip.statusViagem.replace('_', ' ')}{' '}
-									</p>
+									></p>
 
 									<div className="btn-container">
 										<button
