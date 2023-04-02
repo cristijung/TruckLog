@@ -1,8 +1,12 @@
-import Modal from "react-modal";
-import { useRoutes } from "../../../../hooks";
-import { ModalContainer } from "../styles";
-import { FieldValues, useForm } from "react-hook-form";
-import { Button } from "../../../Button";
+import Modal from 'react-modal';
+import { useRoutes } from '../../../../hooks';
+import { ModalContainer } from '../styles';
+import { FieldValues, useForm } from 'react-hook-form';
+import { Button } from '../../../Button';
+import {
+  useEditRouteMutation,
+  useGetRouteQuery,
+} from '../../../../../redux/features/route/routeSlice';
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -17,7 +21,9 @@ export function EditRouteModal({
   idRota,
   descricaoRota,
 }: ICreateEntityModalProps) {
-  const { editRoute } = useRoutes();
+  const [editRoute] = useEditRouteMutation();
+  const { refetch } = useGetRouteQuery();
+
   const { register, handleSubmit } = useForm();
 
   return (
@@ -35,16 +41,14 @@ export function EditRouteModal({
         <form
           className="form-container"
           onSubmit={handleSubmit(async (data: FieldValues) => {
-            const isOk = await editRoute(
-              {
-                descricao: data.descricao,
-                localPartida: data.localPartida,
-                localDestino: data.localDestino,
-              },
-              idRota
-            );
-
-            isOk && onRequestClose();
+            editRoute({
+              descricao: data.descricao,
+              localPartida: data.localPartida,
+              localDestino: data.localDestino,
+              idRota: idRota,
+            });
+            onRequestClose();
+            refetch();
           })}
         >
           <label htmlFor="descricao">Descrição rota</label>
@@ -52,14 +56,14 @@ export function EditRouteModal({
             id="descricao"
             type="text"
             placeholder="Digite a descrição da nova rota aqui"
-            {...register("descricao")}
+            {...register('descricao')}
           />
           <label htmlFor="localPartida">Local de Partida</label>
           <input
             id="localPartida"
             type="text"
             placeholder="Digite o local de partida aqui"
-            {...register("localPartida")}
+            {...register('localPartida')}
           />
 
           <label htmlFor="localPartida">Local de Destino</label>
@@ -67,7 +71,7 @@ export function EditRouteModal({
             id="localDestino"
             type="text"
             placeholder="Digite o local de destino aqui"
-            {...register("localDestino")}
+            {...register('localDestino')}
           />
 
           <Button type="submit">Editar</Button>

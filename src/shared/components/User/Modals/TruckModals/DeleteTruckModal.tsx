@@ -1,12 +1,16 @@
-import Modal from "react-modal";
-import { useTrucks } from "../../../../hooks";
-import { Button } from "../../../Button";
-import { ModalContainer } from "../styles";
+import Modal from 'react-modal';
+import { useTrucks } from '../../../../hooks';
+import { Button } from '../../../Button';
+import { ModalContainer } from '../styles';
+import {
+  useDeleteTruckMutation,
+  useGetTruckQuery,
+} from '../../../../../redux/features/truck/truckSlice';
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  idCaminhao: number;
+  idCaminhao: string;
   placaCaminhao: string;
 }
 
@@ -16,7 +20,8 @@ export function DeleteTruckModal({
   idCaminhao,
   placaCaminhao,
 }: ICreateEntityModalProps) {
-  const { deleteTruck } = useTrucks();
+  const [deleteTruck] = useDeleteTruckMutation();
+  const { refetch } = useGetTruckQuery();
 
   return (
     <Modal
@@ -36,9 +41,14 @@ export function DeleteTruckModal({
             <Button
               expanded
               bgColor="error"
-              onClick={async () => {
-                const isOk = await deleteTruck(idCaminhao);
-                isOk && onRequestClose();
+              onClick={() => {
+                deleteTruck(idCaminhao)
+                  .unwrap()
+                  .then((payload) => {
+                    console.log(payload);
+                    refetch();
+                    onRequestClose();
+                  });
               }}
             >
               Deletar
