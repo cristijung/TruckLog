@@ -3,20 +3,14 @@ import { LoginContainer } from './styles';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FaHome, BsArrowLeft } from 'react-icons/all';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaLogin } from './LoginSchema';
 import truckImg from '../../assets/truck.png';
 import bgObject1Img from '../../assets/bg-item3.svg';
 import bgObject2Img from '../../assets/bg-item2.svg';
-import InterestModal from '../../shared/components/User/Modals/LoginModal/InterestModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAuthLoginMutation } from '../../redux/features/Authentication/authenticationSlice';
+import InterestModal from '../../shared/components/Homepage/LoginModal/InterestModal';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-
-export interface IUser {
-  login: string;
-  senha: string;
-}
+import { schemaLogin } from './LoginSchema';
+import { useAuthLoginMutation } from '../../redux/features/Authentication/authenticationSlice';
 
 interface ILoginForm {
   login: string;

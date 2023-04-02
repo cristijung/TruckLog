@@ -1,9 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
-import { Homepage, Login } from './pages';
-import { Viagens, Roles, Caminhoes, Postos, Rotas } from './pages/Admin';
-import { AuthProvider } from './shared/context/AuthContext';
-import { ColaboratorLayout } from './shared/layouts/CollaboratorLayout';
-import { Dashboard } from './pages/Admin/Dashboard/Dashboard';
+import { Route, Routes } from "react-router-dom";
+import { Homepage, Login } from "./pages";
+import { Viagens, Roles, Caminhoes, Postos, Rotas } from "./pages/Admin";
+import { AuthProvider } from "./shared/context/AuthContext";
+import { ColaboratorLayout } from "./shared/layouts/CollaboratorLayout";
+import { Dashboard } from "./pages/Admin/Dashboard/Dashboard";
 
 export const AppRoutes = () => {
   return (

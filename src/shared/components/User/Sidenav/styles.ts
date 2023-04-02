@@ -11,20 +11,11 @@ export const SidenavContainer = styled.nav`
     }
   }
 
-  /* @media (max-width: 600px) {
+  @media (max-width: 750px) {
     .container {
       margin-left: 0;
-
-      &.expanded::before {
-        content: "";
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.2);
-        z-index: 2;
-      }
     }
-  } */
+  }
 `;
 
 export const SidenavContent = styled.nav`
@@ -65,6 +56,11 @@ export const SidenavContent = styled.nav`
   }
 
   .item:hover {
+    border-radius: 90rem;
+    background-color: ${(props) => props.theme["gray-100"]};
+    transition: background 200ms;
+  }
+  .item.active {
     border-radius: 90rem;
     background-color: ${(props) => props.theme["gray-100"]};
     transition: background 200ms;

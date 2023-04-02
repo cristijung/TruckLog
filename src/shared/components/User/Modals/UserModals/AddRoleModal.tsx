@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
 import { IUserComplete, useUsers } from "../../../../hooks/useUsers";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalPropsDriver {
   isOpen: boolean;
@@ -37,14 +38,17 @@ export function AddRoleModal({
             onRequestClose();
           })}
         >
-          <label htmlFor="Role"> Cargo</label>
+          <label htmlFor="idCargo"> Cargo</label>
           <select id="idCargo" {...register("idCargo")}>
             <option value="1">Administrador</option>
             <option value="2">Colaborador</option>
             <option value="3">Motorista</option>
           </select>
 
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">Cadastrar</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

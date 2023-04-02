@@ -3,6 +3,7 @@ import { useGasStations } from "../../../../hooks/useGasStations";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
 import { useUsers } from "../../../../hooks/useUsers";
+import { Button } from "../../../Button";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -78,7 +79,10 @@ export function EditUserModal({
             {...register("documento")}
           />
 
-          <button type="submit">Editar Usuário</button>
+          <Button type="submit">Editar Usuário</Button>
+          <Button bgColor="gray" onClick={() => onRequestClose()}>
+            Cancelar
+          </Button>
         </form>
       </ModalContainer>
     </Modal>

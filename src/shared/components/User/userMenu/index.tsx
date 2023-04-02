@@ -1,10 +1,12 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
+
+import * as React from "react";
+import Button from "@mui/material/Button";
 import { useNavigate } from 'react-router-dom';
-import MenuItem from '@mui/material/MenuItem';
-import { AuthContext } from '../../../context/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { AuthContext } from "../../../context/AuthContext";
+import { useContext, useEffect } from "react";
+import { DropDownContainer } from "./styles";
 
 export function BasicMenu() {
   const { userLogin, getLoggedUsers } = useContext(AuthContext);
@@ -32,40 +34,45 @@ export function BasicMenu() {
 
   return (
     <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        sx={{
-          fontFamily: 'Poppins, sans-serif',
-          fontSize: '1.4rem',
-          width: '100%',
-        }}
-      >
-        {userLogin}
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem
-          onClick={() => handleLogout()}
+
+      <DropDownContainer>
+        <Button
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
           sx={{
-            fontFamily: 'Poppins, sans-serif',
-            fontSize: '1.2rem',
-            width: '100%',
+            fontFamily: "Poppins, sans-serif",
+            fontSize: "1.4rem",
+            width: "100%",
+
           }}
         >
-          Logout
-        </MenuItem>
-      </Menu>
+          <i className="ph-fill ph-caret-down"></i>
+          {userLogin}
+        </Button>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem
+            onClick={() => handleLogout()}
+            sx={{
+              fontFamily: "Poppins, sans-serif",
+              fontSize: "1.2rem",
+              width: "100%",
+            }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
+      </DropDownContainer>
     </div>
   );
 }
