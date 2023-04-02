@@ -74,9 +74,7 @@ export const ModalContainer = styled.div`
     }
 
     button {
-      /* width: fit-content; */
-      padding: 1rem 1.5rem;
-      margin: 1.5rem auto 0 auto;
+      margin-top: 1.5rem;
     }
   }
 
@@ -86,6 +84,10 @@ export const ModalContainer = styled.div`
   }
   
   .lgpd {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
     h2 {
       text-align: center;
     }
@@ -93,6 +95,11 @@ export const ModalContainer = styled.div`
     p {
       text-align: justify;
     }
+
+    button {
+        width: fit-content;
+        margin: auto;
+       }
   }
 
   @media (max-width: 600px) {
@@ -111,13 +118,11 @@ export const ModalContainer = styled.div`
     margin-top: 1rem;
     font-size: 1.6rem;
     color: ${(props) => props.theme["green-700"]};
+    display: flex;
   }
 
   button {
-    /* width: fit-content; */
     max-width: 90%;
-    padding: 1rem 1.5rem;
-    margin: 1.5rem auto 0 auto;
   }
 
   .form-interest {

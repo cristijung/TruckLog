@@ -3,23 +3,24 @@ import { ModalContainer } from "../../User/Modals/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Button } from "../../Button";
-import interestFormSchema from "../../../schemas/interestSchema";
+import { ToastContainer, toast } from "react-toastify";
+import forgotPassSchema from "../../../schemas/forgotPassSchema";
 
-interface IInterestModalProps {
+interface IForgotPassModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-export default function InterestModal({
+export default function ForgotPassModal({
   isOpen,
   onRequestClose,
-}: IInterestModalProps) {
+}: IForgotPassModalProps) {
   const {
     formState: { errors },
     handleSubmit,
     register,
   } = useForm({
-    resolver: yupResolver(interestFormSchema),
+    resolver: yupResolver(forgotPassSchema),
   });
 
   return (
@@ -31,38 +32,24 @@ export default function InterestModal({
       ariaHideApp={false}
     >
       <ModalContainer>
-        <i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
         <div>
           <div className="text-section">
             <div>
               <h2 className="subtitle">
-                Preencha o formulário e entraremos em contato.
+                Informe seu e-mail para recuperar sua senha
               </h2>
             </div>
           </div>
 
           <form
-            onSubmit={handleSubmit(() => {
-              onRequestClose();
+            onSubmit={handleSubmit((data) => {
+              toast.success(
+                `Um e-mail de recuperação foi enviado para ${data.email}`
+              ),
+                onRequestClose();
             })}
             className="form-interest"
           >
-            <div>
-              <label>
-                <i className="ph-user"></i>Seu nome
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Digite aqui seu nome"
-                {...register("name")}
-              />
-
-              <div className="error-yup">
-                {errors.name ? <>*{errors.name?.message}</> : null}
-              </div>
-            </div>
-
             <div>
               <label>
                 <i className="ph-envelope"></i>Seu e-mail
@@ -77,16 +64,18 @@ export default function InterestModal({
                 {errors.email ? <>*{errors.email?.message}</> : null}
               </div>
             </div>
-
-            <p>
-              <input type="checkbox" /> Desejo receber emails sobre lançamentos
-              e correções do sistema
-            </p>
-
-            <Button type="submit">Enviar</Button>
+            <div className="delete-btn-container">
+              <Button expanded type="submit">
+                Enviar
+              </Button>
+              <Button onClick={onRequestClose} expanded bgColor={"gray"}>
+                Cancelar
+              </Button>
+            </div>
           </form>
         </div>
       </ModalContainer>
+      <ToastContainer />
     </Modal>
   );
 }

@@ -16,6 +16,7 @@ import { schemaLogin } from "./LoginSchema";
 
 import { useAuthLoginMutation } from "../../redux/features/Authentication/authenticationSlice";
 import InterestModal from "../../shared/components/Homepage/InterestModal";
+import ForgotPassModal from "../../shared/components/Homepage/ForgotPassModal";
 
 interface ILoginForm {
   login: string;
@@ -31,11 +32,16 @@ export const Login = () => {
     resolver: yupResolver(schemaLogin),
   });
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
-  const [authLogin] = useAuthLoginMutation();
   const navigate = useNavigate();
-  const [_token, setToken] = useState(localStorage.getItem("token"));
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+
+  // MODALS
   const [isInterestModalOpen, setIsInterestModalOpen] = useState(false);
+  const [isForgotPassModalOpen, setIsForgotPassModalOpen] = useState(false);
+
+  // AUTHENTICATION
+  const [_token, setToken] = useState(localStorage.getItem("token"));
+  const [authLogin] = useAuthLoginMutation();
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 600);
@@ -171,7 +177,9 @@ export const Login = () => {
             ) : null}
           </div>
           <div className="button-section">
-            <a href="#">Esqueceu sua senha?</a>
+            <a onClick={() => setIsForgotPassModalOpen(true)}>
+              Esqueceu sua senha?
+            </a>
             <a onClick={() => setIsInterestModalOpen(true)} className="title">
               Se interessou?
             </a>
@@ -184,6 +192,10 @@ export const Login = () => {
       <InterestModal
         isOpen={isInterestModalOpen}
         onRequestClose={() => setIsInterestModalOpen(false)}
+      />
+      <ForgotPassModal
+        isOpen={isForgotPassModalOpen}
+        onRequestClose={() => setIsForgotPassModalOpen(false)}
       />
       <ToastContainer />
     </LoginContainer>
