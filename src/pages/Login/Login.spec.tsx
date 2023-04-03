@@ -4,6 +4,23 @@ import { Login } from "./index";
 import { vi, describe, expect, it } from "vitest";
 import React from "react";
 
+vi.mock("react-router-dom", () => {
+  return {
+    useNavigate() {
+      return [null, false];
+    },
+    Link: vi.fn().mockImplementation(({ children }) => children),
+  };
+});
+
+vi.mock("../../redux/features/Authentication/authenticationSlice", () => {
+  return {
+    useAuthLoginMutation() {
+      return [null, false];
+    },
+  };
+});
+
 describe("Login", () => {
   it("should render login form", () => {
     render(<Login />);
@@ -19,7 +36,7 @@ describe("Login", () => {
 
   it("should handle form submission", () => {
     const handleLogin = vi.fn();
-    
+
     vi.spyOn(React, "useContext").mockReturnValue({ handleLogin });
 
     render(<Login />);
