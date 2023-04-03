@@ -3,14 +3,13 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { AuthContext } from "../../../context/AuthContext";
-import { useContext, useEffect } from "react";
 import { DropDownContainer } from "./styles";
+import { useGetLoggedUserQuery } from "../../../../redux/features/Authentication/authenticationSlice";
 
 export function BasicMenu() {
-    const { userLogin, getLoggedUsers } = useContext(AuthContext);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const navigate = useNavigate();
+    const { data: loggedUser } = useGetLoggedUserQuery();
     const open = Boolean(anchorEl);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -20,9 +19,6 @@ export function BasicMenu() {
         setAnchorEl(null);
     };
 
-    useEffect(() => {
-        getLoggedUsers();
-    }, []);
     const handleLogout = () => {
         localStorage.removeItem("token");
         navigate("/login");
@@ -44,7 +40,7 @@ export function BasicMenu() {
                     }}
                 >
                     <i className="ph-fill ph-caret-down"></i>
-                    {userLogin}
+                    {loggedUser?.nome}
                 </Button>
                 <Menu
                     id="basic-menu"

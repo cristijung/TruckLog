@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRoutes } from "../../../shared/hooks/useRoutes";
 import { RotasContainer } from "./styles";
 import {
     CreateRouteModal,
@@ -10,7 +9,6 @@ import { Button } from "../../../shared/components/Button";
 import { useGetRouteQuery } from "../../../redux/features/route/routeSlice";
 
 export const Rotas = () => {
-    const { getRoutes, routes } = useRoutes();
     const [searchRoute, setSearchRoute] = useState("");
     const [isCreateRouteModalOpen, setIsCreateRouteModalOpen] = useState(false);
     const [isEditRouteModalOpen, setIsEditRouteModalOpen] = useState(false);
@@ -27,7 +25,6 @@ export const Rotas = () => {
     };
 
     useEffect(() => {
-        getRoutes();
         document.title = "Rotas | TruckLog";
     }, []);
 
