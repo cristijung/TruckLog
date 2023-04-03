@@ -1,22 +1,21 @@
-import { useEffect, useState } from 'react';
-import { useRoutes } from '../../../shared/hooks/useRoutes';
-import { RotasContainer } from './styles';
+import { useEffect, useState } from "react";
+
+import { RotasContainer } from "./styles";
 import {
   CreateRouteModal,
   EditRouteModal,
   DeleteRouteModal,
-} from '../../../shared/components/User/Modals';
-import { Button } from '../../../shared/components/Button';
-import { useGetRouteQuery } from '../../../redux/features/route/routeSlice';
+} from "../../../shared/components/User/Modals";
+import { Button } from "../../../shared/components/Button";
+import { useGetRouteQuery } from "../../../redux/features/route/routeSlice";
 
 export const Rotas = () => {
-  const { getRoutes, routes } = useRoutes();
-  const [searchRoute, setSearchRoute] = useState('');
+  const [searchRoute, setSearchRoute] = useState("");
   const [isCreateRouteModalOpen, setIsCreateRouteModalOpen] = useState(false);
   const [isEditRouteModalOpen, setIsEditRouteModalOpen] = useState(false);
 
   const [idRoute, setIdRoute] = useState(0);
-  const [descriptionRoute, setDescriptionRoute] = useState('');
+  const [descriptionRoute, setDescriptionRoute] = useState("");
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -27,8 +26,7 @@ export const Rotas = () => {
   };
 
   useEffect(() => {
-    getRoutes();
-    document.title = 'Rotas | TruckLog';
+    document.title = "Rotas | TruckLog";
   }, []);
 
   const handleOpenEditModal = (idRota: number, descricaoRota: string) => {
@@ -44,7 +42,7 @@ export const Rotas = () => {
       <main className="content">
         <div className="user-trail">
           <span>Meu Painel</span>
-          <span>{' > '}</span>
+          <span>{" > "}</span>
           <a className="selected">Rotas</a>
         </div>
 
@@ -76,7 +74,7 @@ export const Rotas = () => {
             data
               .slice()
               .sort((route) => {
-                return route.status === 'ATIVO' ? -1 : 1;
+                return route.status === "ATIVO" ? -1 : 1;
               })
 
               .filter((route) =>
@@ -87,7 +85,7 @@ export const Rotas = () => {
               .map((route) => (
                 <div
                   className={
-                    route.status === 'ATIVO' ? 'posto ativo' : 'posto inativo'
+                    route.status === "ATIVO" ? "posto ativo" : "posto inativo"
                   }
                   key={route.idRota}
                 >
@@ -97,7 +95,7 @@ export const Rotas = () => {
                   </div>
                   <div>{route.localDestino}</div>
                   <div
-                    className={route.status === 'ATIVO' ? 'ativo' : 'inativo'}
+                    className={route.status === "ATIVO" ? "ativo" : "inativo"}
                   >
                     {route.status}
                   </div>
@@ -107,7 +105,7 @@ export const Rotas = () => {
                       onClick={() =>
                         handleOpenEditModal(route.idRota, route.descricao)
                       }
-                      disabled={route.status === 'ATIVO' ? false : true}
+                      disabled={route.status === "ATIVO" ? false : true}
                     >
                       <i title="Editar Posto" className="ph ph-pencil"></i>
                     </button>
@@ -117,7 +115,7 @@ export const Rotas = () => {
                         handleRemoveEditModal(route.idRota, route.descricao)
                       }
                       title="Deletar Posto"
-                      disabled={route.status === 'ATIVO' ? false : true}
+                      disabled={route.status === "ATIVO" ? false : true}
                     >
                       <i className="ph ph-trash delete-icon"></i>
                     </button>

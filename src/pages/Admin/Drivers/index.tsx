@@ -115,9 +115,9 @@ export const Roles: React.FC = () => {
                     }
                     key={driver.idUsuario}
                   >
-                    <p>{driver.nome}</p>
+                    <p className="nome">{driver.nome}</p>
                     <div>
-                      <p>{driver.documento}</p>
+                      <p className="documento">{driver.documento}</p>
                     </div>
 
                     <div
