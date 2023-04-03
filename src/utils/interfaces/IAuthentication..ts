@@ -4,7 +4,7 @@ export interface ILoggedUser {
   nome: string;
   email: string;
   documento: string;
-  status: 'ATIVO' | 'INATIVO';
+  status: "ATIVO" | "INATIVO";
   cargos: {
     nome: string;
     idCargo: number;

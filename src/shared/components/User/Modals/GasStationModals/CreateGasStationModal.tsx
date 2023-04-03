@@ -1,12 +1,15 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { Button } from "../../../Button";
 import {
     useAddGasStationMutation,
     useGetGasStationQuery,
 } from "../../../../../redux/features/gasStation/gasStationSlice";
 import { toast } from "react-toastify";
+import gasStationSchema from "../../../../schemas/gasStationSchema";
 
 interface ICreateEntityModalProps {
     isOpen: boolean;
@@ -17,7 +20,14 @@ export function CreateGasStationModal({
     isOpen,
     onRequestClose,
 }: ICreateEntityModalProps) {
-    const { register, handleSubmit, reset } = useForm();
+    const {
+        formState: { errors },
+        register,
+        handleSubmit,
+        reset,
+    } = useForm({
+        resolver: yupResolver(gasStationSchema),
+    });
     const { refetch } = useGetGasStationQuery();
     const [addGasStation] = useAddGasStationMutation();
 
@@ -67,26 +77,41 @@ export function CreateGasStationModal({
                     <label htmlFor="nome">Nome do Posto</label>
                     <input
                         id="nome"
+                        maxLength={21}
                         type="text"
                         placeholder="Digite o nome do posto aqui"
                         {...register("nome")}
                     />
+
+                    <div className="error-yup">
+                        {errors.nome ? <>*{errors.nome?.message}</> : null}
+                    </div>
+
                     <label htmlFor="nome">Cidade localizada</label>
                     <input
                         id="cidade"
+                        maxLength={36}
                         type="text"
                         placeholder="Digite o nome da cidade do posto aqui"
                         {...register("cidade")}
                     />
+                    <div className="error-yup">
+                        {errors.cidade ? <>*{errors.cidade?.message}</> : null}
+                    </div>
 
                     <label htmlFor="valorCombustivel">Valor Combustível</label>
                     <input
                         id="valorCombustivel"
                         type="text"
+                        maxLength={3}
                         placeholder="Digite o valor do combustível aqui"
                         {...register("valorCombustivel")}
                     />
-
+                    <div className="error-yup">
+                        {errors.valorCombustivel ? (
+                            <>*{errors.valorCombustivel?.message}</>
+                        ) : null}
+                    </div>
                     <Button type="submit">Cadastrar</Button>
                 </form>
             </ModalContainer>

@@ -1,7 +1,13 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
-import { useRoles } from "../../../../hooks/useRoles";
+import {
+  useDeleteDriversMutation,
+  useGetDriversQuery,
+} from "../../../../../redux/features/role/roleSlice";
+import { ref } from "yup";
+
 import { Button } from "../../../Button";
+import { toast } from "react-toastify";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -16,7 +22,8 @@ export function DeleteDriverModal({
   nomeUsuario,
   idUsuario,
 }: ICreateEntityModalProps) {
-  const { deleteUserByRole } = useRoles();
+  const [deleteDriver] = useDeleteDriversMutation();
+  const { refetch } = useGetDriversQuery(0);
 
   return (
     <Modal
@@ -38,11 +45,13 @@ export function DeleteDriverModal({
                 expanded
                 bgColor="error"
                 className="delete-btn"
-                onClick={() =>
-                  deleteUserByRole(idUsuario).then(() => {
+                onClick={() => {
+                  deleteDriver(idUsuario).then(() => {
+                    refetch();
+                    toast.success("Motorista desativado  com sucesso!");
                     onRequestClose();
-                  })
-                }
+                  });
+                }}
               >
                 Deletar
               </Button>

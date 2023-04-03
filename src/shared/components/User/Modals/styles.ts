@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -7,19 +7,19 @@ export const ModalContainer = styled.div`
 
   h2 {
     font-size: 1.8rem;
-    color: ${(props) => props.theme["green-700"]};
+    color: ${props => props.theme['green-700']};
   }
 
   p {
     padding: 1rem;
     text-align: center;
     border: 1px transparent black;
-    background-color: ${(props) => props.theme["gray-100"]};
+    background-color: ${props => props.theme['gray-100']};
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px 1px;
     font-size: 1.6rem;
     strong {
-      color: ${(props) => props.theme["green-700"]};
+      color: ${props => props.theme['green-700']};
     }
   }
 
@@ -62,7 +62,7 @@ export const ModalContainer = styled.div`
     label {
       margin-top: 1rem;
       font-size: 1.6rem;
-      color: ${(props) => props.theme["green-700"]};
+      color: ${props => props.theme['green-700']};
     }
 
     input,
@@ -70,7 +70,7 @@ export const ModalContainer = styled.div`
       all: unset;
       width: 95%;
       padding: 1rem;
-      border: 1px solid ${(props) => props.theme["gray-100"]};
+      border: 1px solid ${props => props.theme['gray-100']};
       font-size: 1.4rem;
       border-radius: 0.5rem;
     }
@@ -81,7 +81,7 @@ export const ModalContainer = styled.div`
   }
 
   .error-yup {
-    color: ${(props) => props.theme.status["error"]};
+    color: ${(props) => props.theme.status?.error || "red"};
     font-size: 1.4rem;
   }
   
@@ -119,7 +119,7 @@ export const ModalContainer = styled.div`
   label {
     margin-top: 1rem;
     font-size: 1.6rem;
-    color: ${(props) => props.theme["green-700"]};
+    color: ${props => props.theme['green-700']};
     display: flex;
   }
 
@@ -176,12 +176,12 @@ export const ModalContainer = styled.div`
     height: 3rem;
     margin-right: 1rem;
     border-radius: 4px;
-    background-color: ${(props) => props.theme["green-500"]};
-    color: ${(props) => props.theme.white};
+    background-color: ${props => props.theme['green-500']};
+    color: ${props => props.theme.white};
   }
 
   form > div input {
-    border: 1px solid ${(props) => props.theme["gray-300"]};
+    border: 1px solid ${props => props.theme['gray-300']};
     width: 100%;
     padding: 1rem;
     border-radius: 0.5rem;

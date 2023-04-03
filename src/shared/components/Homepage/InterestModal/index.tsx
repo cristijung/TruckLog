@@ -1,9 +1,9 @@
-import Modal from "react-modal";
-import { ModalContainer } from "../../User/Modals/styles";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { Button } from "../../Button";
-import interestFormSchema from "../../../schemas/interestSchema";
+import Modal from 'react-modal';
+import { ModalContainer } from '../../User/Modals/styles';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { Button } from '../../Button';
+import interestFormSchema from '../../../schemas/interestSchema';
 
 interface IInterestModalProps {
   isOpen: boolean;
@@ -55,7 +55,7 @@ export default function InterestModal({
                 id="name"
                 type="text"
                 placeholder="Digite aqui seu nome"
-                {...register("name")}
+                {...register('name')}
               />
 
               <div className="error-yup">
@@ -71,7 +71,7 @@ export default function InterestModal({
                 id="email"
                 type="email"
                 placeholder="Digite aqui seu e-mail"
-                {...register("email")}
+                {...register('email')}
               />
               <div className="error-yup">
                 {errors.email ? <>*{errors.email?.message}</> : null}

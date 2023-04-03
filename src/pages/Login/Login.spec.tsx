@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Login } from "./index";
 import { vi, describe, it } from "vitest";
@@ -46,10 +46,10 @@ describe("Login", () => {
   //   const loginInput = screen.getByPlaceholderText("login");
   //   const passwordInput = screen.getByPlaceholderText("senha");
   //   const submitButton = screen.getByText("Entrar");
-
-  //   userEvent.type(loginInput, "user");
-  //   userEvent.type(passwordInput, "password");
-  //   userEvent.click(submitButton);
+    
+  //   fireEvent.change(loginInput, { target: { value: "John Doe" } });
+  //   fireEvent.change(passwordInput, { target: { value: "jhon123" } });
+  //   fireEvent.click(submitButton);
 
   //   console.log(authLoginMock);
 
