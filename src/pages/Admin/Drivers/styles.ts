@@ -92,12 +92,12 @@ export const RolesContainer = styled.main`
       padding: 0.5rem;
       border-radius: 0.5rem;
       color: ${(props) => props.theme.white};
-      background-color: ${(props) => props.theme.status.warning};
+      background-color: ${(props) => props.theme.status?.warning || "#cbb944"};
       cursor: pointer;
     }
 
     .delete-icon {
-      background-color: ${(props) => props.theme.status.error};
+      background-color: ${(props) => props.theme.status?.error || "#e74c3c"};
     }
   }
 
@@ -142,11 +142,11 @@ export const RolesContainer = styled.main`
     }
 
     div.inativo {
-      color: ${(props) => props.theme.status.error};
+      color: ${(props) => props.theme.status?.error || "#e74c3c"};
     }
 
     div.ativo {
-      color: ${(props) => props.theme.status.success};
+      color: ${(props) => props.theme.status?.success || "#4BB543"};
     }
   }
 

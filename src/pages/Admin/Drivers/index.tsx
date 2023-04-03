@@ -94,6 +94,7 @@ export const Roles: React.FC = () => {
                   return driver;
                 }
               })
+              .reverse()
               .sort((a, b) => {
                 if (a.status === "ATIVO" && b.status !== "ATIVO") {
                   return -1; // "a" vem primeiro que "b"
