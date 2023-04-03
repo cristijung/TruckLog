@@ -1,18 +1,16 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm, FieldValues } from "react-hook-form";
+import InputMask from "react-input-mask";
 import {
   useEditDriversMutation,
   useGetDriversQuery,
 } from "../../../../../redux/features/role/roleSlice";
 import { useState } from "react";
-
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../../../Button";
-
-interface IEditDriver {
-  nome: string;
-  senha: string;
-}
+import { toast } from "react-toastify";
+import { editDriverModal } from "../../../../schemas/driverSchemas";
 
 interface IEditDriverModalProps {
   isOpen: boolean;
@@ -25,7 +23,12 @@ export function EditDriverModal({
   onRequestClose,
   idUsuario,
 }: IEditDriverModalProps) {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(editDriverModal) });
   const [editDriver] = useEditDriversMutation();
   const { refetch } = useGetDriversQuery(0);
   return (
@@ -51,10 +54,25 @@ export function EditDriverModal({
               nome: data.nome,
               senha: data.senha,
               email: data.email,
-              documento: data.documento,
+              documento: data.documento.replace(/[^0-9]/g, ""),
+            }).then((response: any) => {
+              if (response.error) {
+                response.error.data.errors.map((err: string, i: number) => {
+                  if (i < err.length) {
+                    console.log("entrou");
+                    return toast.error("Ocorreu um erro:" + err);
+                  }
+                });
+              } else {
+                refetch();
+                toast.success("Motorista editado com sucesso!");
+                onRequestClose();
+                reset();
+                reset({
+                  documento: "",
+                });
+              }
             });
-            refetch();
-            onRequestClose();
           })}
         >
           <label htmlFor="name">Nome</label>
@@ -64,22 +82,43 @@ export function EditDriverModal({
             placeholder="Nome"
             {...register("nome")}
           />
+          <div className="error-yup">
+            {errors.nome ? <span>{errors?.nome.message}</span> : ""}
+          </div>
+
           <label htmlFor="password">Senha</label>
           <input
             id="senha"
             type="password"
             placeholder="Senha"
             {...register("senha")}
-          />{" "}
+          />
+          <div className="error-yup">
+            {errors.senha ? <span>{errors?.senha.message}</span> : ""}
+          </div>
+
           <label htmlFor="email">Email</label>
-          <input id="email" type="text" {...register("email")} />
-          <label htmlFor="document">Documento</label>
           <input
+            id="email"
+            type="text"
+            {...register("email")}
+            placeholder="Email"
+          />
+          <div className="error-yup">
+            {errors.email ? <span>{errors?.email.message}</span> : ""}
+          </div>
+          <label htmlFor="document">Documento</label>
+          <InputMask
+            defaultValue=""
+            mask="999.999.999-99"
             id="documento"
             type="text"
-            maxLength={11}
+            placeholder="CNH ou CPF"
             {...register("documento")}
           />
+          <div className="error-yup">
+            {errors.documento ? <span> {errors?.documento.message}</span> : ""}
+          </div>
           <Button type="submit">Editar</Button>
         </form>
       </ModalContainer>
