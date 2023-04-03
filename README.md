@@ -43,7 +43,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## Arquitetura do projeto
 
 <p align="center">
-  <img alt="imagem do site pronto" src="./public/pastes.png">
+  <img alt="imagem do site pronto" src="./public/Pastes.png">
 </p>
 
 - Shared
@@ -96,4 +96,4 @@ Esse projeto está sob a licença MIT.
 
 ---
 
-Made with 💚 by [Guilherme](https://github.com/Viilih), [Leonardo](https://github.com/leovscn), [Rafael](https://github.com/RafaelR4mos), [Miguel](https://github.com/MiguelZK), [Henrique](https://github.com/miranda-henrique), Kellvin, [Marcklen](https://github.com/Marcklen), [Lucas](https://github.com/lluuccaass88/), [Mariana](https://github.com/marimaccos) [Cris](https://github.com/cristijung)
+Made with 💚 by [Guilherme](https://github.com/Viilih), [Leonardo](https://github.com/leovscn), [Luan](https://github.com/limaluan), [Rafael](https://github.com/RafaelR4mos), [Vinicius](https://github.com/viniciusbq), [Miguel](https://github.com/MiguelZK), [Henrique](https://github.com/miranda-henrique), [Kellvin](https://github.com/KellvinCorreia), [Marcklen](https://github.com/Marcklen), [Lucas](https://github.com/lluuccaass88/), [Mariana](https://github.com/marimaccos) e [Cris](https://github.com/cristijung)
