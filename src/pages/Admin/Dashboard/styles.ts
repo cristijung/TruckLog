@@ -85,19 +85,17 @@ export const UsersContainer = styled.main`
     .chart-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 2rem;
-        justify-content: space-between;
+        gap: 2.9rem;
         align-items: center;
-        height: 100%;
+        height: fit-content;
         width: 100%;
-        max-height: 480px;
 
         canvas {
             border-radius: 8px;
             padding: 1rem;
             background-color: ${(props) => props.theme.background};
-            width: 100%;
-            height: 100%;
+            max-width: 49.9%;
+            max-height: 550px;
         }
     }
     @media (max-width: 1900px) {
@@ -128,8 +126,11 @@ export const UsersContainer = styled.main`
             align-items: center;
             justify-content: center;
             margin-bottom: 3rem;
+            width: 100%;
+            flex-grow: 1;
 
             canvas {
+                max-width: 100%;
                 max-height: 500px;
             }
         }
@@ -149,6 +150,7 @@ export const UsersContainer = styled.main`
             gap: 1rem;
 
             .card-data {
+                height: 100%;
                 padding: 1rem;
             }
         }

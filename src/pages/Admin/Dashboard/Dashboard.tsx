@@ -6,7 +6,7 @@ import { useGetTruckQuery } from "../../../redux/features/truck/truckSlice";
 import { useGetTripsQuery } from "../../../redux/features/trip/tripSlice";
 import { useGetDriversQuery } from "../../../redux/features/role/roleSlice";
 import { FlagBanner, GasPump, Users, Truck } from "@phosphor-icons/react";
-import { BarChart } from "../../../shared/components/User/BarChart";
+import { PolarAreaChart } from "../../../shared/components/User/PolarChart";
 import { PieChart } from "../../../shared/components/User/PieChart";
 export const Dashboard = () => {
     const { data: loggedUser } = useGetLoggedUserQuery();
@@ -21,7 +21,10 @@ export const Dashboard = () => {
     }).length;
     const caminhoesCadastrados = trucks?.length;
     const caminhoesDisponiveis = trucks?.filter((caminhao) => {
-        return caminhao.status === "ATIVO";
+        return (
+            caminhao.status === "ATIVO" &&
+            caminhao.statusCaminhao === "ESTACIONADO"
+        );
     }).length;
 
     const viagensCadastradas = trips?.length;
@@ -109,7 +112,7 @@ export const Dashboard = () => {
                         </div>
                     </div>
                     <div className="chart-container">
-                        <BarChart />
+                        <PolarAreaChart />
                         <PieChart />
                     </div>
                 </div>

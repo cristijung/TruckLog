@@ -54,11 +54,8 @@ export function PieChart() {
             {
                 label: "quantidade de motoristas",
                 data: [motoristasDisponiveis, motoristasIndisponiveis],
-                backgroundColor: [
-                    "rgb(75, 181, 67, 0.6)",
-                    "rgb(231, 76, 60, 0.6)",
-                ],
-                borderColor: ["#4BB543", "#e74c3c"],
+                backgroundColor: ["#3cbd96", "#204945"],
+                borderColor: ["#116655", "#132b28"],
                 borderWidth: 1,
             },
         ],
