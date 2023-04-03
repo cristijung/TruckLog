@@ -102,8 +102,18 @@ export const Viagens = () => {
                                     key={trip.idViagem}
                                 >
                                     <p>{trip.descricao}</p>
-                                    <p>{trip.dataInicio}</p>
-                                    <p>{trip.dataFim}</p>
+                                    <p>
+                                        {trip.dataInicio.replace(
+                                            /^(\d{4})-(\d{2})-(\d{2})$/,
+                                            "$3/$2/$1"
+                                        )}
+                                    </p>
+                                    <p>
+                                        {trip.dataFim.replace(
+                                            /^(\d{4})-(\d{2})-(\d{2})$/,
+                                            "$3/$2/$1"
+                                        )}
+                                    </p>
                                     <p
                                         className={
                                             trip.statusViagem === "FINALIZADA"

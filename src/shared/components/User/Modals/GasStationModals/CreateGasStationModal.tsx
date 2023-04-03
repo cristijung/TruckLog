@@ -55,7 +55,6 @@ export function CreateGasStationModal({
                                     }
                                 );
                             } else {
-                                console.log(response);
                                 reset();
                                 refetch();
                                 toast.success("Posto criado com sucesso!");
