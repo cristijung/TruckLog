@@ -18,9 +18,9 @@ export const ButtonContainer = styled.button<IButtonProps>`
 
   background-color: ${(props) =>
     props.bgColor === "error"
-      ? props.theme.status.error
+      ? props.theme.status?.error
       : props.bgColor === "warning"
-      ? props.theme.status.warning
+      ? props.theme.status?.warning
       : props.bgColor === "gray"
       ? props.theme["gray-300"]
       : ""};

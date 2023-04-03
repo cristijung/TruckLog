@@ -120,7 +120,7 @@ export const LoginContainer = styled.div`
     }
 
     & .error {
-      color: ${(props) => props.theme.status.error};
+      color: ${(props) => props.theme.status?.error || "#e74c3c"};
       font-weight: 700;
       font-size: 1.2rem;
       visibility: hidden;
@@ -150,7 +150,7 @@ export const LoginContainer = styled.div`
     border: 2px solid rgba(0, 0, 0, 0);
 
     &.outlined-error {
-      border: 2px solid ${(props) => props.theme.status.error};
+      border: 2px solid ${(props) => props.theme.status?.error || "#e74c3c"};
       animation: shake 400ms;
 
       @keyframes shake {

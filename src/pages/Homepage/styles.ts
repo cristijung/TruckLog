@@ -281,7 +281,7 @@ export const LandingPageContainer = styled.div`
   }
 
   .error-yup {
-    color: ${(props) => props.theme.status["error"]};
+    color: ${(props) => props.theme.status?.error || "#e74c3c"};
   }
 
   form label,

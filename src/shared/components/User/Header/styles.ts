@@ -8,6 +8,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   border-bottom: 1px solid ${(props) => props.theme["gray-100"]};
   box-shadow: 2px 0 3px rgba(0, 0, 0, 0.1);
+  padding: 0 4rem;
 
   gap: 0.5rem;
   .header-icon {
@@ -20,7 +21,6 @@ export const HeaderContainer = styled.header`
   }
 
   .logout-container {
-    margin-right: 2rem;
 
     button {
       background-color: transparent;
@@ -41,7 +41,6 @@ export const HeaderContainer = styled.header`
 
   i {
     font-size: 2rem;
-    margin-left: 2rem;
     padding: 1rem;
     border-radius: 90rem;
     cursor: pointer;
