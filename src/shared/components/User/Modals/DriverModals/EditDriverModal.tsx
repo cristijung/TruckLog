@@ -1,13 +1,14 @@
-import Modal from "react-modal";
-import { ModalContainer } from "../styles";
-import { useForm, FieldValues } from "react-hook-form";
+import Modal from 'react-modal';
+import { ModalContainer } from '../styles';
+import { useForm, FieldValues } from 'react-hook-form';
 import {
   useEditDriversMutation,
   useGetDriversQuery,
-} from "../../../../../redux/features/role/roleSlice";
-import { useState } from "react";
+} from '../../../../../redux/features/role/roleSlice';
+import { yupResolver } from '@hookform/resolvers/yup';
+import driverSchema from '../../../../schemas/driverSchema';
 
-import { Button } from "../../../Button";
+import { Button } from '../../../Button';
 
 interface IEditDriver {
   nome: string;
@@ -25,7 +26,13 @@ export function EditDriverModal({
   onRequestClose,
   idUsuario,
 }: IEditDriverModalProps) {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(driverSchema),
+  });
   const [editDriver] = useEditDriversMutation();
   const { refetch } = useGetDriversQuery(0);
   return (
@@ -62,24 +69,36 @@ export function EditDriverModal({
             id="nome"
             type="text"
             placeholder="Nome"
-            {...register("nome")}
+            {...register('nome')}
           />
+          <div className="error-yup">
+            {errors.nome ? <>*{errors.nome?.message}</> : null}
+          </div>
           <label htmlFor="password">Senha</label>
           <input
             id="senha"
             type="password"
             placeholder="Senha"
-            {...register("senha")}
-          />{" "}
+            {...register('senha')}
+          />
+          <div className="error-yup">
+            {errors.senha ? <>*{errors.senha?.message}</> : null}
+          </div>
           <label htmlFor="email">Email</label>
-          <input id="email" type="text" {...register("email")} />
+          <input id="email" type="text" {...register('email')} />
+          <div className="error-yup">
+            {errors.email ? <>*{errors.email?.message}</> : null}
+          </div>
           <label htmlFor="document">Documento</label>
           <input
             id="documento"
             type="text"
             maxLength={11}
-            {...register("documento")}
+            {...register('documento')}
           />
+          <div className="error-yup">
+            {errors.documento ? <>*{errors.documento?.message}</> : null}
+          </div>
           <Button type="submit">Editar</Button>
         </form>
       </ModalContainer>
