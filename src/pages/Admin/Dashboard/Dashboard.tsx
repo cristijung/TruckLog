@@ -95,7 +95,7 @@ export const Dashboard = () => {
                             <span>
                                 {caminhoesDisponiveis
                                     ? `${caminhoesDisponiveis} disponíveis para viagens`
-                                    : null}
+                                    : `0 disponíveis para viagens`}
                             </span>
                         </div>
                         <div className="card-data">
