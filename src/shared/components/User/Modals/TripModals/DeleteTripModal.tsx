@@ -2,6 +2,7 @@ import Modal from 'react-modal';
 import { useRoutes } from '../../../../hooks';
 import { Button } from '../../../Button';
 import { ModalContainer } from '../styles';
+import { toast } from 'react-toastify';
 import {
 	useEditTripsMutation,
 	useGetTripsQuery,
@@ -45,6 +46,7 @@ export function DeleteTripModal({
 								onClick={async () => {
 									const isOk = await deleteTrip({ idMotorista, idViagem });
 									isOk && onRequestClose();
+									toast.success('Viagem finalizada com sucesso!');
 									refetch();
 								}}
 							>
