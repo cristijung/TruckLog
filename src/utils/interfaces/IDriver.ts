@@ -34,7 +34,6 @@ export interface DriverPagination {
 	pagina: number;
 	tamanho: number;
 }
-
 export interface IDriveByStatus {
 	totalElementos: number;
 	quantidadePaginas: number;
@@ -42,9 +41,7 @@ export interface IDriveByStatus {
 	tamanho: number;
 	elementos: [];
 }
-
 export interface RoleResponse {
-	filter(arg0: (driver: IDriver) => IDriver | undefined): unknown;
 	map(
 		arg0: (driver: import('./IDriver').IDriver) => JSX.Element
 	): import('react').ReactNode;

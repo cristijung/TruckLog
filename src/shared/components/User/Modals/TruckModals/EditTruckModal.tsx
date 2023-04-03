@@ -8,6 +8,9 @@ import {
   useGetTruckQuery,
 } from '../../../../../redux/features/truck/truckSlice';
 import { ICaminhaoEdit } from '../../../../../utils/interfaces/ITruckAPI';
+import { yupResolver } from '@hookform/resolvers/yup';
+import truckSchema from '../../../../schemas/truckSchema';
+import { toast } from 'react-toastify';
 
 interface IEditTruckModalProps {
   isOpen: boolean;
@@ -15,17 +18,19 @@ interface IEditTruckModalProps {
   truckId: number;
 }
 
-interface IUseFormProps {
-  nivelCombustivel: number;
-  gas: number;
-}
-
 export function EditTruckModal({
   isOpen,
   onRequestClose,
   truckId,
 }: IEditTruckModalProps) {
-  const { register, handleSubmit, setValue } = useForm<ICaminhaoEdit>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ICaminhaoEdit>({
+    resolver: yupResolver(truckSchema),
+  });
   const [editTruck] = useEditTruckMutation();
   const { refetch } = useGetTruckQuery();
 
@@ -43,10 +48,25 @@ export function EditTruckModal({
         <form
           className="form-container"
           onSubmit={handleSubmit((data: ICaminhaoEdit) => {
-            return editTruck({
+            editTruck({
               idCaminhao: truckId,
               gas: Number(data.gas),
               nivelCombustivel: data.nivelCombustivel,
+            }).then((response: any) => {
+              if (response.error) {
+                response.error.data.errors.map((err: string, i: number) => {
+                  if (i < err.length) {
+                    console.log('entrou');
+                    return toast.error(err);
+                  }
+                });
+              } else {
+                console.log(response);
+                reset();
+                refetch();
+                toast.success('Caminhão abastecido com sucesso!');
+                onRequestClose();
+              }
             });
           })}
         >
@@ -57,8 +77,10 @@ export function EditTruckModal({
             placeholder="Digite a quantidade a abastecer"
             {...register('gas')}
           />
+          <div className="error-yup">
+            {errors.gas ? <>*{errors.gas?.message}</> : null}
+          </div>
           <Button type="submit">Abastecer</Button>
-          
         </form>
       </ModalContainer>
     </Modal>

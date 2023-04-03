@@ -43,7 +43,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
 			}),
 		}),
 
-		deleteTruck: build.mutation<string, string>({
+		deleteTruck: build.mutation<number, number>({
 			query: idCaminhao => ({
 				url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/caminhao?idCaminhao=${idCaminhao}`,
 				method: 'DELETE',

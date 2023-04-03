@@ -84,7 +84,7 @@ export function CreateTripModal({
 								getTrips();
 								getDrivers();
 								getTrucks();
-								toast.success('Posto criado com sucesso!');
+								toast.success('Viagem criada com sucesso!');
 								onRequestClose();
 							}
 						})

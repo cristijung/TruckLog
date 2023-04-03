@@ -48,6 +48,7 @@ export function DeleteRouteModal({
                     console.log(payload);
                     refetch();
                     onRequestClose();
+                    toast.success('Rota removida com sucesso!');
                   });
               }}
             >

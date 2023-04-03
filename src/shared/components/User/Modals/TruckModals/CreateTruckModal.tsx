@@ -7,6 +7,9 @@ import {
 	useAddTruckMutation,
 	useGetTruckQuery,
 } from '../../../../../redux/features/truck/truckSlice';
+import { yupResolver } from '@hookform/resolvers/yup';
+import truckSchema from '../../../../schemas/truckSchema';
+import { toast } from 'react-toastify';
 
 interface ICreateTruckModalProps {
 	isOpen: boolean;
@@ -19,7 +22,14 @@ export function CreateTruckModal({
 	isOpen,
 	onRequestClose,
 }: ICreateTruckModalProps) {
-	const { register, handleSubmit } = useForm<IFieldValues>();
+	const {
+		formState: { errors },
+		register,
+		handleSubmit,
+		reset,
+	} = useForm({
+		resolver: yupResolver(truckSchema),
+	});
 	const { refetch } = useGetTruckQuery();
 	const [addTruck] = useAddTruckMutation();
 	return (
@@ -40,9 +50,22 @@ export function CreateTruckModal({
 							modelo: data.modelo,
 							nivelCombustivel: data.nivelCombustivel,
 							placa: data.placa,
+						}).then((response: any) => {
+							if (response.error) {
+								response.error.data.errors.map((err: string, i: number) => {
+									if (i < err.length) {
+										console.log('entrou');
+										return toast.error(err);
+									}
+								});
+							} else {
+								console.log(response);
+								reset();
+								refetch();
+								toast.success('Caminhão cadastrado com sucesso!');
+								onRequestClose();
+							}
 						});
-						refetch();
-						onRequestClose();
 					})}
 				>
 					<label htmlFor="modelo">Modelo</label>
@@ -52,6 +75,9 @@ export function CreateTruckModal({
 						placeholder="Digite o nome do modelo"
 						{...register('modelo')}
 					/>
+					<div className="error-yup">
+						{errors.modelo ? <>*{errors.modelo?.message}</> : null}
+					</div>
 					<label htmlFor="placa">Placa</label>
 					<input
 						id="placa"
@@ -59,6 +85,9 @@ export function CreateTruckModal({
 						placeholder="Digite o número da Placa"
 						{...register('placa')}
 					/>
+					<div className="error-yup">
+						{errors.placa ? <>*{errors.placa?.message}</> : null}
+					</div>
 					<label htmlFor="nivelCombustivel">Combustível</label>
 					<input
 						id="nivelCombustivel"
@@ -66,6 +95,11 @@ export function CreateTruckModal({
 						placeholder="Digite nível de Combustível"
 						{...register('nivelCombustivel')}
 					/>
+					<div className="error-yup">
+						{errors.nivelCombustivel ? (
+							<>*{errors.nivelCombustivel?.message}</>
+						) : null}
+					</div>
 					<Button type="submit">Cadastrar</Button>
 				</form>
 			</ModalContainer>
