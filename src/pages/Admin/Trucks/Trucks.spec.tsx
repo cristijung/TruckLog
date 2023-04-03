@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { Caminhoes } from ".";
 import { vi, it, expect } from "vitest";
 
-vi.mock("../../../shared/hooks/useTrucks", () => ({
-  useTrucks: vi.fn(() => ({
+vi.mock("../../../redux/features/truck/truckSlice", () => ({
+  useGetTruckQuery: vi.fn(() => ({
     trucks: [
       {
         idCaminhao: 1,
