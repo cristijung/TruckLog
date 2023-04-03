@@ -1,16 +1,18 @@
-import Modal from "react-modal";
-import { ModalContainer } from "../styles";
-import { useForm, FieldValues } from "react-hook-form";
+import Modal from 'react-modal';
+import { ModalContainer } from '../styles';
+import { useForm, FieldValues } from 'react-hook-form';
 import {
   IDriver,
   INewUserFromDriver,
-} from "../../../../../utils/interfaces/IDriver";
+} from '../../../../../utils/interfaces/IDriver';
 import {
   useCreateDriverMutation,
   useGetDriversQuery,
-} from "../../../../../redux/features/role/roleSlice";
+} from '../../../../../redux/features/role/roleSlice';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Button } from "../../../Button";
+import { Button } from '../../../Button';
+import driverSchema from '../../../../schemas/driverSchema';
 
 interface ICreateEntityModalPropsDriver {
   isOpen: boolean;
@@ -21,7 +23,13 @@ export function CreateDriverModal({
   isOpen,
   onRequestClose,
 }: ICreateEntityModalPropsDriver) {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(driverSchema),
+  });
   const [createDriver] = useCreateDriverMutation();
   const { refetch } = useGetDriversQuery(0);
 
@@ -45,7 +53,7 @@ export function CreateDriverModal({
               senha: data.senha,
               documento: data.documento,
               email: data.email,
-              nomeCargo: "ROLE_MOTORISTA",
+              nomeCargo: 'ROLE_MOTORISTA',
             };
 
             createDriver(newUser);
@@ -58,32 +66,49 @@ export function CreateDriverModal({
             id="nome"
             type="text"
             placeholder="Nome"
-            {...register("nome")}
+            {...register('nome')}
           />
+
+          <div className="error-yup">
+            {errors.nome ? <>*{errors.nome?.message}</> : null}
+          </div>
           <label htmlFor="user">Usuário</label>
           <input
             id="usuario"
             type="text"
             placeholder="Usuário"
-            {...register("usuario")}
+            {...register('usuario')}
           />
+          <div className="error-yup">
+            {errors.usuario ? <>*{errors.usuario?.message}</> : null}
+          </div>
           <label htmlFor="password">Senha</label>
           <input
             id="senha"
             type="password"
             placeholder="Senha"
-            {...register("senha")}
+            {...register('senha')}
           />
+          <div className="error-yup">
+            {errors.senha ? <>*{errors.senha?.message}</> : null}
+          </div>
+
           <label htmlFor="documento">Documento</label>
           <input
             id="documento"
             type="text"
             placeholder="CNH ou CPF"
             maxLength={11}
-            {...register("documento")}
+            {...register('documento')}
           />
+          <div className="error-yup">
+            {errors.documento ? <>*{errors.documento?.message}</> : null}
+          </div>
           <label htmlFor="email">E-mail</label>
-          <input type="email" placeholder="E-mail" {...register("email")} />
+          <input type="email" placeholder="E-mail" {...register('email')} />
+          <div className="error-yup">
+            {errors.email ? <>*{errors.email?.message}</> : null}
+          </div>
           <Button type="submit">Cadastrar</Button>
         </form>
       </ModalContainer>

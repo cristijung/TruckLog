@@ -7,7 +7,9 @@ import {
   useAddRouteMutation,
   useGetRouteQuery,
 } from '../../../../../redux/features/route/routeSlice';
-
+import { yupResolver } from '@hookform/resolvers/yup';
+import routeSchema from '../../../../schemas/routeSchema';
+import { toast } from 'react-toastify';
 interface ICreateEntityModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -17,8 +19,14 @@ export function CreateRouteModal({
   isOpen,
   onRequestClose,
 }: ICreateEntityModalProps) {
-  const { createRoute } = useRoutes();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm({
+    resolver: yupResolver(routeSchema),
+  });
   const { refetch } = useGetRouteQuery();
 
   const [addRoute] = useAddRouteMutation();
@@ -41,10 +49,22 @@ export function CreateRouteModal({
               descricao: data.descricao,
               localPartida: data.localPartida,
               localDestino: data.localDestino,
+            }).then((response: any) => {
+              if (response.error) {
+                response.error.data.errors.map((err: string, i: number) => {
+                  if (i < err.length) {
+                    console.log('entrou');
+                    return toast.error(err);
+                  }
+                });
+              } else {
+                console.log(response);
+                reset();
+                refetch();
+                toast.success('Rota cadastrada com sucesso!');
+                onRequestClose();
+              }
             });
-
-            refetch();
-            onRequestClose();
           })}
         >
           <label htmlFor="descricao">Descrição rota</label>
@@ -54,6 +74,9 @@ export function CreateRouteModal({
             placeholder="Digite a descrição da nova rota aqui"
             {...register('descricao')}
           />
+          <div className="error-yup">
+            {errors.descricao ? <>*{errors.descricao?.message}</> : null}
+          </div>
           <label htmlFor="localPartida">Local de Partida</label>
           <input
             id="localPartida"
@@ -61,7 +84,9 @@ export function CreateRouteModal({
             placeholder="Digite o local de partida aqui"
             {...register('localPartida')}
           />
-
+          <div className="error-yup">
+            {errors.localPartida ? <>*{errors.localPartida?.message}</> : null}
+          </div>
           <label htmlFor="localPartida">Local de Destino</label>
           <input
             id="localDestino"
@@ -69,9 +94,10 @@ export function CreateRouteModal({
             placeholder="Digite o local de destino aqui"
             {...register('localDestino')}
           />
-
+          <div className="error-yup">
+            {errors.localDestino ? <>*{errors.localDestino?.message}</> : null}
+          </div>
           <Button type="submit">Cadastrar</Button>
-          
         </form>
       </ModalContainer>
     </Modal>

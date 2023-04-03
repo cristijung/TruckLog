@@ -6,6 +6,7 @@ import {
   useDeleteTruckMutation,
   useGetTruckQuery,
 } from '../../../../../redux/features/truck/truckSlice';
+import { toast } from 'react-toastify';
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -44,8 +45,9 @@ export function DeleteTruckModal({
               onClick={() => {
                 deleteTruck(idCaminhao)
                   .unwrap()
-                  .then((payload) => {
-                    console.log(payload);
+                  .then(() => {
+                    toast.success('Caminhão removido com sucesso!');
+
                     refetch();
                     onRequestClose();
                   });
