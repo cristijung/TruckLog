@@ -8,11 +8,11 @@ import {
 
 const token = localStorage.getItem("token");
 
-const apiSliceWithTag = apiSlice.enhanceEndpoints({
-    addTagTypes: ["route"],
-});
+// const apiSliceWithTag = apiSlice.enhanceEndpoints({
+//     addTagTypes: ["truck"],
+// });
 
-const routeSlice = apiSliceWithTag.injectEndpoints({
+const routeSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         getTruck: build.query<ICaminhao[], void>({
             query: () => ({
