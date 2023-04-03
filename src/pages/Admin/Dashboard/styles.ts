@@ -98,14 +98,19 @@ export const UsersContainer = styled.main`
             max-height: 550px;
         }
     }
-    @media (max-width: 1900px) {
+    @media (max-width: 1750px) {
         .chart-container {
             max-height: none;
-            padding-bottom: 2rem;
-        }
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem;
+            width: 100%;
+            flex-grow: 1;
 
-        canvas {
-            max-height: 500px;
+            canvas {
+                max-width: 100%;
+                max-height: 500px;
+            }
         }
     }
 
@@ -119,20 +124,6 @@ export const UsersContainer = styled.main`
             grid-template-columns: repeat(2, 1fr);
             justify-content: center;
             align-items: center;
-        }
-
-        .chart-container {
-            max-height: none;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 3rem;
-            width: 100%;
-            flex-grow: 1;
-
-            canvas {
-                max-width: 100%;
-                max-height: 500px;
-            }
         }
     }
 

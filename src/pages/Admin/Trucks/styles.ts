@@ -94,7 +94,7 @@ export const CaminhoesContainer = styled.div`
       padding: 0.5rem;
       border-radius: 0.5rem;
       color: ${(props) => props.theme.white};
-      background-color: ${(props) => props.theme.status.warning};
+      background-color: ${(props) => props.theme.status?.warning || "yellow"};
       cursor: pointer;
     }
 
@@ -103,7 +103,7 @@ export const CaminhoesContainer = styled.div`
       border-radius: 0.5rem;
       color: ${(props) => props.theme.white};
       cursor: pointer;
-      background-color: ${(props) => props.theme.status.error};
+      background-color: ${(props) => props.theme.status?.error || "red"};
     }
   }
 
@@ -130,11 +130,11 @@ export const CaminhoesContainer = styled.div`
     }
 
     div.inativo {
-      color: ${(props) => props.theme.status.error};
+      color: ${(props) => props.theme.status?.error || "red"};
     }
 
     div.ativo {
-      color: ${(props) => props.theme.status.success};
+      color: ${(props) => props.theme.status?.success || "green"};
     }
 
     .btn-container {
@@ -153,17 +153,17 @@ export const CaminhoesContainer = styled.div`
     }
 
     .error {
-      color: ${(props) => props.theme.status.error};
+      color: ${(props) => props.theme.status?.error || "red"};
       /* filter: brightness(0.9); */
     }
 
     .warning {
-      color: ${(props) => props.theme.status.warning};
+      color: ${(props) => props.theme.status?.warning || "yellow"};
       /* filter: brightness(0.9); */
     }
 
     .success {
-      color: ${(props) => props.theme.status.success};
+      color: ${(props) => props.theme.status?.success || "green"};
       /* filter: brightness(0.9); */
     }
   }

@@ -10,15 +10,11 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
     "@hookform/resolvers": "^3.0.0",
-    "@mui/material": "^5.11.14",
     "@phosphor-icons/react": "^2.0.6",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/react-redux": "^7.1.25",
     "chart.js": "^4.2.1",
-    "date-fns": "^2.29.3",
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",

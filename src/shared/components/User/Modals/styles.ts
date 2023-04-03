@@ -81,7 +81,7 @@ export const ModalContainer = styled.div`
   }
 
   .error-yup {
-    color: ${props => props.theme.status['error']};
+    color: ${(props) => props.theme.status?.error || "red"};
     font-size: 1.4rem;
   }
   
