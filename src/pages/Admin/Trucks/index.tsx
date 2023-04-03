@@ -132,6 +132,11 @@ export const Caminhoes = () => {
                                                             true
                                                         );
                                                     }}
+                                                    disabled={
+                                                        truck.status === "ATIVO"
+                                                            ? false
+                                                            : true
+                                                    }
                                                 >
                                                     <i
                                                         title="Abastecer"
@@ -145,6 +150,11 @@ export const Caminhoes = () => {
                                                             truck.idCaminhao,
                                                             truck.placa
                                                         )
+                                                    }
+                                                    disabled={
+                                                        truck.status === "ATIVO"
+                                                            ? false
+                                                            : true
                                                     }
                                                 >
                                                     <i
