@@ -97,14 +97,16 @@ export const Viagens = () => {
 									}
 									key={trip.idViagem}
 								>
-									<p>{trip.descricao}</p>
+									<p className="status-desc">{trip.descricao}</p>
 									<p>
+										<span className="date-desc">Inicio</span>
 										{trip.dataInicio.replace(
 											/^(\d{4})-(\d{2})-(\d{2})$/,
 											'$3/$2/$1'
 										)}
 									</p>
 									<p>
+										<span className="date-desc">Fim</span>
 										{trip.dataFim.replace(
 											/^(\d{4})-(\d{2})-(\d{2})$/,
 											'$3/$2/$1'
