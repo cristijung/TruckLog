@@ -11,7 +11,7 @@ Projeto desenvolvido através do programa vem ser da DBC Company durante o módu
 </p>
 
 <p align="center">
-  <img alt="imagem do site pronto" src="https://raw.githubusercontent.com/limaluan/trucklog/old-main/assets/full-website-photo.png">
+  <img alt="imagem do site pronto" src="./public/Homepage.png">
 </p>
 
 <p align="center">
@@ -27,9 +27,23 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - React
 - TypeScript
 - Vitest
+- Yup
 - Styled Components
 - React Router Dom
+- React Hook Form
+- React Tostify
+- React Modal
+- React Input Mask
+
+- Redux Toolkit
+- RTK Querry API
 - Phosphor Icons - CDN
+- Chart-JS
+
+## Arquitetura do projeto
+
+## Fluxo da Aplicação
+
 
 ## 💻 Projeto
 
