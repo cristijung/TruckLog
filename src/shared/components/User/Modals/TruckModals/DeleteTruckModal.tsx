@@ -1,5 +1,4 @@
 import Modal from "react-modal";
-import { useTrucks } from "../../../../hooks";
 import { Button } from "../../../Button";
 import { ModalContainer } from "../styles";
 import {

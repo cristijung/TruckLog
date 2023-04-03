@@ -1,12 +1,11 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import {
     useEditDriversMutation,
     useGetDriversQuery,
 } from "../../../../../redux/features/role/roleSlice";
-import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../../../Button";
 import { toast } from "react-toastify";
@@ -16,12 +15,14 @@ interface IEditDriverModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
     idUsuario: number;
+    nomeMotorista: string;
 }
 
 export function EditDriverModal({
     isOpen,
     onRequestClose,
     idUsuario,
+    nomeMotorista,
 }: IEditDriverModalProps) {
     const {
         register,
@@ -45,13 +46,12 @@ export function EditDriverModal({
                     className="ph ph-x-circle close-btn"
                 ></i>
                 <h2>Editar Usuario</h2>
+                <p>
+                    Você está editando: <strong>{nomeMotorista}</strong>
+                </p>
                 <form
                     className="form-container"
                     onSubmit={handleSubmit((data) => {
-                        console.log(idUsuario);
-                        console.log(data);
-                        // manter o idUsuario atual
-
                         editDriver({
                             idUsuario: idUsuario,
                             nome: data.nome,
