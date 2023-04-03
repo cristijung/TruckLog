@@ -11,6 +11,8 @@ import { RolesContainer } from "./styles";
 import { useGetDriversQuery } from "../../../redux/features/role/roleSlice";
 
 export const Roles: React.FC = () => {
+
+
     const [searchUsers, setSearchUsers] = useState("");
 
     const [isCreateByRoleModal, setIsCreateByRoleModalOpen] = useState(false);
@@ -122,9 +124,9 @@ export const Roles: React.FC = () => {
                                         }
                                         key={driver.idUsuario}
                                     >
-                                        <p>{driver.nome}</p>
+                                        <p className="nome">{driver.nome}</p>
                                         <div>
-                                            <p>{driver.documento}</p>
+                                            <p className="documento">{driver.documento}</p>
                                         </div>
 
                                         <div
@@ -206,4 +208,5 @@ export const Roles: React.FC = () => {
             />
         </RolesContainer>
     );
+
 };

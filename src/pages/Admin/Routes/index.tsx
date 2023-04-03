@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
+
 import { RotasContainer } from "./styles";
 import {
     CreateRouteModal,
     EditRouteModal,
     DeleteRouteModal,
+
 } from "../../../shared/components/User/Modals";
 import { Button } from "../../../shared/components/Button";
 import { useGetRouteQuery } from "../../../redux/features/route/routeSlice";
 
 export const Rotas = () => {
+
     const [searchRoute, setSearchRoute] = useState("");
     const [isCreateRouteModalOpen, setIsCreateRouteModalOpen] = useState(false);
     const [isEditRouteModalOpen, setIsEditRouteModalOpen] = useState(false);
 
     const [idRoute, setIdRoute] = useState(0);
     const [descriptionRoute, setDescriptionRoute] = useState("");
+
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -24,9 +28,11 @@ export const Rotas = () => {
         setDescriptionRoute(descricaoRota);
     };
 
+
     useEffect(() => {
         document.title = "Rotas | TruckLog";
     }, []);
+
 
     const handleOpenEditModal = (idRota: number, descricaoRota: string) => {
         setIsEditRouteModalOpen(true);
@@ -34,6 +40,7 @@ export const Rotas = () => {
         setDescriptionRoute(descricaoRota);
     };
     const { data } = useGetRouteQuery();
+
 
     return (
         <RotasContainer>
@@ -43,6 +50,7 @@ export const Rotas = () => {
                     <span>{" > "}</span>
                     <a className="selected">Rotas</a>
                 </div>
+
 
                 <h2 className="title-page">Rotas</h2>
                 <Button
@@ -66,6 +74,7 @@ export const Rotas = () => {
                     <p>Destino</p>
                     <p>Status</p>
                 </div>
+
 
                 <div className="gas-station-body ">
                     {data ? (
@@ -146,6 +155,7 @@ export const Rotas = () => {
                     ) : (
                         <p>Estamos carregando a página</p>
                     )}
+
                 </div>
             </main>
             <CreateRouteModal

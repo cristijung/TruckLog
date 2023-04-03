@@ -175,4 +175,19 @@ export const RolesContainer = styled.main`
     width: 2rem;
     height: 2rem;
   }
+
+
+  @media (max-width: 600px) {
+    .posto {
+      grid-template: 1fr / 1fr;
+      padding: 1rem 1rem;
+      .nome{
+        font-weight: 700;
+      }
+    }
+    .gas-station-header {
+      display: none;
+    }
+
+    
 `;
