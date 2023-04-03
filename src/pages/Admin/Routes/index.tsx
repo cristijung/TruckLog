@@ -34,7 +34,6 @@ export const Rotas = () => {
         setDescriptionRoute(descricaoRota);
     };
     const { data } = useGetRouteQuery();
-    console.log(data);
 
     return (
         <RotasContainer>

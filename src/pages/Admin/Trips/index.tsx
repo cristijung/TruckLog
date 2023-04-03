@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { useGetTripsQuery } from '../../../redux/features/trip/tripSlice';
-import { useGetGasStationQuery } from '../../../redux/features/gasStation/gasStationSlice';
 import {
 	CreateTripModal,
 	EditTripModal,
@@ -125,7 +124,6 @@ export const Viagens = () => {
 									<div className="btn-container">
 										<button
 											onClick={() => {
-												console.log(trip.idViagem, trip.idUsuario);
 												handleEditTrip(
 													trip.idViagem,
 													trip.idUsuario,
