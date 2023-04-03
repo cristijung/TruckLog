@@ -24,6 +24,15 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
 				},
 			}),
 		}),
+		getRouteByStatus: build.query<IRota[], void>({
+			query: () => ({
+				url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/rota/listar-ativas`,
+				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}),
+		}),
 		addRoute: build.mutation<IRotaCreate, IRotaCreate>({
 			query: rota => ({
 				url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/rota`,
@@ -62,6 +71,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
 
 export const {
 	useGetRouteQuery,
+	useGetRouteByStatusQuery,
 	useAddRouteMutation,
 	useEditRouteMutation,
 	useDeleteRouteMutation,
