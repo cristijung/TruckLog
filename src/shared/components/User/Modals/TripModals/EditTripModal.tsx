@@ -8,6 +8,9 @@ import { useState } from 'react';
 import { useForm, Controller, FieldValues } from 'react-hook-form';
 import { useTrucks, useRoles, useRoutes, useTrips } from '../../../../hooks';
 import { Button } from '../../../Button';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { createTripSchema } from '../../../../../shared/schemas/createTripSchema';
+import { toast } from 'react-toastify';
 import { IEditTrip } from '../../../../../utils/interfaces/ITripAPI';
 interface ICreateEntityModalProps {
 	isOpen: boolean;
@@ -24,10 +27,14 @@ export function EditTripModal({
 	idMotorista,
 	tripName,
 }: ICreateEntityModalProps) {
-	const { register, handleSubmit } = useForm();
-	const { drivers } = useRoles();
-	const { editTrip } = useTrips();
-
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(createTripSchema),
+	});
 	const [editTrips] = useEditTripsMutation();
 	const { refetch } = useGetTripsQuery();
 
@@ -40,7 +47,13 @@ export function EditTripModal({
 			ariaHideApp={false}
 		>
 			<ModalContainer>
-				<i onClick={onRequestClose} className="ph ph-x-circle close-btn"></i>
+				<i
+					onClick={() => {
+						onRequestClose();
+						reset();
+					}}
+					className="ph ph-x-circle close-btn"
+				></i>
 				<h2>Editar viagem</h2>
 				<p className="desc-modal">
 					<span>Descrição da viagem:</span> {tripName}
@@ -57,9 +70,11 @@ export function EditTripModal({
 							idMotorista,
 							idViagem,
 						}).then(() => {
+							toast.success('Viagem editada com sucesso!');
 							refetch();
+							reset();
+							onRequestClose();
 						});
-						onRequestClose();
 					})}
 				>
 					<label htmlFor="descricao">Descrição</label>
@@ -69,12 +84,20 @@ export function EditTripModal({
 						placeholder="Descrição"
 						{...register('descricao')}
 					/>
+					<div className="error-yup">
+						{errors.descricao ? <>{errors.descricao?.message}</> : null}
+					</div>
 					<label htmlFor="dataInicio">Data inicial</label>
 					<input id="dataInicio" type="date" {...register('dataInicio')} />
+					<div className="error-yup">
+						{errors.dataInicio ? <>{errors.dataInicio?.message}</> : null}
+					</div>
 
 					<label htmlFor="dataFim">Data final</label>
 					<input id="dataFim" type="date" {...register('dataFim')} />
-
+					<div className="error-yup">
+						{errors.dataFim ? <>{errors.dataFim?.message}</> : null}
+					</div>
 					<Button type="submit">Editar</Button>
 				</form>
 			</ModalContainer>

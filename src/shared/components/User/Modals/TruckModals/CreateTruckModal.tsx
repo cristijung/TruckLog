@@ -8,7 +8,7 @@ import {
     useGetTruckQuery,
 } from "../../../../../redux/features/truck/truckSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
-import schema from "../../../../schemas/truckSchema";
+import truckSchema from "../../../../schemas/truckSchema";
 import { toast } from "react-toastify";
 
 interface ICreateTruckModalProps {
@@ -26,7 +26,7 @@ export function CreateTruckModal({
         handleSubmit,
         reset,
     } = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(truckSchema),
     });
     const { refetch } = useGetTruckQuery();
     const [addTruck] = useAddTruckMutation();
@@ -63,11 +63,11 @@ export function CreateTruckModal({
                                 );
                             } else {
                                 console.log(response);
+                                reset();
                                 refetch();
                                 toast.success(
                                     "Caminhão cadastrado com sucesso!"
                                 );
-                                reset();
                                 onRequestClose();
                             }
                         });
@@ -81,7 +81,7 @@ export function CreateTruckModal({
                         {...register("modelo")}
                     />
                     <div className="error-yup">
-                        {errors.modelo ? <>*{errors.modelo.message}</> : null}
+                        {errors.modelo ? <>*{errors.modelo?.message}</> : null}
                     </div>
                     <label htmlFor="placa">Placa</label>
                     <input
@@ -91,7 +91,7 @@ export function CreateTruckModal({
                         {...register("placa")}
                     />
                     <div className="error-yup">
-                        {errors.placa ? <>*{errors.placa.message}</> : null}
+                        {errors.placa ? <>*{errors.placa?.message}</> : null}
                     </div>
                     <label htmlFor="nivelCombustivel">Combustível</label>
                     <input
@@ -102,7 +102,7 @@ export function CreateTruckModal({
                     />
                     <div className="error-yup">
                         {errors.nivelCombustivel ? (
-                            <>*{errors.nivelCombustivel.message}</>
+                            <>*{errors.nivelCombustivel?.message}</>
                         ) : null}
                     </div>
                     <Button type="submit">Cadastrar</Button>
