@@ -147,7 +147,6 @@ export const RolesContainer = styled.main`
 
     div.ativo {
       color: ${(props) => props.theme.status.success};
-      font-weight: 700;
     }
   }
 

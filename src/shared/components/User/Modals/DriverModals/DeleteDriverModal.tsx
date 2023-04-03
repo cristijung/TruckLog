@@ -7,6 +7,7 @@ import {
 import { ref } from "yup";
 
 import { Button } from "../../../Button";
+import { toast } from "react-toastify";
 
 interface ICreateEntityModalProps {
   isOpen: boolean;
@@ -45,9 +46,11 @@ export function DeleteDriverModal({
                 bgColor="error"
                 className="delete-btn"
                 onClick={() => {
-                  deleteDriver(idUsuario);
-                  refetch();
-                  onRequestClose();
+                  deleteDriver(idUsuario).then(() => {
+                    refetch();
+                    toast.success("Motorista desativado  com sucesso!");
+                    onRequestClose();
+                  });
                 }}
               >
                 Deletar
