@@ -1,9 +1,21 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
-import { useForm } from "react-hook-form";
-import { useRoles } from "../../../../hooks/useRoles";
-import { Button } from "../../../Button";
+import InputMask from "react-input-mask";
+import { useForm, FieldValues } from "react-hook-form";
+import {
+  IDriver,
+  INewUserFromDriver,
+} from "../../../../../utils/interfaces/IDriver";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  driverSlice,
+  useCreateDriverMutation,
+  useGetDriversQuery,
+} from "../../../../../redux/features/role/roleSlice";
 
+import { Button } from "../../../Button";
+import { toast } from "react-toastify";
+import { createDriverModal } from "../../../../schemas/driverSchemas";
 interface ICreateEntityModalPropsDriver {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -13,9 +25,16 @@ export function CreateDriverModal({
   isOpen,
   onRequestClose,
 }: ICreateEntityModalPropsDriver) {
-  const { createWithRole, deleteUserByRole, editUserByRole } = useRoles();
-
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createDriverModal),
+  });
+  const [createDriver] = useCreateDriverMutation();
+  const { refetch } = useGetDriversQuery(0);
 
   return (
     <Modal
@@ -26,11 +45,47 @@ export function CreateDriverModal({
       ariaHideApp={false}
     >
       <ModalContainer>
+        <i
+          onClick={() => {
+            onRequestClose(), reset();
+          }}
+          className="ph ph-x-circle close-btn"
+        ></i>
         <h2>Adicionar</h2>
         <form
           className="form-container"
           onSubmit={handleSubmit((data) => {
-            onRequestClose();
+            const newUser: INewUserFromDriver = {
+              nome: data.nome,
+              login: data.usuario,
+              senha: data.senha,
+              documento: data.documento.replace(/[^0-9]/g, ""),
+              email: data.email,
+              nomeCargo: "ROLE_MOTORISTA",
+            };
+
+            createDriver(newUser).then((response: any) => {
+              if (response.error) {
+                toast.error(
+                  "Ocorreu um erro ao criar a conta, tente outro email ou usuário "
+                );
+                response.error.data.errors.map((err: string, i: number) => {
+                  if (i < err.length) {
+                    console.log("entrou");
+                    return toast.error("Ocorreu um erro: " + err);
+                  }
+                });
+              } else {
+                console.log(response);
+                reset({
+                  documento: "",
+                });
+                reset();
+                refetch();
+                toast.success("Cadastrado com sucesso!");
+                onRequestClose();
+              }
+            });
           })}
         >
           <label htmlFor="name">Nome</label>
@@ -40,6 +95,9 @@ export function CreateDriverModal({
             placeholder="Nome"
             {...register("nome")}
           />
+          <div className="error-yup">
+            {errors.nome ? <>{errors?.nome.message}</> : ""}
+          </div>
           <label htmlFor="user">Usuário</label>
           <input
             id="usuario"
@@ -47,6 +105,9 @@ export function CreateDriverModal({
             placeholder="Usuário"
             {...register("usuario")}
           />
+          <div className="error-yup">
+            {errors.usuario ? <>{errors?.usuario.message}</> : ""}
+          </div>
           <label htmlFor="password">Senha</label>
           <input
             id="senha"
@@ -54,25 +115,29 @@ export function CreateDriverModal({
             placeholder="Senha"
             {...register("senha")}
           />
+          <div className="error-yup">
+            {errors.senha ? <>{errors?.senha.message}</> : ""}
+          </div>
           <label htmlFor="documento">Documento</label>
-          <input
+          <InputMask
+            mask="999.999.999-99"
             id="documento"
             type="text"
+            defaultValue=""
             placeholder="CNH ou CPF"
             {...register("documento")}
           />
-          <label htmlFor="idCargo"> Cargo</label>
-          <select id="idCargo" {...register("idCargo")}>
-            <option value="1">Administrador</option>
-            <option value="2">Colaborador</option>
-            <option value="3">Motorista</option>
-          </select>
+          <div className="error-yup">
+            {errors.documento ? <>{errors?.documento.message}</> : ""}
+          </div>
+
           <label htmlFor="email">E-mail</label>
           <input type="email" placeholder="E-mail" {...register("email")} />
+          <div className="error-yup">
+            {errors.email ? <>{errors?.email.message}</> : ""}
+          </div>
+
           <Button type="submit">Cadastrar</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
         </form>
       </ModalContainer>
     </Modal>

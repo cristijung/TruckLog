@@ -1,59 +1,99 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
-import { useTrucks } from "../../../../hooks";
 import { Button } from "../../../Button";
+import {
+    useEditTruckMutation,
+    useGetTruckQuery,
+} from "../../../../../redux/features/truck/truckSlice";
+import { ICaminhaoEdit } from "../../../../../utils/interfaces/ITruckAPI";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaEdit } from "../../../../schemas/truckSchema";
+import { toast } from "react-toastify";
 
 interface IEditTruckModalProps {
-  isOpen: boolean;
-  onRequestClose: () => void;
-  truckId: number;
-}
-
-interface IUseFormProps {
-  nivelCombustivel: number;
+    isOpen: boolean;
+    onRequestClose: () => void;
+    truckId: number;
+    truckName: string;
 }
 
 export function EditTruckModal({
-  isOpen,
-  onRequestClose,
-  truckId,
+    isOpen,
+    onRequestClose,
+    truckId,
+    truckName,
 }: IEditTruckModalProps) {
-  const { register, handleSubmit } = useForm<IUseFormProps>();
-  const { editTruck } = useTrucks();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<ICaminhaoEdit>({
+        resolver: yupResolver(schemaEdit),
+    });
+    const [editTruck] = useEditTruckMutation();
+    const { refetch } = useGetTruckQuery();
 
-  return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      className="modal-content"
-      overlayClassName="modal-overlay"
-      ariaHideApp={false}
-    >
-      <ModalContainer>
-        <h2>Abastecer Caminhão</h2>
-        <form
-          className="form-container"
-          onSubmit={handleSubmit(
-            async ({ nivelCombustivel }: IUseFormProps) => {
-              const response = await editTruck(truckId, nivelCombustivel);
-              return response ? onRequestClose() : null;
-            }
-          )}
+    return (
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={onRequestClose}
+            className="modal-content"
+            overlayClassName="modal-overlay"
+            ariaHideApp={false}
         >
-          <label htmlFor="nivelCombustivel">Combustível</label>
-          <input
-            id="nivelCombustivel"
-            type="number"
-            placeholder="Digite a quantidade a abastecer"
-            {...register("nivelCombustivel")}
-          />
-          <Button type="submit">Abastecer</Button>
-          <Button bgColor="gray" onClick={() => onRequestClose()}>
-            Cancelar
-          </Button>
-        </form>
-      </ModalContainer>
-    </Modal>
-  );
+            <ModalContainer>
+                <i
+                    onClick={onRequestClose}
+                    className="ph ph-x-circle close-btn"
+                ></i>
+                <h2>Abastecer Caminhão</h2>
+                <p>
+                    Você está editando: <strong>{truckName}</strong>
+                </p>
+                <form
+                    className="form-container"
+                    onSubmit={handleSubmit((data: ICaminhaoEdit) => {
+                        editTruck({
+                            idCaminhao: truckId,
+                            gas: Number(data.gas),
+                            nivelCombustivel: data.nivelCombustivel,
+                        }).then((response: any) => {
+                            if (response.error) {
+                                response.error.data.errors.map(
+                                    (err: string, i: number) => {
+                                        if (i < err.length) {
+                                            console.log("entrou");
+                                            return toast.error(err);
+                                        }
+                                    }
+                                );
+                            } else {
+                                console.log(response);
+                                reset();
+                                refetch();
+                                toast.success(
+                                    "Caminhão abastecido com sucesso!"
+                                );
+                                onRequestClose();
+                            }
+                        });
+                    })}
+                >
+                    <label htmlFor="nivelCombustivel">Combustível</label>
+                    <input
+                        id="gas"
+                        type="number"
+                        placeholder="Digite a quantidade a abastecer"
+                        {...register("gas")}
+                    />
+                    <div className="error-yup">
+                        {errors.gas ? <>*{errors.gas?.message}</> : null}
+                    </div>
+                    <Button type="submit">Abastecer</Button>
+                </form>
+            </ModalContainer>
+        </Modal>
+    );
 }

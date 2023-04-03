@@ -62,7 +62,7 @@ export const RolesContainer = styled.main`
     font-size: 1.6rem;
     position: relative;
     padding: 1.5rem 3.2rem 1.5rem 1rem;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr;
     grid-gap: 0.5rem;
     border-bottom: 1px solid ${(props) => props.theme["gray-200"]};
 
@@ -92,12 +92,12 @@ export const RolesContainer = styled.main`
       padding: 0.5rem;
       border-radius: 0.5rem;
       color: ${(props) => props.theme.white};
-      background-color: ${(props) => props.theme.status.warning};
+      background-color: ${(props) => props.theme.status?.warning || "#cbb944"};
       cursor: pointer;
     }
 
     .delete-icon {
-      background-color: ${(props) => props.theme.status.error};
+      background-color: ${(props) => props.theme.status?.error || "#e74c3c"};
     }
   }
 
@@ -111,7 +111,7 @@ export const RolesContainer = styled.main`
     font-size: 1.6rem;
     position: relative;
     padding: 1.5rem 1rem;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr;
     grid-gap: 0.5rem;
     border-bottom: 1px solid ${(props) => props.theme["gray-200"]};
 
@@ -142,11 +142,11 @@ export const RolesContainer = styled.main`
     }
 
     div.inativo {
-      color: ${(props) => props.theme.status.error};
+      color: ${(props) => props.theme.status?.error || "#e74c3c"};
     }
 
     div.ativo {
-      color: ${(props) => props.theme.status.success};
+      color: ${(props) => props.theme.status?.success || "#4BB543"};
     }
   }
 
@@ -175,4 +175,19 @@ export const RolesContainer = styled.main`
     width: 2rem;
     height: 2rem;
   }
+
+
+  @media (max-width: 600px) {
+    .posto {
+      grid-template: 1fr / 1fr;
+      padding: 1rem 1rem;
+      .nome{
+        font-weight: 700;
+      }
+    }
+    .gas-station-header {
+      display: none;
+    }
+
+    
 `;
