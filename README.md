@@ -1,7 +1,7 @@
 <h1 align="center">TruckLog App</h1>
 
 <p align="center">
-Projeto desenvolvido através do programa vem ser da DBC Company durante o módulo de HTML e CSS<br/>
+O TruckLog é uma aplicação web desenvolvida para gerenciar frotas de caminhões.<br/>
 </p>
 
 <p align="center">
@@ -14,9 +14,9 @@ Projeto desenvolvido através do programa vem ser da DBC Company durante o módu
   <img alt="imagem do site pronto" src="./public/Homepage.png">
 </p>
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://trucklog.vercel.app/" target="_blank">😁 -> Acesse o deploy do projeto!</a>
-</p>
+</p> -->
 
 <br>
 
@@ -42,22 +42,58 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## Arquitetura do projeto
 
+<p align="center">
+  <img alt="imagem do site pronto" src="./public/pastes.png">
+</p>
+
+- Shared
+
+  Pasta onde se encontra os arquivos que são compartilhados por toda a aplicação.
+
+- utils
+
+  Pasta onde se encontra as interfaces utilziadas pelo código e o link da api.
+
+- Redux
+
+  Pasta onde estão localizados todos os arquivos relacionados a redux, como: Slices de cada página, Store e o Root reducer.
+
+- Pages
+
+  Pasta onde estão localizadas as páginas que o usuário acessa:
+
+  Homepage, Login, Dashboard e páginas com informações específicas sobre Viagens, Motoristas, Rotas, Postos e Caminhões.
+
+- @Types
+
+  Local onde estão definidas configurações sobre a api e o styled-components
+
 ## Fluxo da Aplicação
 
+<p align="center">
+  <img alt="imagem do site pronto" src="./public/fluxo-app.png">
+</p>
+
+<p> Quando um usuário acessa a aplicação, ele é direcionado para a página de login. Após fazer login, o usuário pode acessar as diferentes funcionalidades da aplicação, como visualizar os caminhões, rotas, motoristas, viagens e postos da frota, adicionar novos dados, editar ou excluir entidades  existentes na aplicação.
+</p>
 
 ## 💻 Projeto
 
-O objetivo desta task era criarmos uma Landing Page baseado em um tema de uma empresa cliente da DBC.
+O objetivo desta task era desenvolvermos um sistema de controle de rotas e abastecimento com gestão de frotas, utilizando as ferramentas Redux, Redux Toolkit e RTK Query API baseado em um tema de uma empresa cliente da DBC.
 
-> Nosso tema foi: Landing Page de Sistema de controle de rotas e abastecimento com gestão de frotas.
+> Nosso tema foi: Desenvolver um Sistema de controle de rotas e abastecimento com gestão de frotas.
 
-- Pesquisa de UX Writing
-  - [Google Docs](https://docs.google.com/document/d/1ontmQ_qB8j491NnT3CsPw-lCrYg9HHDQ6SQwGpKq87M/edit)
 - Board
-  - [Trello](https://trello.com/invite/b/GgHQludT/ATTI31cc9fe907da6ac40fec6ff4af4f0437278ADC48/truckgo)
-- Design
-  - [Figma](https://www.figma.com/file/FwkYMhKGb1aMaJJGCuktUZ/TruckLog---App?node-id=0%3A1&t=YdRgavpASouSpN8x-1)
+
+  - [Trello](https://trello.com/b/DVIOkXBg/trucklog)
+
+- Análise de projeto
+  - [Figma](https://www.figma.com/file/YGQvR5HTlvNNmJT5Yb3QcP/Trucklog---Brainstorming?node-id=0-1&t=JuvPwv6e3YzH74GF-0)
 
 ## 🔘 Licença
 
 Esse projeto está sob a licença MIT.
+
+---
+
+Made with 💚 by [Guilherme](https://github.com/Viilih), [Leonardo](https://github.com/leovscn), [Rafael](https://github.com/RafaelR4mos), [Miguel](https://github.com/MiguelZK), [Henrique](https://github.com/miranda-henrique), Kellvin, [Marcklen](https://github.com/Marcklen), [Lucas](https://github.com/lluuccaass88/), [Mariana](https://github.com/marimaccos) [Cris](https://github.com/cristijung)
