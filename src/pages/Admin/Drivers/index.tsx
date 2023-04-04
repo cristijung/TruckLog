@@ -117,7 +117,12 @@ export const Roles: React.FC = () => {
                   >
                     <p className="nome">{driver.nome}</p>
                     <div>
-                      <p className="documento">{driver.documento}</p>
+                      <p className="documento">
+                        {driver.documento.replace(
+                          /^(\d{3})(\d{3})(\d{3})(\d{2})$/,
+                          "$1.$2.$3-$4"
+                        )}
+                      </p>
                     </div>
 
                     <div
