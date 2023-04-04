@@ -6,13 +6,16 @@ import {
   DeleteDriverModal,
 } from '../../../shared/components/User/Modals';
 
+
 import { IDriver } from '../../../utils/interfaces/IDriver';
 import { RolesContainer } from './styles';
 import { useGetDriversQuery } from '../../../redux/features/role/roleSlice';
 import loadingGif from '../../../assets/TruckGif.gif';
 
 export const Roles: React.FC = () => {
+
   const [searchUsers, setSearchUsers] = useState('');
+
 
   const [isCreateByRoleModal, setIsCreateByRoleModalOpen] = useState(false);
 
@@ -20,8 +23,10 @@ export const Roles: React.FC = () => {
 
   const [isDeleteByRoleModalOpen, setIsDeleteByRoleModalOpen] = useState(false);
 
+
   const [userName, setUserName] = useState('');
   const [loading, setLoading] = useState(true);
+
 
   const [idUsuario, setIdUsuario] = useState(0);
 
@@ -38,6 +43,7 @@ export const Roles: React.FC = () => {
   };
 
   useEffect(() => {
+
     document.title = 'Motoristas | TruckLog';
 
     const timeoutId = setTimeout(() => {
@@ -45,12 +51,14 @@ export const Roles: React.FC = () => {
     }, 1500);
 
     return () => clearTimeout(timeoutId);
+
   }, []);
 
   const { data } = useGetDriversQuery(0);
 
   return (
     <RolesContainer>
+
       {loading ? (
         <div
           style={{
@@ -135,7 +143,10 @@ export const Roles: React.FC = () => {
                       >
                         <p className="nome">{driver.nome}</p>
                         <div>
-                          <p className="documento">{driver.documento}</p>
+                          <p className="documento">{driver.documento.replace(
+                          /^(\d{3})(\d{3})(\d{3})(\d{2})$/,
+                          "$1.$2.$3-$4"
+                        )}</p>
                         </div>
 
                         <div
@@ -204,6 +215,7 @@ export const Roles: React.FC = () => {
           />
         </>
       )}
+
     </RolesContainer>
   );
 };
