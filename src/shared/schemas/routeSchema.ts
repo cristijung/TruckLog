@@ -4,7 +4,7 @@ const schema = yup.object().shape({
     descricao: yup
         .string()
         .required("A descrição é obrigatória")
-        .max(30, "Atingiu o limite de caracteres")
+        .max(40, "Atingiu o limite de caracteres")
         .min(3, "Digite uma descrição maior"),
     localPartida: yup
         .string()

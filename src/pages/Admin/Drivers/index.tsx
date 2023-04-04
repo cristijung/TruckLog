@@ -6,14 +6,8 @@ import {
   DeleteDriverModal,
 } from "../../../shared/components/User/Modals";
 
-import {
-  IDriver,
-  DriverPagination,
-  RoleResponse,
-} from "../../../utils/interfaces/IDriver";
+import { IDriver } from "../../../utils/interfaces/IDriver";
 import { RolesContainer } from "./styles";
-
-import { Pagination } from "@mui/material";
 import { useGetDriversQuery } from "../../../redux/features/role/roleSlice";
 
 export const Roles: React.FC = () => {
@@ -35,16 +29,17 @@ export const Roles: React.FC = () => {
     setUserName(newUserName);
   };
 
-  const handleEditByRoleModal = (idUsuario: number) => {
+  const handleEditByRoleModal = (idUsuario: number, nomeMotorista: string) => {
     setIsEditByRoleModalOpen(true);
     setIdUsuario(idUsuario);
+    setUserName(nomeMotorista);
   };
 
   useEffect(() => {
     document.title = "Motoristas | TruckLog";
   }, []);
 
-  const { data, isLoading, error } = useGetDriversQuery(0);
+  const { data } = useGetDriversQuery(0);
 
   return (
     <RolesContainer>
@@ -135,7 +130,7 @@ export const Roles: React.FC = () => {
                       <div className="btn-container">
                         <button
                           onClick={() =>
-                            handleEditByRoleModal(driver.idUsuario)
+                            handleEditByRoleModal(driver.idUsuario, driver.nome)
                           }
                           disabled={driver.status === "ATIVO" ? false : true}
                         >
@@ -173,6 +168,7 @@ export const Roles: React.FC = () => {
         isOpen={isEditByRoleModalOpen}
         onRequestClose={() => setIsEditByRoleModalOpen(false)}
         idUsuario={idUsuario}
+        nomeMotorista={userName}
       />
       <DeleteDriverModal
         isOpen={isDeleteByRoleModalOpen}

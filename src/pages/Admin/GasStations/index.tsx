@@ -39,7 +39,6 @@ export const Postos = () => {
     }, []);
 
     const { data } = useGetGasStationQuery();
-    console.log(data);
 
     return (
         <PostosContainer>

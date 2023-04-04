@@ -1,7 +1,6 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
-import { ICreateTruckDTO, useTrucks } from "../../../../hooks";
 import { Button } from "../../../Button";
 import {
     useAddTruckMutation,

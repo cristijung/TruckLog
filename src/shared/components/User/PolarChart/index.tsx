@@ -26,7 +26,6 @@ export function PolarAreaChart() {
         drivers: 0,
     });
 
-    console.log(trips);
     useEffect(() => {
         if (trips && gasStation && trucks && drivers) {
             setDataInfo({
@@ -42,7 +41,7 @@ export function PolarAreaChart() {
         labels: ["Viagens", "Postos", "Caminhões", "Motoristas"],
         datasets: [
             {
-                label: "My First Dataset",
+                label: "Dados",
                 data: [
                     dataInfo.trips,
                     dataInfo.gasStation,

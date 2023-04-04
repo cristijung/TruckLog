@@ -5,12 +5,12 @@ import {
     EditTruckModal,
     DeleteTruckModal,
 } from "../../../shared/components/User/Modals";
-import { useTrucks } from "../../../shared/hooks";
 import { CaminhoesContainer } from "./styles";
 import { useGetTruckQuery } from "../../../redux/features/truck/truckSlice";
 
 export const Caminhoes = () => {
     const [truckId, setTruckId] = useState(0);
+    const [truckName, setTruckName] = useState("");
     const [licensePlate, setlicensePlate] = useState("");
     const [searchTruck, setSearchTruck] = useState("");
 
@@ -28,141 +28,143 @@ export const Caminhoes = () => {
         document.title = "Caminhões | TruckLog";
     }, []);
     const { data } = useGetTruckQuery();
-    console.log(data);
 
     return (
-        <>
-            <CaminhoesContainer>
-                <main className="content">
-                    <div className="user-trail">
-                        <span>Meu Painel</span>
-                        <span>{" > "}</span>
-                        <a className="selected">Caminhões</a>
-                    </div>
+        <CaminhoesContainer>
+            <main className="content">
+                <div className="user-trail">
+                    <span>Meu Painel</span>
+                    <span>{" > "}</span>
+                    <a className="selected">Caminhões</a>
+                </div>
 
-                    <h2 className="title-page">Caminhões</h2>
-                    <Button
-                        onClick={() => setIsCreateTruckModalOpen(true)}
-                        className="create-button"
-                    >
-                        Cadastrar Caminhão <i className="ph ph-plus"></i>
-                    </Button>
-                    <input
-                        value={searchTruck}
-                        onChange={(e) => setSearchTruck(e.target.value)}
-                        type="text"
-                        placeholder="Procurar caminhões"
-                    />
+                <h2 className="title-page">Caminhões</h2>
+                <Button
+                    onClick={() => setIsCreateTruckModalOpen(true)}
+                    className="create-button"
+                >
+                    Cadastrar Caminhão <i className="ph ph-plus"></i>
+                </Button>
+                <input
+                    value={searchTruck}
+                    onChange={(e) => setSearchTruck(e.target.value)}
+                    type="text"
+                    placeholder="Procurar caminhões"
+                />
 
-                    <div className="trucks-header">
-                        <p>
-                            Modelo <i className="ph ph-arrow-down"></i>
-                        </p>
-                        <p>Placa</p>
-                        <p>Combustível</p>
-                        <p>Situação</p>
-                        <p>Status</p>
-                    </div>
+                <div className="trucks-header">
+                    <p>
+                        Modelo <i className="ph ph-arrow-down"></i>
+                    </p>
+                    <p>Placa</p>
+                    <p>Combustível</p>
+                    <p>Situação</p>
+                    <p>Status</p>
+                </div>
 
-                    <div className="trucks-body">
-                        {data ? (
-                            data
-                                .slice()
-                                .sort((item) => {
-                                    return item.statusCaminhao === "ESTACIONADO"
-                                        ? 1
-                                        : -1;
-                                })
-                                .sort((item) => {
-                                    return item.status === "ATIVO" ? -1 : 1;
-                                })
+                <div className="trucks-body">
+                    {data ? (
+                        data
+                            .slice()
+                            .sort((item) => {
+                                return item.statusCaminhao === "ESTACIONADO"
+                                    ? 1
+                                    : -1;
+                            })
+                            .sort((item) => {
+                                return item.status === "ATIVO" ? -1 : 1;
+                            })
 
-                                .filter((truck) =>
-                                    truck.modelo
-                                        .toLowerCase()
-                                        .includes(searchTruck.toLowerCase())
-                                )
-                                .map((truck) => (
-                                    <div
-                                        className={`truck truck-${truck.status.toLowerCase()}`}
-                                        key={truck.placa}
+                            .filter((truck) =>
+                                truck.modelo
+                                    .toLowerCase()
+                                    .includes(searchTruck.toLowerCase())
+                            )
+                            .map((truck) => (
+                                <div
+                                    className={`truck truck-${truck.status.toLowerCase()}`}
+                                    key={truck.placa}
+                                >
+                                    <p>{truck.modelo}</p>
+                                    <p>{truck.placa}</p>
+                                    <p
+                                        className={
+                                            truck.nivelCombustivel <= 20
+                                                ? "error"
+                                                : truck.nivelCombustivel <= 60
+                                                ? "warning"
+                                                : "success"
+                                        }
                                     >
-                                        <p>{truck.modelo}</p>
-                                        <p>{truck.placa}</p>
-                                        <p
-                                            className={
-                                                truck.nivelCombustivel <= 20
-                                                    ? "error"
-                                                    : truck.nivelCombustivel <=
-                                                      60
-                                                    ? "warning"
-                                                    : "success"
-                                            }
-                                        >
-                                            {truck.nivelCombustivel}%
-                                        </p>
-                                        <p
-                                            className={
-                                                truck.statusCaminhao ===
-                                                "EM_VIAGEM"
-                                                    ? "warning"
-                                                    : "success"
-                                            }
-                                        >
-                                            {truck.statusCaminhao.replace(
-                                                "_",
-                                                " "
-                                            )}
-                                        </p>
-                                        <div
-                                            className={
-                                                truck.status === "INATIVO"
-                                                    ? "error"
-                                                    : "success"
-                                            }
-                                        >
-                                            {truck.status}
-                                            <div className="btn-container">
-                                                <button
-                                                    onClick={() => {
-                                                        setTruckId(
-                                                            truck.idCaminhao
-                                                        );
-                                                        return setIsEditTruckModalOpen(
-                                                            true
-                                                        );
-                                                    }}
-                                                >
-                                                    <i
-                                                        title="Abastecer"
-                                                        className="ph ph-gas-pump"
-                                                    ></i>
-                                                </button>
+                                        {truck.nivelCombustivel}%
+                                    </p>
+                                    <p
+                                        className={
+                                            truck.statusCaminhao === "EM_VIAGEM"
+                                                ? "warning"
+                                                : "success"
+                                        }
+                                    >
+                                        {truck.statusCaminhao.replace("_", " ")}
+                                    </p>
+                                    <div
+                                        className={
+                                            truck.status === "INATIVO"
+                                                ? "error"
+                                                : "success"
+                                        }
+                                    >
+                                        {truck.status}
+                                        <div className="btn-container">
+                                            <button
+                                                onClick={() => {
+                                                    setTruckId(
+                                                        truck.idCaminhao
+                                                    );
+                                                    setTruckName(truck.modelo);
+                                                    return setIsEditTruckModalOpen(
+                                                        true
+                                                    );
+                                                }}
+                                                disabled={
+                                                    truck.status === "ATIVO"
+                                                        ? false
+                                                        : true
+                                                }
+                                            >
+                                                <i
+                                                    title="Abastecer"
+                                                    className="ph ph-gas-pump"
+                                                ></i>
+                                            </button>
 
-                                                <button
-                                                    onClick={() =>
-                                                        handleDeleteTruck(
-                                                            truck.idCaminhao,
-                                                            truck.placa
-                                                        )
-                                                    }
-                                                >
-                                                    <i
-                                                        title="Deletar"
-                                                        className="ph ph-trash delete-icon"
-                                                    ></i>
-                                                </button>
-                                            </div>
+                                            <button
+                                                onClick={() =>
+                                                    handleDeleteTruck(
+                                                        truck.idCaminhao,
+                                                        truck.placa
+                                                    )
+                                                }
+                                                disabled={
+                                                    truck.status === "ATIVO"
+                                                        ? false
+                                                        : true
+                                                }
+                                            >
+                                                <i
+                                                    title="Deletar"
+                                                    className="ph ph-trash delete-icon"
+                                                ></i>
+                                            </button>
                                         </div>
                                     </div>
-                                ))
-                        ) : (
-                            <p>Estamos carregando a página</p>
-                        )}
-                    </div>
-                </main>
-            </CaminhoesContainer>
-
+                                </div>
+                            ))
+                    ) : (
+                        <p>Estamos carregando a página</p>
+                    )}
+                </div>
+            </main>
             <CreateTruckModal
                 isOpen={isCreateTruckModalOpen}
                 onRequestClose={() => setIsCreateTruckModalOpen(false)}
@@ -171,6 +173,7 @@ export const Caminhoes = () => {
                 isOpen={isEditTruckModalOpen}
                 onRequestClose={() => setIsEditTruckModalOpen(false)}
                 truckId={truckId}
+                truckName={truckName}
             />
             <DeleteTruckModal
                 isOpen={isDeleteTruckModalOpen}
@@ -178,6 +181,6 @@ export const Caminhoes = () => {
                 idCaminhao={truckId}
                 placaCaminhao={licensePlate}
             />
-        </>
+        </CaminhoesContainer>
     );
 };
