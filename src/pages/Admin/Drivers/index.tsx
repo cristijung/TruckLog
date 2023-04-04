@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
-import { Button } from "../../../shared/components/Button";
+import { useEffect, useState } from 'react';
+import { Button } from '../../../shared/components/Button';
 import {
   CreateDriverModal,
   EditDriverModal,
   DeleteDriverModal,
-} from "../../../shared/components/User/Modals";
+} from '../../../shared/components/User/Modals';
 
-import { IDriver } from "../../../utils/interfaces/IDriver";
-import { RolesContainer } from "./styles";
-import { useGetDriversQuery } from "../../../redux/features/role/roleSlice";
+
+import { IDriver } from '../../../utils/interfaces/IDriver';
+import { RolesContainer } from './styles';
+import { useGetDriversQuery } from '../../../redux/features/role/roleSlice';
+import loadingGif from '../../../assets/TruckGif.gif';
 
 export const Roles: React.FC = () => {
-  const [searchUsers, setSearchUsers] = useState("");
+
+  const [searchUsers, setSearchUsers] = useState('');
+
 
   const [isCreateByRoleModal, setIsCreateByRoleModalOpen] = useState(false);
 
@@ -19,7 +23,10 @@ export const Roles: React.FC = () => {
 
   const [isDeleteByRoleModalOpen, setIsDeleteByRoleModalOpen] = useState(false);
 
-  const [userName, setUserName] = useState("");
+
+  const [userName, setUserName] = useState('');
+  const [loading, setLoading] = useState(true);
+
 
   const [idUsuario, setIdUsuario] = useState(0);
 
@@ -36,146 +43,179 @@ export const Roles: React.FC = () => {
   };
 
   useEffect(() => {
-    document.title = "Motoristas | TruckLog";
+
+    document.title = 'Motoristas | TruckLog';
+
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
+
   }, []);
 
   const { data } = useGetDriversQuery(0);
 
   return (
     <RolesContainer>
-      <main className="content">
-        <div className="user-trail">
-          <span>Meu Painel</span>
-          <span>{" > "}</span>
-          <a className="selected">Motoristas</a>
-        </div>
 
-        <h2 className="title-page">Motoristas</h2>
-        <Button
-          className="create-button"
-          onClick={() => setIsCreateByRoleModalOpen(true)}
+      {loading ? (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
         >
-          Cadastrar motorista <i className="ph ph-plus"></i>
-        </Button>
-        <input
-          value={searchUsers}
-          onChange={(e) => setSearchUsers(e.target.value)}
-          type="text"
-          placeholder="Procurar motoristas"
-        />
-
-        <div className="gas-station-header">
-          <p>
-            Nome <i className="ph ph-arrow-down"></i>
-          </p>
-          <p>
-            CNH/CPF <i className="ph ph-arrow-down"></i>
-          </p>
-
-          <p>
-            Status <i className="ph ph-arrow-down"></i>
-          </p>
+          <img src={loadingGif} alt="Loading..." />
         </div>
+      ) : (
+        <>
+          <main className="content">
+            <div className="user-trail">
+              <span>Meu Painel</span>
+              <span>{' > '}</span>
+              <a className="selected">Motoristas</a>
+            </div>
 
-        <div className="gas-station-body">
-          {data ? (
-            data
-              .filter((driver: IDriver) => {
-                if (
-                  driver.cargos.length == 1 &&
-                  driver.cargos[0].nome !== "ROLE_ADMIN" &&
-                  driver.nome.toLowerCase().includes(searchUsers.toLowerCase())
-                ) {
-                  return driver;
-                }
-              })
-              .reverse()
-              .sort((a, b) => {
-                if (a.status === "ATIVO" && b.status !== "ATIVO") {
-                  return -1; // "a" vem primeiro que "b"
-                } else if (a.status !== "ATIVO" && b.status === "ATIVO") {
-                  return 1; // "b" vem primeiro que "a"
-                } else {
-                  return 0; // não muda a ordem
-                }
-              })
+            <h2 className="title-page">Motoristas</h2>
+            <Button
+              className="create-button"
+              onClick={() => setIsCreateByRoleModalOpen(true)}
+            >
+              Cadastrar motorista <i className="ph ph-plus"></i>
+            </Button>
+            <input
+              value={searchUsers}
+              onChange={(e) => setSearchUsers(e.target.value)}
+              type="text"
+              placeholder="Procurar motoristas"
+            />
 
-              .map((driver: IDriver) => {
-                return (
-                  <div
-                    className={
-                      driver.status === "ATIVO"
-                        ? "posto ativo"
-                        : "posto inativo"
+            <div className="gas-station-header">
+              <p>
+                Nome <i className="ph ph-arrow-down"></i>
+              </p>
+              <p>
+                CNH/CPF <i className="ph ph-arrow-down"></i>
+              </p>
+
+              <p>
+                Status <i className="ph ph-arrow-down"></i>
+              </p>
+            </div>
+
+            <div className="gas-station-body">
+              {data ? (
+                data
+                  .filter((driver: IDriver) => {
+                    if (
+                      driver.cargos.length == 1 &&
+                      driver.cargos[0].nome !== 'ROLE_ADMIN' &&
+                      driver.nome
+                        .toLowerCase()
+                        .includes(searchUsers.toLowerCase())
+                    ) {
+                      return driver;
                     }
-                    key={driver.idUsuario}
-                  >
-                    <p className="nome">{driver.nome}</p>
-                    <div>
-                      <p className="documento">
-                        {driver.documento.replace(
+                  })
+                  .reverse()
+                  .sort((a, b) => {
+                    if (a.status === 'ATIVO' && b.status !== 'ATIVO') {
+                      return -1; // "a" vem primeiro que "b"
+                    } else if (a.status !== 'ATIVO' && b.status === 'ATIVO') {
+                      return 1; // "b" vem primeiro que "a"
+                    } else {
+                      return 0; // não muda a ordem
+                    }
+                  })
+
+                  .map((driver: IDriver) => {
+                    return (
+                      <div
+                        className={
+                          driver.status === 'ATIVO'
+                            ? 'posto ativo'
+                            : 'posto inativo'
+                        }
+                        key={driver.idUsuario}
+                      >
+                        <p className="nome">{driver.nome}</p>
+                        <div>
+                          <p className="documento">{driver.documento.replace(
                           /^(\d{3})(\d{3})(\d{3})(\d{2})$/,
                           "$1.$2.$3-$4"
-                        )}
-                      </p>
-                    </div>
+                        )}</p>
+                        </div>
 
-                    <div
-                      className={
-                        driver.status === "ATIVO" ? "ativo" : "inativo"
-                      }
-                    >
-                      {driver.status}
-
-                      <div className="btn-container">
-                        <button
-                          onClick={() =>
-                            handleEditByRoleModal(driver.idUsuario, driver.nome)
+                        <div
+                          className={
+                            driver.status === 'ATIVO' ? 'ativo' : 'inativo'
                           }
-                          disabled={driver.status === "ATIVO" ? false : true}
                         >
-                          <i title="Editar Posto" className="ph ph-pencil"></i>
-                        </button>
+                          {driver.status}
 
-                        <button
-                          onClick={() =>
-                            handleDeleteModal(driver.idUsuario, driver.nome)
-                          }
-                          disabled={driver.status === "ATIVO" ? false : true}
-                        >
-                          <i
-                            title="Deletar Posto"
-                            className="ph ph-trash delete-icon"
-                          ></i>
-                        </button>
+                          <div className="btn-container">
+                            <button
+                              onClick={() =>
+                                handleEditByRoleModal(
+                                  driver.idUsuario,
+                                  driver.nome
+                                )
+                              }
+                              disabled={
+                                driver.status === 'ATIVO' ? false : true
+                              }
+                            >
+                              <i
+                                title="Editar Posto"
+                                className="ph ph-pencil"
+                              ></i>
+                            </button>
+
+                            <button
+                              onClick={() =>
+                                handleDeleteModal(driver.idUsuario, driver.nome)
+                              }
+                              disabled={
+                                driver.status === 'ATIVO' ? false : true
+                              }
+                            >
+                              <i
+                                title="Deletar Posto"
+                                className="ph ph-trash delete-icon"
+                              ></i>
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })
-          ) : (
-            <p>Nenhum motorista encontrado</p>
-          )}
-        </div>
-      </main>
+                    );
+                  })
+              ) : (
+                <p>Nenhum motorista encontrado</p>
+              )}
+            </div>
+          </main>
+          <CreateDriverModal
+            isOpen={isCreateByRoleModal}
+            onRequestClose={() => setIsCreateByRoleModalOpen(false)}
+          />
+          <EditDriverModal
+            isOpen={isEditByRoleModalOpen}
+            onRequestClose={() => setIsEditByRoleModalOpen(false)}
+            idUsuario={idUsuario}
+            nomeMotorista={userName}
+          />
+          <DeleteDriverModal
+            isOpen={isDeleteByRoleModalOpen}
+            onRequestClose={() => setIsDeleteByRoleModalOpen(false)}
+            idUsuario={idUsuario}
+            nomeUsuario={userName}
+          />
+        </>
+      )}
 
-      <CreateDriverModal
-        isOpen={isCreateByRoleModal}
-        onRequestClose={() => setIsCreateByRoleModalOpen(false)}
-      />
-
-      <EditDriverModal
-        isOpen={isEditByRoleModalOpen}
-        onRequestClose={() => setIsEditByRoleModalOpen(false)}
-        idUsuario={idUsuario}
-        nomeMotorista={userName}
-      />
-      <DeleteDriverModal
-        isOpen={isDeleteByRoleModalOpen}
-        onRequestClose={() => setIsDeleteByRoleModalOpen(false)}
-        idUsuario={idUsuario}
-        nomeUsuario={userName}
-      />
     </RolesContainer>
   );
 };
