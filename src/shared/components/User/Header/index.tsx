@@ -5,34 +5,34 @@ import { Dropdown } from "../../Dropdown";
 import { useGetLoggedUserQuery } from "../../../../redux/features/Authentication/authenticationSlice";
 
 interface IHeaderProps {
-  handleOpenSidenav: () => void;
+    handleOpenSidenav: () => void;
 }
 
 export const Header = ({ handleOpenSidenav }: IHeaderProps) => {
-  const { data: loggedUser } = useGetLoggedUserQuery();
+    const { data: loggedUser } = useGetLoggedUserQuery();
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
 
-  return (
-    <HeaderContainer>
-      <div className="dashboard-menu">
-        <i className="ph ph-list" onClick={handleOpenSidenav}></i>
+    return (
+        <HeaderContainer>
+            <div className="dashboard-menu">
+                <i className="ph ph-list" onClick={handleOpenSidenav}></i>
 
-        <Link to={"/usuario/dashboard"}>
-          <img src={svg} className="header-icon" alt="TruckLog" />
-        </Link>
-      </div>
+                <Link to={"/usuario/dashboard"}>
+                    <img src={svg} className="header-icon" alt="TruckLog" />
+                </Link>
+            </div>
 
-      <Dropdown title={loggedUser ? loggedUser.nome : ""}>
-        <li onClick={handleLogout}>
-          Logout <i className="ph ph-sign-out"></i>
-        </li>
-      </Dropdown>
-    </HeaderContainer>
-  );
+            <Dropdown title={loggedUser ? loggedUser.nome : "Menu"}>
+                <li onClick={handleLogout}>
+                    Logout <i className="ph ph-sign-out"></i>
+                </li>
+            </Dropdown>
+        </HeaderContainer>
+    );
 };

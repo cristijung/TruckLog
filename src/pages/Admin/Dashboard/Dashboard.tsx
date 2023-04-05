@@ -86,11 +86,15 @@ export const Dashboard = () => {
                                     <span>Viagens realizadas</span>
                                     <FlagBanner size={32} />
                                 </div>
-                                <strong>{viagensCadastradas}</strong>
+                                <strong>
+                                    {viagensCadastradas
+                                        ? `${viagensCadastradas}`
+                                        : "0"}
+                                </strong>
                                 <span>
                                     {viagensAtuais
                                         ? `${viagensAtuais} sendo realizadas no momento`
-                                        : null}
+                                        : "0 sendo realizadas no momento"}
                                 </span>
                             </div>
                             <div className="card-data">
@@ -98,10 +102,15 @@ export const Dashboard = () => {
                                     <span>Postos cadastrados</span>
                                     <GasPump size={32} />
                                 </div>
-                                <strong>{postosCadastrados}</strong>
+                                <strong>
+                                    {postosCadastrados
+                                        ? `${postosCadastrados}`
+                                        : "0"}
+                                </strong>
                                 <span>
-                                    {postosDisponiveis} estão disponíveis
-                                    atualmente
+                                    {postosDisponiveis
+                                        ? `${postosDisponiveis} estão disponíveis atualmente`
+                                        : "0 estão disponíveis atualmente"}
                                 </span>
                             </div>
                             <div className="card-data">
@@ -109,11 +118,15 @@ export const Dashboard = () => {
                                     <span>Caminhões cadastrados</span>
                                     <Users size={32} />
                                 </div>
-                                <strong>{caminhoesCadastrados}</strong>
+                                <strong>
+                                    {caminhoesCadastrados
+                                        ? `${caminhoesCadastrados}`
+                                        : "0"}
+                                </strong>
                                 <span>
                                     {caminhoesDisponiveis
                                         ? `${caminhoesDisponiveis} disponíveis para viagens`
-                                        : null}
+                                        : "0 estão disponíveis para viagens"}
                                 </span>
                             </div>
                             <div className="card-data">
@@ -121,11 +134,15 @@ export const Dashboard = () => {
                                     <span>Motoristas cadastrados</span>
                                     <Truck size={32} />
                                 </div>
-                                <strong>{motoristasCadastrados}</strong>
+                                <strong>
+                                    {motoristasCadastrados
+                                        ? `${motoristasCadastrados}`
+                                        : "0"}
+                                </strong>
                                 <span>
                                     {motoristasDisponiveis
                                         ? `${motoristasDisponiveis} estão disponíveis para viagens`
-                                        : null}
+                                        : "0 estão disponíveis para viagens"}
                                 </span>
                             </div>
                         </div>
