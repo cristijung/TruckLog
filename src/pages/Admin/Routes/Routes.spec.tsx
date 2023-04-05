@@ -28,11 +28,6 @@ vi.mock("../../../redux/features/route/routeSlice", () => ({
 }));
 
 describe("'Rotas' Page", () => {
-  it("should render 'Rotas' page", () => {
-    render(<Rotas />);
-    expect(screen.findByText("Rotas")).to.exist;
-  });
-
   it("should render routes cards", () => {
     render(<Rotas />);
     expect(screen.getByText("Porto Alegre até Cachoeirinha")).to.exist;

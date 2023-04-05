@@ -30,11 +30,6 @@ vi.mock("../../../redux/features/truck/truckSlice", () => ({
 }));
 
 describe("Caminhões Page", () => {
-  it("should render Caminhoes page", () => {
-    render(<Caminhoes />);
-    expect(screen.findByText("Caminhões")).to.exist;
-  });
-
   it("should render truck cards", () => {
     render(<Caminhoes />);
     expect(screen.getByText("Scania")).to.exist;
