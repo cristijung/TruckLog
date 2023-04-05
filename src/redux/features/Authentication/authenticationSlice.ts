@@ -2,8 +2,6 @@ import { ILoggedUser } from "../../../utils/interfaces/IAuthentication.";
 import { IUser } from "../../../utils/interfaces/IUser";
 import { apiSlice } from "../../rootReducer";
 
-const token = localStorage.getItem("token");
-
 const authenticationSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         authLogin: build.mutation<IUser, IUser>({
@@ -19,7 +17,7 @@ const authenticationSlice = apiSlice.injectEndpoints({
                 url: "http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/auth/usuario-logado",
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),

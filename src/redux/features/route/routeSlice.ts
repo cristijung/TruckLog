@@ -7,8 +7,6 @@ import {
     IRotaEdit,
 } from "../../../utils/interfaces/IRouteAPI";
 
-const token = localStorage.getItem("token");
-
 const apiSliceWithTag = apiSlice.enhanceEndpoints({
     addTagTypes: ["route"],
 });
@@ -20,7 +18,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/rota`,
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),
@@ -29,7 +27,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/rota/listar-ativas`,
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),
@@ -38,7 +36,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/rota`,
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: rota,
             }),
@@ -48,7 +46,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/rota?idRota=${rota.idRota}`,
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: {
                     descricao: rota.descricao,
@@ -62,7 +60,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/rota?idRota=${idRota}`,
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),
