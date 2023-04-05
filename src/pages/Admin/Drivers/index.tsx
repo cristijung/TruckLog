@@ -6,14 +6,9 @@ import {
   DeleteDriverModal,
 } from "../../../shared/components/User/Modals";
 
-import {
-  IDriver,
-  DriverPagination,
-  RoleResponse,
-} from "../../../utils/interfaces/IDriver";
+import { IDriver } from "../../../utils/interfaces/IDriver";
 import { RolesContainer } from "./styles";
 
-import { Pagination } from "@mui/material";
 import { useGetDriversQuery } from "../../../redux/features/role/roleSlice";
 
 export const Roles: React.FC = () => {
@@ -44,7 +39,7 @@ export const Roles: React.FC = () => {
     document.title = "Motoristas | TruckLog";
   }, []);
 
-  const { data, isLoading, error } = useGetDriversQuery(0);
+  const { data } = useGetDriversQuery(0);
 
   return (
     <RolesContainer>
@@ -133,7 +128,10 @@ export const Roles: React.FC = () => {
                           }
                           disabled={driver.status === "ATIVO" ? false : true}
                         >
-                          <i title="Editar Posto" className="ph ph-pencil"></i>
+                          <i
+                            title="Editar Motorista"
+                            className="ph ph-pencil"
+                          ></i>
                         </button>
 
                         <button
@@ -143,7 +141,7 @@ export const Roles: React.FC = () => {
                           disabled={driver.status === "ATIVO" ? false : true}
                         >
                           <i
-                            title="Deletar Posto"
+                            title="Deletar Motorista"
                             className="ph ph-trash delete-icon"
                           ></i>
                         </button>
