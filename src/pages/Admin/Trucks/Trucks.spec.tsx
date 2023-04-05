@@ -29,7 +29,7 @@ vi.mock("../../../redux/features/truck/truckSlice", () => ({
   useDeleteTruckMutation: vi.fn(() => "")
 }));
 
-describe("Caminhoes", () => {
+describe("Caminhões Page", () => {
   it("should render Caminhoes page", () => {
     render(<Caminhoes />);
     expect(screen.findByText("Caminhões")).to.exist;
