@@ -1,7 +1,6 @@
 import Modal from "react-modal";
 import { ModalContainer } from "../styles";
 import { useForm } from "react-hook-form";
-import { useTrucks } from "../../../../hooks";
 import { Button } from "../../../Button";
 import {
     useEditTruckMutation,
@@ -16,12 +15,14 @@ interface IEditTruckModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
     truckId: number;
+    truckName: string;
 }
 
 export function EditTruckModal({
     isOpen,
     onRequestClose,
     truckId,
+    truckName,
 }: IEditTruckModalProps) {
     const {
         register,
@@ -48,6 +49,9 @@ export function EditTruckModal({
                     className="ph ph-x-circle close-btn"
                 ></i>
                 <h2>Abastecer Caminhão</h2>
+                <p>
+                    Você está editando: <strong>{truckName}</strong>
+                </p>
                 <form
                     className="form-container"
                     onSubmit={handleSubmit((data: ICaminhaoEdit) => {

@@ -1,8 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { Sidenav } from "../components/User";
 
+
+
 export const ColaboratorLayout = () => {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+
 
     return token ? (
         <Sidenav>
@@ -11,4 +14,5 @@ export const ColaboratorLayout = () => {
     ) : (
         <Navigate to="/login" />
     );
+
 };

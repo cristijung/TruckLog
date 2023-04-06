@@ -108,6 +108,9 @@ export const ViagensContainer = styled.main`
 		grid-template-columns: 1.5fr 1fr 1fr 1fr 0.3fr;
 		grid-gap: 0.5rem;
 		border-bottom: 1px solid ${props => props.theme['gray-200']};
+		.date-desc {
+			display: none;
+		}
 
 		.btn-container {
 			display: flex;
@@ -177,5 +180,24 @@ export const ViagensContainer = styled.main`
 		margin-right: 1rem;
 		width: 2rem;
 		height: 2rem;
+	}
+
+	@media (max-width: 768px) {
+		.trips-header {
+			display: none;
+		}
+
+		.trips-body {
+			.trip {
+				grid-template-columns: 1fr;
+				.date-desc {
+					display: block;
+					font-weight: 700;
+				}
+				.status-desc {
+					font-weight: 700;
+				}
+			}
+		}
 	}
 `;

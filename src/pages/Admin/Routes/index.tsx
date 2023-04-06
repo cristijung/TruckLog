@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { RotasContainer } from "./styles";
 import {
   CreateRouteModal,
@@ -7,6 +8,7 @@ import {
 } from "../../../shared/components/User/Modals";
 import { Button } from "../../../shared/components/Button";
 import { useGetRouteQuery } from "../../../redux/features/route/routeSlice";
+import loadingGif from "../../../assets/TruckGif.gif";
 
 export const Rotas = () => {
   const [searchRoute, setSearchRoute] = useState("");
@@ -33,117 +35,135 @@ export const Rotas = () => {
     setIdRoute(idRota);
     setDescriptionRoute(descricaoRota);
   };
-  const { data } = useGetRouteQuery();
-  console.log(data);
+  const { data, isLoading } = useGetRouteQuery();
 
   return (
     <RotasContainer>
-      <main className="content">
-        <div className="user-trail">
-          <span>Meu Painel</span>
-          <span>{" > "}</span>
-          <a className="selected">Rotas</a>
-        </div>
-
-        <h2 className="title-page" data-testid="page-name">Rotas</h2>
-        <Button
-          onClick={() => setIsCreateRouteModalOpen(true)}
-          className="create-button"
+      {isLoading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
         >
-          Cadastrar Rota <i className="ph ph-plus"></i>
-        </Button>
-        <input
-          value={searchRoute}
-          onChange={(e) => setSearchRoute(e.target.value)}
-          type="text"
-          placeholder="Procurar postos"
-        />
-
-        <div className="gas-station-header">
-          <p>
-            Descrição <i className="ph ph-arrow-down"></i>
-          </p>
-          <p>Partida</p>
-          <p>Destino</p>
-          <p>Status</p>
+          <img src={loadingGif} alt="Loading..." />
         </div>
+      ) : (
+        <>
+          <main className="content">
+            <div className="user-trail">
+              <span>Meu Painel</span>
+              <span>{" > "}</span>
+              <a className="selected">Rotas</a>
+            </div>
 
-        <div className="gas-station-body ">
-          {data ? (
-            data
-              .slice()
-              .sort((route) => {
-                return route.status === "ATIVO" ? -1 : 1;
-              })
+            <h2 className="title-page" data-testid="page-name">
+              Rotas
+            </h2>
+            <Button
+              onClick={() => setIsCreateRouteModalOpen(true)}
+              className="create-button"
+            >
+              Cadastrar Rota <i className="ph ph-plus"></i>
+            </Button>
+            <input
+              value={searchRoute}
+              onChange={(e) => setSearchRoute(e.target.value)}
+              type="text"
+              placeholder="Procurar postos"
+            />
 
-              .filter((route) =>
-                route.descricao
-                  .toLowerCase()
-                  .includes(searchRoute.toLowerCase())
-              )
-              .map((route) => (
-                <div
-                  className={
-                    route.status === "ATIVO" ? "posto ativo" : "posto inativo"
-                  }
-                  key={route.idRota}
-                >
-                  <p>{route.descricao}</p>
-                  <div>
-                    <p>{route.localPartida}</p>
-                  </div>
-                  <div>{route.localDestino}</div>
-                  <div
-                    className={route.status === "ATIVO" ? "ativo" : "inativo"}
-                  >
-                    {route.status}
-                  </div>
+            <div className="gas-station-header">
+              <p>
+                Descrição <i className="ph ph-arrow-down"></i>
+              </p>
+              <p>Partida</p>
+              <p>Destino</p>
+              <p>Status</p>
+            </div>
 
-                  <div className="btn-container">
-                    <button
-                      onClick={() =>
-                        handleOpenEditModal(route.idRota, route.descricao)
+            <div className="gas-station-body ">
+              {data ? (
+                data
+                  .slice()
+                  .sort((route) => {
+                    return route.status === "ATIVO" ? -1 : 1;
+                  })
+
+                  .filter((route) =>
+                    route.descricao
+                      .toLowerCase()
+                      .includes(searchRoute.toLowerCase())
+                  )
+                  .map((route) => (
+                    <div
+                      className={
+                        route.status === "ATIVO"
+                          ? "posto ativo"
+                          : "posto inativo"
                       }
-                      disabled={route.status === "ATIVO" ? false : true}
+                      key={route.idRota}
                     >
-                      <i title="Editar Posto" className="ph ph-pencil"></i>
-                    </button>
+                      <p>{route.descricao}</p>
+                      <div>
+                        <p>{route.localPartida}</p>
+                      </div>
+                      <div>{route.localDestino}</div>
+                      <div
+                        className={
+                          route.status === "ATIVO" ? "ativo" : "inativo"
+                        }
+                      >
+                        {route.status}
+                      </div>
 
-                    <button
-                      onClick={() =>
-                        handleRemoveEditModal(route.idRota, route.descricao)
-                      }
-                      title="Deletar Posto"
-                      disabled={route.status === "ATIVO" ? false : true}
-                    >
-                      <i className="ph ph-trash delete-icon"></i>
-                    </button>
-                  </div>
-                </div>
-              ))
-          ) : (
-            <p>Estamos carregando a página</p>
-          )}
-        </div>
-      </main>
-      <CreateRouteModal
-        isOpen={isCreateRouteModalOpen}
-        onRequestClose={() => setIsCreateRouteModalOpen(false)}
-      />
+                      <div className="btn-container">
+                        <button
+                          onClick={() =>
+                            handleOpenEditModal(route.idRota, route.descricao)
+                          }
+                          disabled={route.status === "ATIVO" ? false : true}
+                        >
+                          <i title="Editar Posto" className="ph ph-pencil"></i>
+                        </button>
 
-      <EditRouteModal
-        isOpen={isEditRouteModalOpen}
-        onRequestClose={() => setIsEditRouteModalOpen(false)}
-        descricaoRota={descriptionRoute}
-        idRota={idRoute}
-      />
-
-      <DeleteRouteModal
-        isOpen={isDeleteModalOpen}
-        onRequestClose={() => setIsDeleteModalOpen(false)}
-        idRota={idRoute}
-        descricaoRota={descriptionRoute}
-      />
+                        <button
+                          onClick={() =>
+                            handleRemoveEditModal(route.idRota, route.descricao)
+                          }
+                          title="Deletar Posto"
+                          disabled={route.status === "ATIVO" ? false : true}
+                        >
+                          <i className="ph ph-trash delete-icon"></i>
+                        </button>
+                      </div>
+                    </div>
+                  ))
+              ) : (
+                <p>Estamos carregando a página</p>
+              )}
+            </div>
+          </main>
+          <CreateRouteModal
+            isOpen={isCreateRouteModalOpen}
+            onRequestClose={() => setIsCreateRouteModalOpen(false)}
+          />
+          <EditRouteModal
+            isOpen={isEditRouteModalOpen}
+            onRequestClose={() => setIsEditRouteModalOpen(false)}
+            descricaoRota={descriptionRoute}
+            idRota={idRoute}
+          />
+          <DeleteRouteModal
+            isOpen={isDeleteModalOpen}
+            onRequestClose={() => setIsDeleteModalOpen(false)}
+            idRota={idRoute}
+            descricaoRota={descriptionRoute}
+          />
+        </>
+      )}
     </RotasContainer>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../../shared/components/Button";
 import { useGetTripsQuery } from "../../../redux/features/trip/tripSlice";
 import {
@@ -9,6 +9,7 @@ import {
 
 import { ViagensContainer } from "./styles";
 import { ITrip } from "../../../utils/interfaces/ITripAPI";
+import loadingGif from "../../../assets/TruckGif.gif";
 
 export const Viagens = () => {
   const [searchTrip, setSearchTrip] = useState("");
@@ -33,147 +34,166 @@ export const Viagens = () => {
     setMotorista(idMotorista);
     setTripName(tripName);
   };
-
+  useEffect(() => {
+    document.title = "Viagens | TruckLog";
+  }, []);
   const handleDeleteTrip = (idUsuario: number, idViagem: number) => {
     setIsDeleteTripModalOpen(true);
     setIdUsuario(idUsuario);
     setIdViagem(idViagem);
     setTripName(tripName);
   };
-  const { data } = useGetTripsQuery();
+  const { data, isLoading } = useGetTripsQuery();
   const tripsData = data as unknown as ITrip[];
 
   return (
     <ViagensContainer>
-      <main className="content">
-        <div className="user-trail">
-          <span>Meu Painel</span>
-          <span>{" > "}</span>
-          <a className="selected">Viagens</a>
-        </div>
-
-        <h2 className="title-page" data-testid="page-name">Viagens</h2>
-        <Button
-          onClick={() => setIsCreateTripModalOpen(true)}
-          className="create-button"
+      {isLoading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
         >
-          Criar Viagem <i className="ph ph-plus"></i>
-        </Button>
-        <input
-          value={searchTrip}
-          onChange={(e) => setSearchTrip(e.target.value)}
-          type="text"
-          placeholder="Procurar viagens"
-        />
-
-        <div className="trips-header">
-          <p>
-            Descrição <i className="ph ph-arrow-down"></i>
-          </p>
-          <p>Ínicio</p>
-          <p>Fim</p>
-          <p>Status</p>
+          <img src={loadingGif} alt="Loading..." />
         </div>
+      ) : (
+        <>
+          <main className="content">
+            <div className="user-trail">
+              <span>Meu Painel</span>
+              <span>{" > "}</span>
+              <a className="selected">Viagens</a>
+            </div>
 
-        <div className="trips-body">
-          {tripsData ? (
-            tripsData
-              .slice()
-              .sort((item) => {
-                return item.statusViagem === "EM_ANDAMENTO" ? -1 : 1;
-              })
-              .filter((trip) =>
-                trip.descricao.toLowerCase().includes(searchTrip.toLowerCase())
-              )
-              .map((trip) => (
-                <div
-                  className={
-                    trip.statusViagem === "EM_ANDAMENTO"
-                      ? "trip ativo"
-                      : "trip inativo"
-                  }
-                  key={trip.idViagem}
-                >
-                  <p>{trip.descricao}</p>
-                  <p>
-                    {trip.dataInicio.replace(
-                      /^(\d{4})-(\d{2})-(\d{2})$/,
-                      "$3/$2/$1"
-                    )}
-                  </p>
-                  <p>
-                    {trip.dataFim.replace(
-                      /^(\d{4})-(\d{2})-(\d{2})$/,
-                      "$3/$2/$1"
-                    )}
-                  </p>
-                  <p
-                    className={
-                      trip.statusViagem === "FINALIZADA"
-                        ? "finished"
-                        : "progress"
-                    }
-                  >
-                    {trip.statusViagem.replace(/_/g, " ")}
-                  </p>
+            <h2 className="title-page" data-testid="page-name">
+              Viagens
+            </h2>
+            <Button
+              onClick={() => setIsCreateTripModalOpen(true)}
+              className="create-button"
+            >
+              Criar Viagem <i className="ph ph-plus"></i>
+            </Button>
+            <input
+              value={searchTrip}
+              onChange={(e) => setSearchTrip(e.target.value)}
+              type="text"
+              placeholder="Procurar viagens"
+            />
 
-                  <div className="btn-container">
-                    <button
-                      onClick={() => {
-                        console.log(trip.idViagem, trip.idUsuario);
-                        handleEditTrip(
-                          trip.idViagem,
-                          trip.idUsuario,
-                          trip.descricao
-                        );
-                      }}
-                      disabled={
-                        trip.statusViagem === "EM_ANDAMENTO" ? false : true
+            <div className="trips-header">
+              <p>
+                Descrição <i className="ph ph-arrow-down"></i>
+              </p>
+              <p>Ínicio</p>
+              <p>Fim</p>
+              <p>Status</p>
+            </div>
+
+            <div className="trips-body">
+              {tripsData ? (
+                tripsData
+                  .slice()
+                  .sort((item) => {
+                    return item.statusViagem === "EM_ANDAMENTO" ? -1 : 1;
+                  })
+                  .filter((trip) =>
+                    trip.descricao
+                      .toLowerCase()
+                      .includes(searchTrip.toLowerCase())
+                  )
+                  .map((trip) => (
+                    <div
+                      className={
+                        trip.statusViagem === "EM_ANDAMENTO"
+                          ? "trip ativo"
+                          : "trip inativo"
                       }
-                      title="Editar Viagem"
+                      key={trip.idViagem}
                     >
-                      <i className="ph ph-pencil"></i>
-                    </button>
-                    <button
-                      onClick={() => {
-                        handleDeleteTrip(trip.idUsuario, trip.idViagem);
-                      }}
-                      disabled={
-                        trip.statusViagem === "EM_ANDAMENTO" ? false : true
-                      }
-                    >
-                      <i
-                        title="Concluir Viagem"
-                        className="ph ph-check check-icon"
-                      ></i>
-                    </button>
-                  </div>
-                </div>
-              ))
-          ) : (
-            <p>Carregando página</p>
-          )}
-        </div>
-      </main>
-      <CreateTripModal
-        isOpen={isCreateTripModalOpen}
-        onRequestClose={() => setIsCreateTripModalOpen(false)}
-      />
+                      <p className="status-desc">{trip.descricao}</p>
+                      <p>
+                        <span className="date-desc">Inicio</span>
+                        {trip.dataInicio.replace(
+                          /^(\d{4})-(\d{2})-(\d{2})$/,
+                          "$3/$2/$1"
+                        )}
+                      </p>
+                      <p>
+                        <span className="date-desc">Fim</span>
+                        {trip.dataFim.replace(
+                          /^(\d{4})-(\d{2})-(\d{2})$/,
+                          "$3/$2/$1"
+                        )}
+                      </p>
+                      <p
+                        className={
+                          trip.statusViagem === "FINALIZADA"
+                            ? "finished"
+                            : "progress"
+                        }
+                      >
+                        {trip.statusViagem.replace(/_/g, " ")}
+                      </p>
 
-      <EditTripModal
-        isOpen={isEditTripModalOpen}
-        onRequestClose={() => setIsEditTripModalOpen(false)}
-        idViagem={idViagem}
-        idMotorista={idMotorista}
-        tripName={tripName}
-      />
-      <DeleteTripModal
-        isOpen={isDeleteTripModalOpen}
-        onRequestClose={() => setIsDeleteTripModalOpen(false)}
-        idMotorista={idUsuario}
-        idViagem={idViagem}
-        tripName={tripName}
-      />
+                      <div className="btn-container">
+                        <button
+                          onClick={() => {
+                            handleEditTrip(
+                              trip.idViagem,
+                              trip.idUsuario,
+                              trip.descricao
+                            );
+                          }}
+                          disabled={
+                            trip.statusViagem === "EM_ANDAMENTO" ? false : true
+                          }
+                          title="Editar Viagem"
+                        >
+                          <i className="ph ph-pencil"></i>
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDeleteTrip(trip.idUsuario, trip.idViagem);
+                          }}
+                          disabled={
+                            trip.statusViagem === "EM_ANDAMENTO" ? false : true
+                          }
+                          title="Concluir Viagem"
+                        >
+                          <i className="ph ph-check check-icon"></i>
+                        </button>
+                      </div>
+                    </div>
+                  ))
+              ) : (
+                <p>Carregando página</p>
+              )}
+            </div>
+          </main>
+          <CreateTripModal
+            isOpen={isCreateTripModalOpen}
+            onRequestClose={() => setIsCreateTripModalOpen(false)}
+          />
+          <EditTripModal
+            isOpen={isEditTripModalOpen}
+            onRequestClose={() => setIsEditTripModalOpen(false)}
+            idViagem={idViagem}
+            idMotorista={idMotorista}
+            tripName={tripName}
+          />
+          <DeleteTripModal
+            isOpen={isDeleteTripModalOpen}
+            onRequestClose={() => setIsDeleteTripModalOpen(false)}
+            idMotorista={idUsuario}
+            idViagem={idViagem}
+            tripName={tripName}
+          />
+        </>
+      )}
     </ViagensContainer>
   );
 };

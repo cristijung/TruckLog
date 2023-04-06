@@ -1,5 +1,4 @@
 import Modal from "react-modal";
-import { useRoutes } from "../../../../hooks";
 import { ModalContainer } from "../styles";
 import { FieldValues, useForm } from "react-hook-form";
 import { Button } from "../../../Button";
@@ -69,7 +68,6 @@ export function EditRouteModal({
                                     }
                                 );
                             } else {
-                                console.log(response);
                                 reset();
                                 refetch();
                                 toast.success("Rota editada com sucesso!");
