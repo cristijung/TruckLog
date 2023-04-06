@@ -15,9 +15,9 @@ O TruckLog é uma aplicação web desenvolvida para gerenciar frotas de caminhõ
   <img alt="imagem do site pronto" src="./public/Homepage.png">
 </p>
 
-<!-- <p align="center">
-  <a href="https://trucklog.vercel.app/" target="_blank">😁 -> Acesse o deploy do projeto!</a>
-</p> -->
+<p align="center">
+  <a href="https://truck-log.vercel.app" target="_blank">😁 -> Acesse o deploy do projeto!</a>
+</p>
 
 <br>
 
