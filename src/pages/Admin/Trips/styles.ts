@@ -90,7 +90,7 @@ export const ViagensContainer = styled.main`
 			padding: 0.5rem;
 			border-radius: 0.5rem;
 			color: ${props => props.theme.white};
-			background-color: ${props => props.theme.status.warning};
+			background-color: ${props => props.theme.status?.warning || "yellow"};
 			cursor: pointer;
 		}
 	}
@@ -134,22 +134,22 @@ export const ViagensContainer = styled.main`
 		}
 
 		div.inativo {
-			color: ${props => props.theme.status.error};
+			color: ${props => props.theme.status?.error || "red"};
 			button {
 				cursor: not-allowed;
 			}
 		}
 
 		div.ativo {
-			color: ${props => props.theme.status.success};
+			color: ${props => props.theme.status?.success || "green"};
 		}
 
 		p.finished {
-			color: ${props => props.theme.status.error};
+			color: ${props => props.theme.status?.error || "red"};
 		}
 
 		p.progress {
-			color: ${props => props.theme.status.warning};
+			color: ${props => props.theme.status?.warning || "yellow"};
 		}
 	}
 
