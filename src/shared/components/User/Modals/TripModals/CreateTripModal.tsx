@@ -1,7 +1,6 @@
 import Modal from 'react-modal';
 import { ModalContainer } from '../styles';
 import {
-	useEditTripsMutation,
 	useGetTripsQuery,
 	useAddTripsMutation,
 } from '../../../../../redux/features/trip/tripSlice';

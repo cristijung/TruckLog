@@ -5,7 +5,7 @@ import { vi, it, expect } from "vitest";
 
 vi.mock("../../../redux/features/truck/truckSlice", () => ({
   useGetTruckQuery: vi.fn(() => ({
-    trucks: [
+    data: [
       {
         idCaminhao: 1,
         modelo: "Scania",
@@ -24,14 +24,17 @@ vi.mock("../../../redux/features/truck/truckSlice", () => ({
       },
     ],
   })),
+  useAddTruckMutation: vi.fn(() => ""),
+  useEditTruckMutation: vi.fn(() => ""),
+  useDeleteTruckMutation: vi.fn(() => "")
 }));
 
-describe("Caminhoes", () => {
-  it("should render Caminhoes page", () => {
+describe("Caminhões Page", () => {
+  it("should render page title", async () => {
     render(<Caminhoes />);
-    expect(screen.findByText("Caminhões")).to.exist;
+    expect(screen.getByTestId("page-name").innerHTML).toBe("Caminhões");
   });
-
+  
   it("should render truck cards", () => {
     render(<Caminhoes />);
     expect(screen.getByText("Scania")).to.exist;
@@ -40,11 +43,11 @@ describe("Caminhoes", () => {
     expect(screen.getByText("DEF5678")).to.exist;
   });
 
-  it("should filter trucks", () => {
+  it("should filter trucks", async () => {
     render(<Caminhoes />);
     const searchInput = screen.getByPlaceholderText("Procurar caminhões");
     userEvent.type(searchInput, "Scania");
-    expect(screen.getByText("Scania")).to.exist;
+    expect(await screen.findByText("Scania")).to.exist;
     expect(screen.queryByText("Volvo")).to.exist;
   });
 

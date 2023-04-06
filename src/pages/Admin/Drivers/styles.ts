@@ -92,12 +92,12 @@ export const RolesContainer = styled.main`
       padding: 0.5rem;
       border-radius: 0.5rem;
       color: ${(props) => props.theme.white};
-      background-color: ${(props) => props.theme.status?.warning || "#cbb944"};
+      background-color: ${(props) => props.theme.status?.warning || "yellow"};
       cursor: pointer;
     }
 
     .delete-icon {
-      background-color: ${(props) => props.theme.status?.error || "#e74c3c"};
+      background-color: ${(props) => props.theme.status?.error || "red"};
     }
   }
 
@@ -142,11 +142,11 @@ export const RolesContainer = styled.main`
     }
 
     div.inativo {
-      color: ${(props) => props.theme.status?.error || "#e74c3c"};
+      color: ${(props) => props.theme.status?.error || "red"};
     }
 
     div.ativo {
-      color: ${(props) => props.theme.status?.success || "#4BB543"};
+      color: ${(props) => props.theme.status?.success || "green"};
     }
   }
 
@@ -175,19 +175,4 @@ export const RolesContainer = styled.main`
     width: 2rem;
     height: 2rem;
   }
-
-
-  @media (max-width: 600px) {
-    .posto {
-      grid-template: 1fr / 1fr;
-      padding: 1rem 1rem;
-      .nome{
-        font-weight: 700;
-      }
-    }
-    .gas-station-header {
-      display: none;
-    }
-
-    
 `;
