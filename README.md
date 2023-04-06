@@ -6,8 +6,9 @@ O TruckLog é uma aplicação web desenvolvida para gerenciar frotas de caminhõ
 
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-licença">Licença</a>
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;
+  <a href="#-licença">Licença</a> |
+  <a href="#instalação-e-deploy">Instalação e Deploy </a>
 </p>
 
 <p align="center">
@@ -89,6 +90,18 @@ O objetivo desta task era desenvolvermos um sistema de controle de rotas e abast
 
 - Análise de projeto
   - [Figma](https://www.figma.com/file/YGQvR5HTlvNNmJT5Yb3QcP/Trucklog---Brainstorming?node-id=0-1&t=JuvPwv6e3YzH74GF-0)
+
+## Instalação e Deploy
+
+Importante❗
+
+Para que você possa executar nossa aplicação não esqueça de habilitar conteúdo não seguro específico para o nosso site, pois a API que utilizamos utiliza uma URL HTTP e não HTTPS, uma vez que o site em si, possui verificação SSL via deploy da vercel, é necessário ativar o conteúdo não seguro específico para o Trucklog para obter dados das requisições.
+
+Para mais informações de como fazer isso: 
+-> <a href="https://support.google.com/chrome/answer/114662?hl=pt-BR&co=GENIE.Platform%3DDesktop" target="_blank">Tutorial Chrome</a>
+
+Para mais informações de instalação do projeto:
+->  <a href="https://github.com/cristijung/TruckLog/blob/main/README_INSTALL.md" target="_blank">Tutorial Instalação do projeto completo</a>
 
 ## 🔘 Licença
 
