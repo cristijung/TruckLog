@@ -7,8 +7,8 @@ O TruckLog é uma aplicação web desenvolvida para gerenciar frotas de caminhõ
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;
-  <a href="#-licença">Licença</a> |
-  <a href="#instalação-e-deploy">Instalação e Deploy </a>
+  <a href="#instalação-e-deploy">Instalação e Deploy </a> &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#-licença">Licença</a> 
 </p>
 
 <p align="center">
