@@ -6,8 +6,6 @@ import {
     IeditGasStation,
 } from "../../../utils/interfaces/IGasStationAPI";
 
-const token = localStorage.getItem("token");
-
 const apiSliceWithTag = apiSlice.enhanceEndpoints({
     addTagTypes: ["gasStations"],
 });
@@ -19,7 +17,7 @@ const gasStationSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto`,
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),
@@ -28,7 +26,7 @@ const gasStationSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto`,
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: gasStation,
             }),
@@ -38,7 +36,7 @@ const gasStationSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto?idPosto=${gasStation.id}`,
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: {
                     nome: gasStation.nome,
@@ -54,7 +52,7 @@ const gasStationSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/posto?idPosto=${idPosto}`,
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),

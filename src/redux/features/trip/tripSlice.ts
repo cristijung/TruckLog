@@ -7,8 +7,6 @@ import {
     IDeleteTrip,
 } from "../../../utils/interfaces/ITripAPI";
 
-const token = localStorage.getItem("token");
-
 export const tripSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         getTrips: build.query<ITrip[], void>({
@@ -16,7 +14,7 @@ export const tripSlice = apiSlice.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem`,
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),
@@ -25,7 +23,7 @@ export const tripSlice = apiSlice.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem?idMotorista=${data.idMotorista}`,
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: data.viagem,
             }),
@@ -35,7 +33,7 @@ export const tripSlice = apiSlice.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem?idMotorista=${data.idMotorista}&idViagem=${data.idViagem}`,
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: data.data,
             }),
@@ -45,7 +43,7 @@ export const tripSlice = apiSlice.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/viagem?idMotorista=${data.idMotorista}&idViagem=${data.idViagem}`,
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),

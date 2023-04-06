@@ -6,8 +6,6 @@ import {
     ICaminhaoEdit,
 } from "../../../utils/interfaces/ITruckAPI";
 
-const token = localStorage.getItem("token");
-
 const apiSliceWithTag = apiSlice.enhanceEndpoints({
     addTagTypes: ["route"],
 });
@@ -19,7 +17,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/caminhao`,
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),
@@ -28,7 +26,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/caminhao`,
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: caminhao,
             }),
@@ -38,7 +36,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/caminhao/abastecer?idCaminhao=${caminhao.idCaminhao}&Quantidade%20de%20gasolina=${caminhao.gas}`,
                 method: "PUT",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),
@@ -48,7 +46,7 @@ const routeSlice = apiSliceWithTag.injectEndpoints({
                 url: `http://vemser-dbc.dbccompany.com.br:39000/lluuccaass88/vemser-trabalho-final/caminhao?idCaminhao=${idCaminhao}`,
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),

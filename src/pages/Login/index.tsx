@@ -18,6 +18,7 @@ import { useAuthLoginMutation } from "../../redux/features/Authentication/authen
 // MODALS
 import InterestModal from "../../shared/components/Homepage/InterestModal";
 import ForgotPassModal from "../../shared/components/Homepage/ForgotPassModal";
+import loadingGif from "../../assets/TruckGif.gif";
 
 interface ILoginForm {
     login: string;
@@ -52,7 +53,9 @@ export const Login = () => {
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-
+    useEffect(() => {
+        document.title = "Login | TruckLog";
+    }, []);
     const handleLoginSubmit: SubmitHandler<any> = (data: ILoginForm) => {
         authLogin({
             login: data.login,
@@ -75,132 +78,140 @@ export const Login = () => {
             });
     };
     return (
-        <LoginContainer>
-            <div className="back-button">
-                <Link className="link-button" to="/">
-                    {isMobile ? (
-                        <>
-                            <FaHome size={45} />
-                        </>
-                    ) : (
-                        <>
-                            <BsArrowLeft size={35} />
-                            <span>Página Inicial</span>
-                        </>
-                    )}
-                </Link>
-            </div>
-            <div className="bg-items">
-                <img className="bg-object1" src={bgObject1Img} alt="" />
-                <img className="bg-object2" src={bgObject2Img} alt="" />
-                <img
-                    className="bg-truck"
-                    src={truckImg}
-                    alt="imagem de uma caminhão em uma extremidade com a logo do trucklog"
-                />
-            </div>
-            <form onSubmit={handleSubmit(handleLoginSubmit)}>
-                <div className="form-section">
-                    <h1>Login</h1>
-                    <h3>Insira seus dados de acesso:</h3>
-
-                    <div className={`input-container `}>
-                        <i className="ph ph-envelope"></i>
-                        <input
-                            type="text"
-                            placeholder="login"
-                            id="login"
-                            {...register("login")}
-                            name="login"
-                            onFocus={() => {
-                                document
-                                    .querySelectorAll(".input-container")[0]
-                                    .classList.add("outlined");
-                            }}
-                            onBlur={() => {
-                                document
-                                    .querySelectorAll(".input-container")[0]
-                                    .classList.remove("outlined");
-                                document
-                                    .querySelectorAll(".input-container")[0]
-                                    .classList.remove("outlined-error");
-                            }}
-                        />
-                    </div>
-                    <div className="error-yup">
-                        {errors.login ? (
+        <>
+            (
+            <LoginContainer>
+                <div className="back-button">
+                    <Link className="link-button" to="/">
+                        {isMobile ? (
                             <>
-                                {
-                                    (document
-                                        .querySelectorAll(".input-container")[0]
-                                        .classList.add("outlined-error"),
-                                    errors.login.message)
-                                }
+                                <FaHome size={45} />
                             </>
-                        ) : null}
-                    </div>
-
-                    <div className="input-container visible">
-                        <i className="ph ph-lock-key"></i>
-                        <input
-                            type="password"
-                            id="senha"
-                            placeholder="senha"
-                            {...register("senha")}
-                            required
-                            name="senha"
-                            onFocus={() => {
-                                document
-                                    .querySelectorAll(".input-container")[1]
-                                    .classList.add("outlined");
-                            }}
-                            onBlur={() => {
-                                document
-                                    .querySelectorAll(".input-container")[1]
-                                    .classList.remove("outlined");
-
-                                document
-                                    .querySelectorAll(".input-container")[1]
-                                    .classList.remove("outlined-error");
-                            }}
-                        />
-                    </div>
-                    <div className="error-yup">
-                        {errors.senha ? (
+                        ) : (
                             <>
-                                {
-                                    (document
-                                        .querySelectorAll(".input-container")[1]
-                                        .classList.add("outlined-error"),
-                                    errors.senha.message)
-                                }
+                                <BsArrowLeft size={35} />
+                                <span>Página Inicial</span>
                             </>
-                        ) : null}
-                    </div>
-                    <div className="button-section">
-                        <a onClick={() => setIsForgotPassModalOpen(true)}>
-                            Esqueceu sua senha?
-                        </a>
-                        <a
-                            onClick={() => setIsInterestModalOpen(true)}
-                            className="title"
-                        >
-                            Se interessou?
-                        </a>
-                        <button type="submit">
-                            Entrar <i className="ph ph-sign-in"></i>
-                        </button>
-                    </div>
+                        )}
+                    </Link>
                 </div>
-            </form>
-            <InterestModal
-                isOpen={isInterestModalOpen}
-                onRequestClose={() => setIsInterestModalOpen(false)}
-            />
-            <ForgotPassModal
-                isOpen={isForgotPassModalOpen}
-                onRequestClose={() => setIsForgotPassModalOpen(false)}
-            />
-        </LoginContainer>
+                <div className="bg-items">
+                    <img className="bg-object1" src={bgObject1Img} alt="" />
+                    <img className="bg-object2" src={bgObject2Img} alt="" />
+                    <img
+                        className="bg-truck"
+                        src={truckImg}
+                        alt="imagem de uma caminhão em uma extremidade com a logo do trucklog"
+                    />
+                </div>
+                <form onSubmit={handleSubmit(handleLoginSubmit)}>
+                    <div className="form-section">
+                        <h1>Login</h1>
+                        <h3>Insira seus dados de acesso:</h3>
+
+                        <div className={`input-container `}>
+                            <i className="ph ph-envelope"></i>
+                            <input
+                                type="text"
+                                placeholder="login"
+                                id="login"
+                                {...register("login")}
+                                name="login"
+                                onFocus={() => {
+                                    document
+                                        .querySelectorAll(".input-container")[0]
+                                        .classList.add("outlined");
+                                }}
+                                onBlur={() => {
+                                    document
+                                        .querySelectorAll(".input-container")[0]
+                                        .classList.remove("outlined");
+                                    document
+                                        .querySelectorAll(".input-container")[0]
+                                        .classList.remove("outlined-error");
+                                }}
+                            />
+                        </div>
+                        <div className="error-yup">
+                            {errors.login ? (
+                                <>
+                                    {
+                                        (document
+                                            .querySelectorAll(
+                                                ".input-container"
+                                            )[0]
+                                            .classList.add("outlined-error"),
+                                        errors.login.message)
+                                    }
+                                </>
+                            ) : null}
+                        </div>
+
+                        <div className="input-container visible">
+                            <i className="ph ph-lock-key"></i>
+                            <input
+                                type="password"
+                                id="senha"
+                                placeholder="senha"
+                                {...register("senha")}
+                                required
+                                name="senha"
+                                onFocus={() => {
+                                    document
+                                        .querySelectorAll(".input-container")[1]
+                                        .classList.add("outlined");
+                                }}
+                                onBlur={() => {
+                                    document
+                                        .querySelectorAll(".input-container")[1]
+                                        .classList.remove("outlined");
+
+                                    document
+                                        .querySelectorAll(".input-container")[1]
+                                        .classList.remove("outlined-error");
+                                }}
+                            />
+                        </div>
+                        <div className="error-yup">
+                            {errors.senha ? (
+                                <>
+                                    {
+                                        (document
+                                            .querySelectorAll(
+                                                ".input-container"
+                                            )[1]
+                                            .classList.add("outlined-error"),
+                                        errors.senha.message)
+                                    }
+                                </>
+                            ) : null}
+                        </div>
+                        <div className="button-section">
+                            <a onClick={() => setIsForgotPassModalOpen(true)}>
+                                Esqueceu sua senha?
+                            </a>
+                            <a
+                                onClick={() => setIsInterestModalOpen(true)}
+                                className="title"
+                            >
+                                Se interessou?
+                            </a>
+                            <button type="submit">
+                                Entrar <i className="ph ph-sign-in"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <InterestModal
+                    isOpen={isInterestModalOpen}
+                    onRequestClose={() => setIsInterestModalOpen(false)}
+                />
+                <ForgotPassModal
+                    isOpen={isForgotPassModalOpen}
+                    onRequestClose={() => setIsForgotPassModalOpen(false)}
+                />
+            </LoginContainer>
+            )
+        </>
     );
 };
