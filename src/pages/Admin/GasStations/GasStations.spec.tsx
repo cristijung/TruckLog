@@ -53,6 +53,11 @@ vi.mock("../../../redux/features/gasStation/gasStationSlice", () => ({
 }));
 
 describe("GasStations Page", () => {
+  it("should render page title", async () => {
+    render(<Postos />);
+    expect(screen.getByTestId("page-name").innerHTML).toBe("Postos");
+  });
+  
   it("should render GasStations cards", () => {
     render(<Postos />);
     expect(screen.getByText("Posto DBC POA")).to.exist;

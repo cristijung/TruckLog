@@ -56,6 +56,11 @@ vi.mock("../../../redux/features/role/roleSlice", () => ({
 }));
 
 describe("Drivers Page", () => {
+  it("should render page title", async () => {
+    render(<Roles />);
+    expect(screen.getByTestId("page-name").innerHTML).toBe("Motoristas");
+  });
+
   it("should render Drivers cards", () => {
     render(<Roles />);
     expect(screen.getByText("Jose")).to.exist;

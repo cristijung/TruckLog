@@ -38,7 +38,7 @@ export const Caminhoes = () => {
           <a className="selected">Caminhões</a>
         </div>
 
-        <h2 className="title-page">Caminhões</h2>
+        <h2 className="title-page" data-testid="page-name">Caminhões</h2>
         <Button
           onClick={() => setIsCreateTruckModalOpen(true)}
           className="create-button"

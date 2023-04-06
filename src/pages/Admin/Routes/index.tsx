@@ -45,7 +45,7 @@ export const Rotas = () => {
           <a className="selected">Rotas</a>
         </div>
 
-        <h2 className="title-page">Rotas</h2>
+        <h2 className="title-page" data-testid="page-name">Rotas</h2>
         <Button
           onClick={() => setIsCreateRouteModalOpen(true)}
           className="create-button"

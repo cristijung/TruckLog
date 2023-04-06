@@ -47,7 +47,7 @@ export const Roles: React.FC = () => {
         <div className="user-trail">
           <span>Meu Painel</span>
           <span>{" > "}</span>
-          <a className="selected">Motoristas</a>
+          <a className="selected" data-testid="page-name">Motoristas</a>
         </div>
 
         <h2 className="title-page">Motoristas</h2>

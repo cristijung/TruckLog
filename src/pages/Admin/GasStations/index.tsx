@@ -50,7 +50,9 @@ export const Postos = () => {
           <a className="selected">Postos</a>
         </div>
 
-        <h2 className="title-page">Postos</h2>
+        <h2 className="title-page" data-testid="page-name">
+          Postos
+        </h2>
         <Button
           onClick={() => setIsCreateGasStationModalOpen(true)}
           className="create-button"
